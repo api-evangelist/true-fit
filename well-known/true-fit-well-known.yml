@@ -1,0 +1,42 @@
+generated: '2026-08-05'
+method: probed
+source: live GET probes, 2026-08-05
+note: >-
+  No /.well-known/ discovery document is published on any True Fit host. Recorded here as
+  evidence of the probe, not as a capability. The one machine-readable consent signal True
+  Fit does publish is the Cloudflare Content-Signal line in robots.txt, saved verbatim.
+hosts:
+- host: https://www.truefit.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /robots.txt, status: 200, file: true-fit-robots.txt}
+  - {path: /llms.txt, status: 200, file: ../llms/true-fit-llms.txt}
+  - {path: /sitemap.xml, status: 200}
+- host: https://techdocs.truefitcorp.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 200, file: ../llms/true-fit-techdocs-llms.txt}
+- host: https://partner.truefitcorp.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+- host: https://fitrec.truefitcorp.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+content_signal:
+  file: true-fit-robots.txt
+  value: 'ai-train=no, search=yes, ai-input=no'
+  source: https://www.truefit.com/robots.txt

@@ -1,0 +1,72 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/true-fit-partner-api-openapi.json, openapi/true-fit-consumer-api-openapi.json
+docs: https://www.truefit.com/fit-intelligence-spec
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: openapi/true-fit-partner-api-openapi.json declares openapi 3.1.0
+- id: openapi-3.0
+  conforms: true
+  evidence: openapi/true-fit-consumer-api-openapi.json declares openapi 3.0.0
+- id: http-basic-auth-rfc7617
+  conforms: true
+  evidence: Partner API securityScheme type http, scheme basic
+- id: hmac-sha256-request-signing
+  conforms: true
+  evidence: GET /id-sync is signed with HMAC-SHA256 per the Partner API overview
+- id: oauth2
+  conforms: false
+  evidence: no oauth2 securityScheme in either spec and no OAuth documentation
+- id: openid-connect
+  conforms: false
+  evidence: no /.well-known/openid-configuration on any True Fit host (404)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors are application/json {statusCode, message, error}, not application/problem+json
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returned 404 on www.truefit.com, techdocs.truefitcorp.com
+    and partner.truefitcorp.com
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no deprecation or sunset policy published
+- id: model-context-protocol
+  conforms: partial
+  evidence: >-
+    True Fit publishes a Fit Intelligence Layer over MCP
+    (https://www.truefit.com/mcp-fit-intelligence) but no public MCP endpoint, tools/list
+    manifest or registry entry was discoverable; access is arranged through sales.
+- id: llmstxt
+  conforms: true
+  evidence: https://www.truefit.com/llms.txt (200) and https://techdocs.truefitcorp.com/llms.txt (200)
+- id: cloudflare-content-signals
+  conforms: true
+  evidence: 'robots.txt publishes Content-Signal: ai-train=no, search=yes, ai-input=no'
+- id: openpgp-encrypted-data-delivery
+  conforms: true
+  evidence: 360 Member View data file is OpenPGP/AES256 encrypted with a published SHA-256
+    checksum of the plaintext
+- id: gdpr
+  conforms: claimed
+  evidence: >-
+    "GDPR-aligned. Architecture supports compliance with global privacy regulations."
+    https://www.truefit.com/fit-intelligence-spec section 9; GDPR FAQ at
+    https://www.truefit.com/gdpr-faq
+- id: us-state-privacy
+  conforms: claimed
+  evidence: https://www.truefit.com/us-state-privacy-disclosures
+- id: wcag-accessibility
+  conforms: claimed
+  evidence: https://techdocs.truefitcorp.com/docs/commitment-to-accessibility
+- id: soc2
+  conforms: unknown
+  evidence: no trust centre or published certification page found on truefit.com or
+    truefitcorp.com (trust./security. subdomains do not resolve)
+- id: pci-dss
+  conforms: false
+  evidence: not a payments provider; no cardholder data surface
+note: >-
+  `claimed` marks a compliance posture the provider states publicly but that is not backed
+  by a published certificate, audit report or trust centre. No independent verification was
+  performed.

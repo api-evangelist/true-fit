@@ -1,0 +1,126 @@
+generated: '2026-08-05'
+method: derived
+source: mcp/true-fit-mcp.yml, openapi/true-fit-partner-api-openapi.json
+confidence_note: >-
+  True Fit's live MCP tool list is not published and tools/list could not be reached, so
+  every binding below is between a DERIVED candidate tool and a real, published OpenAPI
+  operation. Confidence is recorded as `derived` rather than high/medium: the REST side is
+  verified, the MCP side is a proposal.
+surfaces:
+  openapi:
+  - file: openapi/true-fit-partner-api-openapi.json
+    server: https://partner.truefitcorp.com/api
+    operations: 13
+    gated: false
+  - file: openapi/true-fit-consumer-api-openapi.json
+    server: /profile/public/v3/{tla}
+    operations: 45
+    gated: false
+    note: browser/session-scoped API; requires a per-retailer tla and an X-TF-UserToken
+  graphql: null
+  mcp:
+    url: null
+    documented_at: https://www.truefit.com/mcp-fit-intelligence
+    gated: true
+    reason: no public endpoint; access arranged through sales
+crosswalk:
+- {tool: recommend_sizes, category: Recommendations, rest: [getBulkRecommendation], binding: rest, confidence: derived}
+- {tool: get_general_fit_guidance, category: Recommendations, rest: [getBulkGeneralGuidance], binding: rest, confidence: derived,
+   note: the only Partner operation that needs no user identifier — the natural anonymous-agent tool}
+- {tool: sync_user, category: Identity, rest: [syncIds], binding: rest, confidence: derived,
+   note: HMAC-SHA256 signed rather than Basic auth}
+- {tool: list_profiles, category: Profiles, rest: [listProfiles], binding: rest, confidence: derived}
+- {tool: create_profile, category: Profiles, rest: [createProfile], binding: rest, confidence: derived}
+- {tool: update_profile, category: Profiles, rest: [updateProfile], binding: rest, confidence: derived}
+- {tool: delete_profile, category: Profiles, rest: [deleteProfile], binding: rest, confidence: derived}
+- {tool: get_measurements, category: Measurements, rest: [getMeasurements], binding: rest, confidence: derived}
+- {tool: upsert_measurements, category: Measurements, rest: [upsertMeasurements], binding: rest, confidence: derived}
+- {tool: list_closet_items, category: Closet, rest: [listClosetItems], binding: rest, confidence: derived}
+- {tool: create_closet_item, category: Closet, rest: [createClosetItem], binding: rest, confidence: derived}
+- {tool: update_closet_item, category: Closet, rest: [updateClosetItem], binding: rest, confidence: derived}
+- {tool: delete_closet_item, category: Closet, rest: [deleteClosetItem], binding: rest, confidence: derived}
+mcp_only: []
+rest_only:
+- capability: Consumer session and account management
+  api: True Fit Consumer API
+  reason: browser-session and shopper-credential surface; not an agent capability
+  operations:
+  - 'GET /token'
+  - 'GET /auth'
+  - 'POST /auth/save'
+  - 'POST /auth/login'
+  - 'POST /auth/logout'
+  - 'POST /auth/update'
+  - 'POST /auth/forgot'
+  - 'POST /auth/recover'
+- capability: Reference data (brands, sizes, bra sizes, inseams, sleeve lengths, style attributes)
+  api: True Fit Consumer API
+  reason: closet-entry pickers with no Partner API equivalent
+  operations:
+  - 'GET /brands'
+  - 'GET /brands/{brandId}'
+  - 'GET /brands/suggested'
+  - 'GET /brands/{brandId}/styles'
+  - 'GET /brands/{brandId}/styles/{brandStyleId}'
+  - 'GET /brands/{brandId}/classes'
+  - 'GET /sizes'
+  - 'GET /sizes/{sizeId}'
+  - 'GET /bra-sizes'
+  - 'GET /inseams'
+  - 'GET /sleeve-lengths'
+  - 'GET /style-attributes'
+- capability: Products and normalized sizes
+  api: True Fit Consumer API
+  operations:
+  - 'GET /products'
+  - 'GET /products/{styleId}'
+  - 'GET /normalized-sizes'
+  - 'GET /normalized-sizes/recommendable'
+- capability: Style recommendations
+  api: True Fit Consumer API
+  reason: product discovery rather than sizing; no Partner API equivalent
+  operations:
+  - 'GET /style-recommendations'
+  - 'GET /style-recommendations/available'
+- capability: Product ratings
+  api: True Fit Consumer API
+  operations:
+  - 'GET /profiles/{profileId}/product-ratings'
+  - 'POST /profiles/{profileId}/product-ratings'
+  - 'PUT /profiles/{profileId}/product-ratings/{productRatingId}'
+  - 'DELETE /profiles/{profileId}/product-ratings/{productRatingId}'
+- capability: Profile and closet management on the Consumer API
+  api: True Fit Consumer API
+  reason: session-scoped duplicates of the Partner API profile/closet surface
+  operations:
+  - 'GET /profiles'
+  - 'POST /profiles'
+  - 'GET /profiles/{profileId}'
+  - 'PUT /profiles/{profileId}'
+  - 'DELETE /profiles/{profileId}'
+  - 'GET /profiles/{profileId}/fit-recommendations'
+  - 'POST /profiles/{profileId}/set-active'
+  - 'GET /profiles/{profileId}/strength/{category}'
+  - 'GET /profiles/{profileId}/closet'
+  - 'POST /profiles/{profileId}/closet'
+  - 'GET /profiles/{profileId}/closet/{closetId}'
+  - 'PUT /profiles/{profileId}/closet/{closetId}'
+  - 'DELETE /profiles/{profileId}/closet/{closetId}'
+- capability: Analytics and checkout tracking
+  api: True Fit Consumer API
+  operations:
+  - 'POST /checkout'
+  - 'POST /analytics/tracking'
+- capability: Bulk shopper intelligence
+  api: True Fit 360 Member View API
+  reason: weekly encrypted file delivery, not an interactive tool
+  operations:
+  - 'GET /{CLIENT_ID}/user-data/meta'
+  - 'GET /{CLIENT_ID}/user-data/content'
+coverage:
+  tools_named: 13
+  tools_bound: 13
+  mcp_only: 0
+  rest_operations_total: 58
+  rest_operations_with_a_tool: 13
+  rest_operations_without_a_tool: 45

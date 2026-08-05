@@ -1,0 +1,76 @@
+generated: '2026-08-05'
+method: searched
+source: https://techdocs.truefitcorp.com/docs/product-detail-page-integration
+description: >-
+  Client-side embeddable UI surfaces. True Fit ships as custom HTML elements rendered by a
+  single CDN loader; the retailer places the element and True Fit renders the fit
+  experience inside it.
+loader:
+  name: tf-integration.js
+  url: https://cdn.truefitcorp.com/fitrec/global/js/tf-integration.js?storeKey=<CLIENT_ID>
+  global: tfcapi
+  api:
+  - call: tfcapi('update', widgetName, options)
+    docs: https://techdocs.truefitcorp.com/docs/widget-update-api
+    note: currently only tfc-fitrec-product is supported
+  - call: tfcapi('getToken', callbackFn)
+    docs: https://techdocs.truefitcorp.com/docs/integration-with-http-apis
+  - call: tfcapi('setToken', tokenId, tokenMaxAge)
+    docs: https://techdocs.truefitcorp.com/docs/integration-with-http-apis
+families:
+- family: Fit recommendation
+  components:
+  - name: tfc-fitrec-product
+    surface: product detail page
+    docs: https://techdocs.truefitcorp.com/docs/product-detail-page-integration
+    options:
+    - name: products
+      description: map of style ID to per-style parameters, e.g. colorId
+    attributes: [data-colorid, data-category, data-userid]
+  - name: tfc-fitrec-catalog
+    surface: category / listing and non-PDP contexts
+    docs: https://techdocs.truefitcorp.com/docs/request-response
+- family: Marketing and acquisition
+  components:
+  - name: Marketing page widget
+    docs: https://techdocs.truefitcorp.com/docs/marketing-page-integration
+  - name: Size Sampling banner
+    docs: https://techdocs.truefitcorp.com/docs/size-sampling-integration
+  - name: Size Guide integration
+    docs: https://techdocs.truefitcorp.com/docs/size-guide-integration
+- family: Post-purchase
+  components:
+  - name: Order confirmation page integration
+    docs: https://techdocs.truefitcorp.com/docs/order-confirmation-integration
+- family: Native app
+  components:
+  - name: True Fit iOS SDK view
+    docs: https://techdocs.truefitcorp.com/docs/integration-for-ios
+  - name: True Fit Android SDK view
+    docs: https://techdocs.truefitcorp.com/docs/option-1-standard-integration-for-android
+  - name: React Native SDK component
+    docs: https://techdocs.truefitcorp.com/docs/react-native-true-fit-sdk
+- family: Conversational
+  components:
+  - name: Conversational Fit Agent
+    docs: https://www.truefit.com/conversation-fit-agent
+    note: out-of-the-box shopping agent with native fit intelligence; deployment arranged
+      with True Fit
+integration_notes:
+  spa: https://techdocs.truefitcorp.com/docs/best-practices-for-single-page-apps
+  dynamic_pages: https://techdocs.truefitcorp.com/docs/true-fit-on-dynamic-pages-1
+  iframe_messaging: https://techdocs.truefitcorp.com/docs/iframe-messaging
+  event_hooks: https://techdocs.truefitcorp.com/docs/javascript-event-hooks
+  ab_testing: https://techdocs.truefitcorp.com/docs/experiment-settings-event-hook
+  accessibility: https://techdocs.truefitcorp.com/docs/commitment-to-accessibility
+platform_integrations:
+- name: Shopify (app)
+  url: https://techdocs.truefitcorp.com/docs/shopify-1
+- name: Shopify headless
+  url: https://techdocs.truefitcorp.com/docs/shopify-headless-integration
+- name: Matrixify returns feed
+  url: https://techdocs.truefitcorp.com/docs/matrixify-returns-feed
+- name: Loop Returns
+  url: https://techdocs.truefitcorp.com/docs/loop-returns-integration
+- name: Tapcart
+  url: https://techdocs.truefitcorp.com/docs/tapcart-integration

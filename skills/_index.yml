@@ -1,0 +1,22 @@
+generated: '2026-08-05'
+method: generated
+source: openapi/true-fit-partner-api-openapi.json
+note: >-
+  Every operationId referenced below was verified verbatim against the published Partner
+  API OpenAPI. No skill is grounded in the Consumer API, which publishes no operationIds.
+skills:
+- file: true-fit-size-a-shopper.md
+  name: Size a shopper for a retailer product
+  api: openapi/true-fit-partner-api-openapi.json
+  operations: [syncIds, listProfiles, createProfile, upsertMeasurements, createClosetItem,
+    getBulkRecommendation, getBulkGeneralGuidance]
+- file: true-fit-anonymous-fit-guidance.md
+  name: Answer "does this run small?" with no shopper profile
+  api: openapi/true-fit-partner-api-openapi.json
+  operations: [getBulkGeneralGuidance]
+- file: true-fit-manage-fit-profile.md
+  name: Manage a shopper's fit profile, measurements and closet
+  api: openapi/true-fit-partner-api-openapi.json
+  operations: [syncIds, listProfiles, createProfile, updateProfile, deleteProfile,
+    getMeasurements, upsertMeasurements, listClosetItems, createClosetItem,
+    updateClosetItem, deleteClosetItem]

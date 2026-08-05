@@ -1,0 +1,68 @@
+generated: '2026-08-05'
+method: searched
+source: https://techdocs.truefitcorp.com/changelog
+scheme: calendar (Version YYYY.MM), documentation-hub scoped
+current_version: v2024.09
+note: >-
+  True Fit publishes a dated changelog for its integration documentation hub rather than
+  per-API release notes. Entries record documentation and SDK-integration changes. The
+  ten most recent published entries are captured below; the live changelog is the source
+  of truth.
+entries:
+- version: '2024.05'
+  date: '2024-05-31'
+  type: added
+  highlights:
+  - Updated the Android Native App SDK docs
+  - Reference the pre-built AAR file instead of building the AAR manually
+  - Note about spacing around the widget
+  - Section on cleaning up the widget, referencing new methods in the 2024.05 build
+- version: '2023.06'
+  date: '2023-06-12'
+  type: improved
+  highlights:
+  - Size Sampling Banner Integration widget documentation
+  - Android SDK installation instructions for Windows
+  - Documentation for the open-event callback listener that passes the style id
+- version: '2023.03'
+  date: '2023-02-17'
+  highlights:
+  - Size Sampling doc rewritten into a single page (script, div, logo) and made live
+  - Marketing Page doc — data-userId changed to optional, Bras added to data-category
+  - Shopify Size Sampling doc updated
+- version: '2023.02'
+  date: '2023-01-18'
+  type: added
+  highlights:
+  - Updated catalog feed preferred format
+  - Shopify Size Sampling documentation added under Shopify Integration
+  - Clarified which product is used to render the widget
+- version: '2023.01'
+  date: '2023-01-10'
+  type: improved
+  highlights:
+  - Event hook documentation updated to include the open event
+- version: '2022.12'
+  date: '2022-12-09'
+  type: improved
+  highlights:
+  - Deprecated event hooks moved to an appendix
+- version: '2022.09'
+  date: '2022-11-03'
+  highlights:
+  - Added Shopify integration details
+- version: '2022.08'
+  date: '2022-10-03'
+  highlights:
+  - True 360 updated to include Kids
+  - Updated suggested widget container size
+- version: '2022.05'
+  date: '2022-05-18'
+  highlights:
+  - Updated adaptive website best practices
+  - Added OptedIn flag to True 360
+- version: '2022.04'
+  date: '2022-04-12'
+  type: improved
+  highlights:
+  - REST API documentation updated with best practices for new UX

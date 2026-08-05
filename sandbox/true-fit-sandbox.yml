@@ -1,0 +1,41 @@
+generated: '2026-08-05'
+method: searched
+source: https://techdocs.truefitcorp.com/docs/overview-1
+description: >-
+  True Fit runs a staging environment alongside production, addressed by hostname rather
+  than by a test-mode key prefix. There is no self-serve sandbox and no public test
+  credentials: the CLIENT_ID (tla), the API_INSTANCE_NAME hostnames and the partner API
+  key are all issued by the True Fit implementation team during onboarding.
+environments:
+- name: production
+  host_pattern: '{CLIENT_ID}-consumer.truefitcorp.com'
+  api: True Fit Consumer API
+- name: staging
+  host_pattern: '{CLIENT_ID}-consumer.staging.truefitcorp.com'
+  api: True Fit Consumer API
+- name: production
+  host: partner.truefitcorp.com
+  api: True Fit Partner API
+  note: >-
+    An unknown or disabled partnerId returns 404 before credentials are checked, so a 404
+    on the first call points at the partnerId or the environment rather than the key.
+test_values:
+  published: false
+  detail: >-
+    No test cards, magic identifiers, fixture tooling or time simulation are published —
+    the domain is fit recommendation, not payments. Behaviour is exercised with real
+    catalogue products from a registered retailerDomain.
+demo_surfaces:
+- name: Sample site PDP widget
+  url: https://www.truefit.com/business/misc/true-fit-sample-site-pdp-widget
+  note: live tf-integration.js widget rendered on a sample product page
+- name: Shopify demo
+  url: https://www.truefit.com/shopifydemo
+- name: Platform demo page
+  url: https://www.truefit.com/true-fit-platform-demo-page
+- name: Agentic shopping agent demo guide
+  url: https://www.truefit.com/agentic-shopping-agent-demo-guide
+onboarding:
+  access: sales-gated
+  url: https://www.truefit.com/get-started
+  issued_credentials: [CLIENT_ID, API_KEY, ENCRYPTION_KEY, API_INSTANCE_NAME]

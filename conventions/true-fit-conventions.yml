@@ -1,0 +1,108 @@
+generated: '2026-08-05'
+method: searched
+source: https://techdocs.truefitcorp.com/reference/partner-overview
+also:
+- https://techdocs.truefitcorp.com/docs/overview-1
+- https://techdocs.truefitcorp.com/docs/integration-with-http-apis
+- openapi/true-fit-partner-api-openapi.json
+- openapi/true-fit-consumer-api-openapi.json
+authentication:
+  partner_api:
+    style: HTTP Basic
+    detail: >-
+      Empty username, partner API key as the password —
+      Authorization: Basic base64(":" + apiKey). The leading colon is required;
+      base64(apiKey) alone has no separator and is rejected with 401.
+    exception: GET /id-sync is signed with HMAC-SHA256 rather than Basic auth.
+    ordering_gotcha: >-
+      An unknown or disabled partnerId returns 404 BEFORE credentials are checked, so a
+      404 on the first call points at the partnerId or the environment, not the key.
+  consumer_api:
+    style: rotating session token in a request header
+    header: X-TF-UserToken
+    detail: >-
+      True Fit generates and manages tokens server-side; the client persists them. One
+      token identifies one client device. The token cycles as the user interacts with
+      True Fit and the updated token is returned as a response header and via iFrame
+      messages; always send the most recent one.
+    exempt_operation: GET /token
+  member_view_api:
+    style: shared secret header
+    header: 'Authorization: sha256 <API_KEY>'
+    docs: https://techdocs.truefitcorp.com/docs/supported-apis
+idempotency:
+  supported: false
+  detail: >-
+    Neither published OpenAPI declares an idempotency key header or parameter, and the
+    docs describe no request-replay contract. Writes are PUT-upsert shaped
+    (PUT /profile/{profileId}/measurements replaces the measurement set), which is
+    naturally idempotent, but there is no client-supplied idempotency key.
+pagination:
+  supported: false
+  detail: >-
+    No cursor or offset parameters appear in either spec. Collection reads return the
+    full set for one profile (profiles, closet items, measurements); breadth is handled
+    by the bulk endpoints instead.
+bulk:
+  endpoints:
+  - POST /partner/{partnerId}/profile/{profileId}/recommendation/bulk
+  - POST /partner/{partnerId}/general-guidance/bulk
+  shape: JSON array of 1 to 100 items
+  response: >-
+    An array of the SAME length and in the SAME order, so results are matched to requests
+    by position. Each result echoes the retailerDomain, productId and locale that were sent.
+  partial_failure: >-
+    Failures are per item — each result carries success:true with its data or success:false
+    with an `error` string. One unrecognised product does not fail the batch and the HTTP
+    status is still a success status.
+identity:
+  detail: >-
+    Partner endpoints operate on a True Fit user, not on your identifier. GET /id-sync
+    creates that user and maps one of your identifiers to it; call it once per user, store
+    the returned tfPartnerUserId, and drive every later request from it.
+  parameters:
+  - name: tfPartnerUserId
+    preferred: true
+  - name: partnerUserId
+    note: your own identifier, as passed to /id-sync
+  rule: Supply at least one; omitting both returns 400. tfPartnerUserId wins if both are sent.
+enums:
+  case_sensitivity: >-
+    Enum values are documented in canonical lowercase but matched case-insensitively —
+    "Womens" and "womens" are equally valid; the stored and returned value is always lowercase.
+localization:
+  parameter: locale
+  format: language_COUNTRY (ISO 639 + ISO 3166), e.g. en_US
+  default: the retailer's primary locale when omitted
+  scale: guidance delivered across 25 languages and dozens of size strings
+retailer_domain:
+  detail: >-
+    retailerDomain accepts a hostname or a full URL; only the hostname is used and
+    protocol, port, path and query string are discarded. Matching is case-insensitive.
+    "www." is NOT stripped, so confirm with True Fit which exact hostnames are registered.
+async_behaviour:
+  detail: >-
+    Profile writes trigger asynchronous body estimation, so a recommendation requested
+    immediately after one may return userEstimationInProgress. Retry after a short delay.
+cookies:
+  detail: >-
+    The Consumer API relies on third-party cookies so shoppers receive recommendations
+    across sites; XMLHttpRequest must be configured with withCredentials=true.
+  token_sharing: >-
+    "2-way token sharing" keeps the JavaScript library and the HTTP API on one token —
+    tfcapi('getToken', cb) reads it, tfcapi('setToken', id, maxAge) writes it.
+pii:
+  policy: >-
+    True Fit does not collect or accept PII (names, email addresses, postal addresses)
+    on any integration point, and states that no PII is used to generate fit
+    recommendations.
+  source: https://techdocs.truefitcorp.com/docs/overview-1
+versioning:
+  api: URI path — /profile/public/v3, /true-360/public/v1
+  docs: calendar versions on the documentation hub (current v2024.09)
+error_envelope: errors/true-fit-problem-types.yml
+error_codes: errors/true-fit-error-codes.yml
+rate_limits:
+  published: false
+  detail: No published rate limits or rate-limit response headers were found in either
+    spec or the documentation.

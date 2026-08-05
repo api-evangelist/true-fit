@@ -1,0 +1,57 @@
+generated: '2026-08-05'
+method: searched
+source: https://techdocs.truefitcorp.com/changelog
+versioning:
+  scheme: uri-path
+  current:
+  - api: True Fit Consumer API
+    version: v3
+    path: /profile/public/v3/{tla}
+  - api: True Fit Partner API
+    version: '2026-08-05'
+    note: calendar version declared in the OpenAPI info block; the path itself is unversioned
+  - api: True Fit 360 Member View API
+    version: v1
+    path: /true-360/public/v1
+  docs_version: v2024.09
+  docs: https://techdocs.truefitcorp.com/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  detail: >-
+    No published deprecation or sunset policy and no RFC 8594 Sunset/Deprecation header
+    support was found. Deprecation is handled editorially in the docs — a "Legacy" section
+    carries the superseded Shopify integration, JavaScript event hooks and JSON object
+    reference, and the changelog records deprecated event hooks being moved to an appendix
+    (2022.12).
+  legacy_documentation:
+  - https://techdocs.truefitcorp.com/docs/shopify-integration
+  - https://techdocs.truefitcorp.com/docs/legacy-javascript-event-hooks
+  - https://techdocs.truefitcorp.com/docs/legacy-json-object-reference
+  - https://techdocs.truefitcorp.com/docs/shopify-widget-integration-old-themes
+deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.truefit.com/
+support: https://www.truefit.com/support
+accessibility: https://techdocs.truefitcorp.com/docs/commitment-to-accessibility
+browser_support:
+  url: https://techdocs.truefitcorp.com/docs/browser-support
+  detail: The Website Integration API is disabled on all versions of Internet Explorer
+    and Safari 11 and below; True Fit disables itself gracefully on those browsers.
+data_feeds:
+- name: Daily Product Catalog Feed
+  cadence: daily
+  url: https://techdocs.truefitcorp.com/docs/daily-product-catalog-feed-copy
+- name: Weekly Incremental Returns Feed
+  cadence: weekly
+  url: https://techdocs.truefitcorp.com/docs/weekly-incremental-returns-feed
+- name: 360 Member View data file
+  cadence: weekly
+  url: https://techdocs.truefitcorp.com/docs/overview-2
+x-evidence:
+- url: https://status.truefit.com/
+  http_status: 200
+- url: https://techdocs.truefitcorp.com/changelog
+  http_status: 200

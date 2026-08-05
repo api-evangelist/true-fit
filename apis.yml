@@ -1,23 +1,190 @@
 aid: true-fit
 name: True Fit
-description: 'True Fit is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'True Fit Corporation is an AI-powered fit and sizing intelligence platform
+  for apparel and footwear ecommerce. Its Fashion Genome dataset is built on roughly
+  two decades of real purchase-and-return outcomes across 100M+ registered shoppers,
+  60M unique products and 91K+ brands, and powers size recommendations, fit confidence
+  scores, cross-brand size calibration and shopper fit profiles. True Fit ships as a
+  product-detail-page JavaScript widget, a Shopify app, native iOS/Android/React Native
+  SDKs, a documented Partner REST API and Consumer REST API, a 360 Member View data
+  API, and a Fit Intelligence Layer exposed to AI agents over the Model Context Protocol.'
+image: https://cdn.prod.website-files.com/64ee50f98275d03e3242bdef/69d410679088692a9df73243_256px%20webclip.png
 url: https://raw.githubusercontent.com/api-evangelist/true-fit/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-05'
 modified: '2026-08-05'
 tags:
 - Company
-apis: []
+- Fit and Sizing
+- Apparel
+- Footwear
+- Retail
+- E-Commerce
+- Recommendations
+- Personalization
+- Artificial Intelligence
+- Agentic Commerce
+- Model Context Protocol
+apis:
+- aid: true-fit:partner-api
+  name: True Fit Partner API
+  description: 'Server-to-server REST API for managing True Fit profiles on behalf of
+    your own users and requesting size recommendations for retailer products. Covers
+    identity sync, profiles, body measurements, closet items, bulk size recommendations
+    for up to 100 products, and anonymous aggregate general guidance. HTTP Basic auth
+    with an empty username and the partner API key as the password; GET /id-sync is
+    signed with HMAC-SHA256.'
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Recommendations
+  - Profiles
+  - Measurements
+  - Closet
+  - Identity
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-partner-api-openapi.json
+  - type: Overlay
+    url: overlays/true-fit-partner-api-overlay.yaml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+- aid: true-fit:consumer-api
+  name: True Fit Consumer API
+  description: 'Browser/device-facing REST API used to build a custom True Fit integration:
+    session tokens, shopper profiles and recipient profiles, closet items, brands,
+    sizes, bra sizes, inseams, sleeve lengths, style attributes, products, normalized
+    sizes, fit recommendations, product ratings, checkout tracking and analytics.
+    Requests are identified by a rotating token passed as a header; the API relies on
+    third-party cookies and withCredentials for cross-site recommendations.'
+  humanURL: https://techdocs.truefitcorp.com/reference/registration-api
+  baseURL: https://fitrec.truefitcorp.com/profile/public/v3
+  tags:
+  - Profiles
+  - Recommendations
+  - Closet
+  - Brands
+  - Sizes
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-consumer-api-openapi.json
+  - type: Overlay
+    url: overlays/true-fit-consumer-api-overlay.yaml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:360-member-view-api
+  name: True Fit 360 Member View API
+  description: 'Two-endpoint data API that packages True Fit machine-learning assets
+    for a retailer partner: a Metadata endpoint returning the descriptor of the current
+    weekly 360 Member View file (client id, created timestamp, OpenPGP algorithm, SHA-256
+    of the plaintext) and a Content endpoint streaming the encrypted newline-delimited
+    JSON file of shopper registration, likely-brand and likely-size predictions. Authorized
+    with an "Authorization: sha256 API_KEY" header issued during onboarding.'
+  humanURL: https://techdocs.truefitcorp.com/docs/overview-2
+  baseURL: https://true-360.truefitcorp.com/true-360/public/v1
+  tags:
+  - Data
+  - Analytics
+  - Personalization
+  properties:
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-2
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/docs/supported-apis
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/true-fit-agentic-access.yml
+- type: DomainSecurity
+  url: security/true-fit-domain-security.yml
+- type: Authentication
+  url: authentication/true-fit-authentication.yml
 - type: Website
-  url: https://forgeglobal.com/true-fit_stock/
+  url: https://www.truefit.com/
+- type: DeveloperPortal
+  url: https://techdocs.truefitcorp.com/
+- type: Documentation
+  url: https://techdocs.truefitcorp.com/docs
+- type: APIReference
+  url: https://techdocs.truefitcorp.com/reference
+- type: GettingStarted
+  url: https://techdocs.truefitcorp.com/docs/product-detail-page-integration
+- type: Support
+  url: https://www.truefit.com/support
+- type: Blog
+  url: https://www.truefit.com/blog
+- type: TermsOfService
+  url: https://www.truefit.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.truefit.com/privacy-policy-and-choices
+- type: Marketplace
+  name: Shopify App Store listing
+  url: https://apps.shopify.com/truefit
+- type: TechnicalSpecification
+  name: Fit Intelligence technical specification
+  url: https://www.truefit.com/fit-intelligence-spec
+- type: Compliance
+  name: GDPR FAQ
+  url: https://www.truefit.com/gdpr-faq
+- type: PrivacyDisclosures
+  name: US state privacy disclosures
+  url: https://www.truefit.com/us-state-privacy-disclosures
+- type: StatusPage
+  url: https://status.truefit.com/
+- type: ChangeLog
+  url: https://techdocs.truefitcorp.com/changelog
+- type: ChangeLog
+  name: True Fit changelog (captured)
+  url: changelog/true-fit-changelog.yml
+- type: Lifecycle
+  url: lifecycle/true-fit-lifecycle.yml
+- type: Conventions
+  url: conventions/true-fit-conventions.yml
+- type: Conformance
+  url: conformance/true-fit-conformance.yml
+- type: ErrorCatalog
+  url: errors/true-fit-problem-types.yml
+- type: ErrorCodes
+  url: errors/true-fit-error-codes.yml
+- type: Packages
+  url: packages/true-fit-packages.yml
+- type: SDKs
+  url: packages/true-fit-packages.yml
+- type: CDN
+  name: tf-integration.js loader
+  url: https://cdn.truefitcorp.com/fitrec/global/js/tf-integration.js
+- type: Components
+  url: components/true-fit-components.yml
+- type: Sandbox
+  url: sandbox/true-fit-sandbox.yml
+- type: DataModel
+  url: data-model/true-fit-data-model.yml
+- type: MCPServer
+  url: mcp/true-fit-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/true-fit-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/true-fit-llms.txt
+- type: LLMsTxt
+  name: Integration documentation llms.txt
+  url: llms/true-fit-techdocs-llms.txt
+- type: ContentSignal
+  name: robots.txt Content-Signal (ai-train=no, search=yes, ai-input=no)
+  url: well-known/true-fit-robots.txt
+x-enrichment:
+  date: '2026-08-05'
+  status: enriched
+  artifacts_added: 27
+  pass: local-v1

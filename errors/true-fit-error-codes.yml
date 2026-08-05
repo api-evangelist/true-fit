@@ -1,0 +1,78 @@
+generated: '2026-08-05'
+method: searched
+source: https://techdocs.truefitcorp.com/docs/api-reference-1
+also: openapi/true-fit-partner-api-openapi.json#/components/schemas/BulkRecommendationResult
+description: >-
+  Domain-level outcome codes. These are NOT HTTP errors — the HTTP status is a success
+  status and each item in a bulk response carries success:true with data or success:false
+  with one of these `error` strings. The Confidence API returns the equivalent value as a
+  fit recommendation status.
+families:
+- family: bulk-recommendation
+  field: error
+  envelope: array item, same length and order as the request
+  codes:
+  - code: Invalid retailerDomain
+    meaning: The value could not be parsed as a hostname.
+    action: Send a hostname or full URL; only the hostname is used.
+  - code: Unsupported retailer domain
+    meaning: The hostname is not mapped to a retailer.
+    action: Ask True Fit to register the exact hostname (www. is not stripped).
+  - code: No recommendation returned for product
+    meaning: The product is unknown to True Fit.
+    action: Confirm the productId matches a record in the daily product catalog feed.
+  - code: incompleteProfile
+    meaning: The profile lacks the measurements needed for this garment.
+    action: Add measurements or closet items, or fall back to general guidance.
+  - code: noProfile
+    meaning: The profile no longer exists.
+    action: Recreate the profile.
+  - code: userEstimationInProgress
+    meaning: Body estimation is still running after a profile, measurement or closet write.
+    action: Retry after a short delay.
+  - code: noSizesFitTheUser
+    meaning: No stocked size fits.
+    action: Surface an out-of-stock or nearest-size message.
+  - code: invalidGender
+    meaning: The product's department does not apply to this profile.
+  - code: unrecommendableDepartment
+    meaning: The product is in a department True Fit does not size, such as accessories.
+  - code: productMissingData
+    meaning: The product lacks the garment data needed to size it.
+  - code: recommendationDisabled
+    meaning: Recommendations are turned off for that retailer.
+  - code: error
+    meaning: An unexpected failure.
+    action: Safe to retry.
+- family: bulk-general-guidance
+  field: error
+  codes:
+  - code: Invalid retailerDomain
+    meaning: The value could not be parsed as a hostname.
+  - code: Unsupported retailer domain
+    meaning: The hostname is not mapped to a retailer.
+  - code: No general guidance returned for product
+    meaning: The product is unknown, or too few shoppers have rated it to produce guidance.
+- family: fit-recommendation-status
+  source: https://techdocs.truefitcorp.com/docs/api-reference-1
+  codes:
+  - code: nouser
+    meaning: The style is recommendable, but the user does not have a True Fit profile.
+  - code: nostyle
+    meaning: The user has a True Fit profile, but the style is not recommendable.
+  - code: nostylenouser
+    meaning: The style is not recommendable and the user has no profile.
+  - code: incompleteprofile
+    meaning: Not enough information about this user to provide a recommendation.
+  - code: incompletegarment
+    meaning: Not enough information about this style to provide a recommendation.
+  - code: invaliddepartment
+    meaning: The user cannot receive a recommendation for the department of the style.
+  - code: sizenotavailable
+    meaning: The style is not sold in the size True Fit would recommend.
+  - code: estimationinprogress
+    meaning: True Fit is still computing a fit recommendation.
+  - code: success
+    meaning: True Fit successfully provided a fit recommendation.
+  - code: error
+    meaning: An error occurred providing a fit recommendation.

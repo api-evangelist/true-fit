@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Content Signals
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
+Sitemap: https://www.truefit.com/sitemap.xml

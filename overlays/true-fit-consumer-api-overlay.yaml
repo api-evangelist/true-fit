@@ -1,0 +1,41 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the True Fit Consumer API
+  version: 1.0.0
+extends: openapi/true-fit-consumer-api-openapi.json
+x-provenance:
+  generated: '2026-08-05'
+  method: generated
+  source: harvested verbatim from the True Fit ReadMe API registry
+    (https://dash.readme.com/api/v1/api-registry/1mld74kq6wjhv1) via
+    https://techdocs.truefitcorp.com/reference
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: true-fit
+    x-apievangelist-harvested: '2026-08-05'
+    x-apievangelist-source: https://techdocs.truefitcorp.com/reference/registration-api
+    x-apievangelist-gaps:
+    - no operationId on any of the 45 operations
+    - no components.securitySchemes; the X-TF-UserToken session header is described in
+      prose only
+    - servers[] carries the relative path /profile/public/v3/{tla} with no host
+- target: $.servers
+  update:
+    x-apievangelist-observed-hosts:
+    - url: https://fitrec.truefitcorp.com/profile/public/v3
+      note: verified live 2026-08-05 (HTTP 204 on the base path); CNAME to
+        consumer.truefitcorp.com
+      probed: '2026-08-05'
+    - url: https://{tla}-consumer.truefitcorp.com
+      note: per-retailer production hostname pattern documented at
+        https://techdocs.truefitcorp.com/docs/overview-1
+    - url: https://{tla}-consumer.staging.truefitcorp.com
+      note: per-retailer staging hostname pattern
+- target: $.info
+  update:
+    x-apievangelist-artifacts:
+      conventions: conventions/true-fit-conventions.yml
+      error_codes: errors/true-fit-error-codes.yml
+      components: components/true-fit-components.yml
+      data_model: data-model/true-fit-data-model.yml

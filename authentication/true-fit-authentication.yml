@@ -1,0 +1,15 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/true-fit-partner-api-openapi.json
+summary:
+  types:
+  - http
+schemes:
+- name: partnerApiKey
+  type: http
+  scheme: basic
+  description: |-
+    Empty username, partner API key as the password:
+    `Authorization: Basic <base64(":" + apiKey)>`.
+  sources:
+  - openapi/true-fit-partner-api-openapi.json

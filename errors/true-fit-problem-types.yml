@@ -1,0 +1,76 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/true-fit-partner-api-openapi.json, openapi/true-fit-consumer-api-openapi.json
+docs: https://techdocs.truefitcorp.com/reference/partner-overview
+format: custom-json
+note: >-
+  True Fit does not use RFC 9457 application/problem+json. Both REST APIs return a
+  plain application/json error envelope. The Partner API envelope is
+  {statusCode, message, error}; schema validation failures return {message, error}
+  where `error` is a map of failing field path to message and carries NO statusCode.
+envelope:
+  media_type: application/json
+  schema: openapi/true-fit-partner-api-openapi.json#/components/schemas/Error
+  fields:
+  - name: statusCode
+    type: integer
+    note: absent on ValidationError bodies
+  - name: message
+    type: string
+  - name: error
+    type: string or object
+    note: string reason phrase on Error; field-path map on ValidationError
+problems:
+- status: 400
+  name: MissingIdSyncParams
+  title: Missing required params
+  detail: partnerId or partnerUserId was not supplied to GET /id-sync.
+  source_operation: openapi/true-fit-partner-api-openapi.json#syncIds
+- status: 400
+  name: MissingUserIdentifier
+  title: tfPartnerUserId or partnerUserId query parameter is required
+  detail: Neither partnerUserId nor tfPartnerUserId was supplied. If both are sent,
+    tfPartnerUserId takes precedence.
+  source_operation: openapi/true-fit-partner-api-openapi.json#listProfiles
+- status: 400
+  name: ValidationFailed
+  title: Validation failed
+  detail: The request body or query string failed schema validation. `error` maps each
+    failing field path to its message; array indices appear as the first path segment.
+  schema: openapi/true-fit-partner-api-openapi.json#/components/schemas/ValidationError
+- status: 401
+  name: Unauthorized
+  title: Missing or invalid Basic credentials
+  detail: Missing or invalid Basic credentials, or a user identifier that does not match
+    a known partner user. "Unknown partner user" means call GET /id-sync first, not
+    "bad credentials".
+  remediation: Send Authorization Basic base64(":" + apiKey) with an EMPTY username;
+    base64(apiKey) without the leading colon is rejected.
+- status: 404
+  name: UnsupportedPartner
+  title: Unsupported partner
+  detail: The partnerId is unknown or disabled. Returned BEFORE credentials are checked,
+    so an invalid API key against an unknown partner is a 404, not a 401.
+- status: 404
+  name: ProfileNotFound
+  title: Profile not found
+  detail: The profileId does not exist or does not belong to the identified user.
+- status: 500
+  name: UnvalidatedClosetSize
+  title: Internal server error / unvalidated closet size
+  detail: A server error. On the closet endpoints it also indicates a closet item that
+    does not match a size in True Fit's catalogue, in which case retrying the identical
+    payload will not succeed.
+  remediation: Verify brand, department, category, sellingLocale, hierarchyLabels and
+    sellingSize against True Fit's catalogue before retrying.
+- status: 401
+  name: Unauthorized360
+  title: Unauthorized
+  detail: The Authorization header on a 360 Member View request is invalid.
+  source: https://techdocs.truefitcorp.com/docs/metadata-api
+- status: 404
+  name: NoDataFile
+  title: File not found
+  detail: The Authorization header is valid but no 360 Member View data file is available
+    on the server.
+  source: https://techdocs.truefitcorp.com/docs/content-api

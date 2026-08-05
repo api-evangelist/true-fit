@@ -1,0 +1,58 @@
+generated: '2026-08-05'
+method: searched
+source: https://www.npmjs.com/package/truefit-consumer-app-sdk-react-native
+docs: https://techdocs.truefitcorp.com/docs/react-native-true-fit-sdk
+note: >-
+  DISAMBIGUATION — the npm scope @truefit/* and the GitHub org github.com/TrueFit belong
+  to Truefit (truefit.io), a software consultancy, NOT True Fit Corporation (truefit.com).
+  Those packages are deliberately excluded. Only packages published by the npm user
+  `tfpublicpackage` and linked from techdocs.truefitcorp.com are treated as first-party.
+packages:
+- language: javascript
+  platform: react-native
+  registry: npm
+  name: truefit-consumer-app-sdk-react-native
+  url: https://www.npmjs.com/package/truefit-consumer-app-sdk-react-native
+  install: npm install truefit-consumer-app-sdk-react-native
+  version: 1.0.10
+  published: '2025-11-03'
+  publisher: tfpublicpackage
+  official: true
+  evidence: linked as the React Native True Fit SDK from
+    https://techdocs.truefitcorp.com/docs/react-native-true-fit-sdk
+- language: javascript
+  platform: react-native
+  registry: npm
+  name: truefit-consumer-app-sdk-bare-react-native
+  url: https://www.npmjs.com/package/truefit-consumer-app-sdk-bare-react-native
+  install: npm install truefit-consumer-app-sdk-bare-react-native
+  version: 1.0.0
+  publisher: tfpublicpackage
+  official: true
+  description: Bare React Native SDK for the True Fit consumer app
+unpublished_sdks:
+- language: swift
+  platform: ios
+  name: TrueFit
+  distribution: private archive supplied by the True Fit implementation team; installed as
+    a local Swift Package or a path-based CocoaPod
+  registry: none
+  docs: https://techdocs.truefitcorp.com/docs/installation-for-ios
+- language: kotlin
+  platform: android
+  name: TrueFit-release.aar
+  distribution: pre-built AAR inside a private archive supplied by the implementation team
+  registry: none
+  docs: https://techdocs.truefitcorp.com/docs/installation-for-android
+browser_distribution:
+- name: tf-integration.js
+  url: https://cdn.truefitcorp.com/fitrec/global/js/tf-integration.js?storeKey=<CLIENT_ID>
+  kind: CDN-hosted JavaScript integration library (global `tfcapi`)
+  docs: https://techdocs.truefitcorp.com/docs/product-detail-page-integration
+app_listings:
+- marketplace: Shopify App Store
+  name: True Fit
+  url: https://apps.shopify.com/truefit
+  official: true
+registries_probed: [npm, pypi, maven-central, nuget, pkg.go.dev, rubygems, packagist, crates.io]
+registries_with_first_party_packages: [npm]

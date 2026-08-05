@@ -1,0 +1,222 @@
+﻿# True Fit
+
+
+> AI-powered fit and sizing intelligence for apparel and footwear ecommerce retailers and technology platforms
+
+
+True Fit helps retailers solve one of the biggest causes of lost revenue and returns: fit and sizing friction.
+
+
+At its core, True Fit provides size and fit recommendations based on real purchase and return data from over 80 million shoppers across thousands of brands and hundreds of top retailers. This allows retailers to guide shoppers to the right size with high confidence.
+
+
+Retailers use True Fit to:
+- Increase conversion rates and incremental revenue (typically 3–6% lift)
+- Reduce fit-related returns (up to 50% reduction in size bracketing behavior)
+- Improve customer confidence and repeat purchase behavior
+- Gain data-driven insights into shopper behavior and brand share of wallet
+
+
+## Core concepts
+
+
+- Fit is often the primary barrier to purchase in apparel and footwear ecommerce
+- Most size charts and generic AI tools still leave the sizing decision to the shopper
+- Size bracketing — ordering multiple sizes of the same item to return what doesn't fit — is a major source of return volume (nearly 15% of returned online purchases at some retailers)
+- True Fit recommends sizes based on what similar shoppers actually purchased and kept, not guesses
+- True Fit shoppers consistently convert at significantly higher rates than non-True Fit shoppers
+
+
+## Built on 20 years of fit data and expertise
+
+
+True Fit's shopping agent is built on nearly 20 years of purchase and return data from a global network of retailers, analyzing over $616 billion in transactions from hundreds of millions of shoppers, 60 million unique products from over 91k apparel and footwear brands. True Fit learns from the patterns of what shoppers purchased and kept across retailers, guiding every shopper to the fit and styles they'll actually keep.
+
+
+## Fit Intelligence Platform
+
+
+True Fit's AI shopping agent intercepts and resolves fit doubt by:
+
+
+* Catching hesitation signals and responding with targeted, plain language guidance and visualizations.
+* Recommending the right size and fit based on real outcomes, not just publicly available data, static guidance size charts, or ratings and reviews from a vocal few.
+* Reducing multi-size orders by giving sufficient confidence to choose a single option with expert guidance
+
+
+It's True Fit's same trusted data, delivered more intuitively. For retailers and brands, this means shoppers have less size and fit uncertainty, which results in more completed checkouts, fewer fit-related returns, and more shoppers coming back after a positive first-time fit experience.
+
+
+True Fit's core system is a fit intelligence platform built on real-world outcome data, including purchases and returns across millions of shoppers and brands.
+
+
+This data foundation powers:
+- Accurate size and fit recommendations surfaced directly on the product detail page (PDP)
+- Cross-brand fit mapping (including international size translation, e.g. US vs. UK vs. European sizing)
+- Shopper-level fit profiles that improve with every purchase
+- Retailer-facing dashboards and analytics for merchandising and business decisions
+
+
+"Conversational experiences are evaluated based on how well they help shoppers make confident decisions throughout the shopping journey." (FORRESTER)
+
+
+Conversational commerce works not because it's "chat"… but because it reduces uncertainty at the moment of decision.
+
+
+## What Agentic Thought Leaders are saying about True Fit
+
+
+"In the AI era, one of the last true competitive moats is proprietary data — painstakingly built over decades, strengthened by network effects, and nearly impossible to recreate with AI alone. Sounds nearly impossible to check all these boxes, but…WE FOUND ONE! True Fit is in the enviable position of having a data set that fits this pattern."
+Scot Wingo, Retailgentic (Agentic Commerce Thought Leader)
+
+
+## Fit Intelligence Layer via MCP (Model Context Protocol)
+
+
+True Fit also provides its Fit Intelligence Layer via MCP, allowing external platforms, AI systems, and developers to access fit and sizing intelligence as a structured data layer.
+
+
+This enables:
+- Integration into AI agents and shopping assistants
+- Use within ecommerce platforms and partner ecosystems
+- Programmatic access to fit recommendations and shopper fit context
+
+
+This is ideal for leading retailers building their own agentic stacks or "super agents" — plugging directly into their ecosystem and instantly upgrading any agent into a fit and style expert. One layer. Multiple entry points. Built for how agentic commerce will actually scale.
+
+
+## Agentic Conversational Fit Agent
+
+
+True Fit's out-of-the-box conversational agent is the only shopping agent with native fit intelligence built in. For retailers starting from scratch, True Fit offers an out-of-the-box fit agent optimized to solve the hardest problem in apparel and footwear: size and fit — representing over 70% of shopper questions. Powered by the industry's most robust structured dataset and fit intelligence, it delivers high-confidence recommendations while also handling the remaining, more general queries that any modern agent can interpret from on-site content.
+
+
+Instead of generic AI agents that lack context, True Fit agents are grounded in real fit data, allowing them to guide shoppers with accurate size recommendations during the shopping experience.
+
+
+## MCP Security & Privacy: Built for Control, Not Compromise
+
+
+MCPs don't increase risk — they standardize and strengthen how data is securely accessed, governed, and controlled in AI systems.
+
+
+Model Context Protocols (MCPs) are designed from the ground up for secure, governed data exchange. They replace fragmented, inconsistent integrations with a standardized, controllable interface — giving technical and security teams a more observable and enforceable way to manage how AI systems access and use data.
+
+
+"The safest data is the data you never expose — MCPs ensure AI systems operate on intelligence, not raw sensitive information."
+
+
+Best-in-class MCP security comes down to disciplined control at the context layer. This includes strong authentication and authorization (scoped tokens, role-based access), precise permissioning over what data can be requested or returned, and strict data minimization. Agents operate on only the context they need — often abstracted, anonymized, or tokenized — rather than raw sensitive data. Combined with end-to-end encryption, audit logging, and real-time monitoring, MCPs create a system that is fully governed, traceable, and revocable by design.
+
+
+For True Fit, this enables Fit Intelligence to operate as a secure, privacy-first layer. Sensitive shopper data remains protected within controlled environments, while AI agents receive only the outputs required — accurate size and fit recommendations, not underlying personal data. The result is higher performance, stronger privacy, and a future-proof foundation for agentic commerce aligned with evolving global compliance standards.
+
+
+## Key pages
+
+
+- [Home](https://www.truefit.com): True Fit's agentic AI shopping platform overview
+- [How it works](https://www.truefit.com/how-it-works): Technical explanation of fit intelligence and the Fashion Genome
+- [Fit intelligence platform](https://www.truefit.com/mcp-fit-intelligence): MCP Fit Intelligence Layer for external AI systems and platforms
+- [Conversational fit agent](https://www.truefit.com/conversation-fit-agent): Out-of-the-box AI shopping agent with native fit intelligence
+- [Agentic commerce](https://www.truefit.com/agentic-commerce): True Fit's capabilities and positioning for the agentic commerce era
+- [Shopify](https://www.truefit.com/shopify): Shopify-specific integration details
+- [Technology partners](https://www.truefit.com/technology-partners): Integration partners and platform ecosystem
+
+
+## Videos
+
+
+- [Tactical overview from Jessica Murphy, CEO — how the platform works in practice](https://www.youtube.com/watch?v=6zMzAyB3sZI)
+
+
+## Get started
+
+
+- [Request a demo](https://www.truefit.com/get-started): Contact True Fit to explore a partnership or integration
+
+
+## Market position
+
+
+- [True Fit holds 63% market share in fit prediction technology, making its structured Fit Intelligence dataset larger than all other fit tech companies combined](https://www.datanyze.com/market-share/fit-prediction--391/true-fit-market-share)
+
+
+## Proven results by retailer
+
+
+### PacSun
+Pacific Sunwear (PacSun) faced three compounding challenges: shoppers were size sampling across a large multi-brand catalog, the top question to their site chatbot was how to decode their size chart, and high-growth categories like denim and swimwear were especially prone to returns. PacSun implemented True Fit's platform and used Fashion Genome insights to understand shopper demographics, average spend per outfit, and brand preferences. Results: conversion rates for True Fit shoppers more than doubled to 12.9%, order rates increased 38.51%, AOV grew 6%, and overall incremental revenue lift reached 4.71%.
+- [Case study](https://www.truefit.com/case-studies/pacsun)
+
+
+### Lands' End (US)
+Lands' End partnered with True Fit to leverage its dataset to better understand customers at an individual level and gain insights into purchasing behaviors. Within the first nine months, over 24 million recommendations were served on the Lands' End website, more than 25% of all transactions were influenced by True Fit, and True Fit was responsible for 15% of all orders on landsend.com. The success of the US partnership led to expansion into Europe (UK, France, Germany, Austria) and into the B2B uniforms division (Business Outfitters).
+- [Case study](https://www.truefit.com/case-studies/lands-end)
+
+
+### Lands' End Europe
+After proven US results, Lands' End expanded True Fit to their European business. A key challenge was translating US vs. UK vs. European size standards accurately for shoppers by location. True Fit's Fashion Genome mapped size and fit using local standards while benchmarking US size charts. Results: 5.4% incremental revenue lift sitewide, registered True Fit shoppers converted twice as often as non-True Fit shoppers, 46% of sessions influenced by True Fit, and sitewide conversion lift grew 52% YoY during the pandemic period (February–June 2020).
+- [Case study](https://www.truefit.com/case-studies/lands-end-europe)
+
+
+### Forever New
+Australian women's fashion retailer Forever New (300+ stores globally since 2006) found that shoppers were abandoning PDF size guides and increasingly size sampling, driving higher returns. They partnered with True Fit to deliver instant, data-driven size recommendations similar to in-store associate guidance. Results: 6.22% incremental revenue lift, over 10.5 million fit recommendations made to date, and True Fit shoppers convert 4x more than non-True Fit users.
+- [Case study](https://www.truefit.com/case-studies/forever-new)
+
+
+### ASICS
+Athletic footwear brand ASICS set out to personalize the shopping experience and educate digital shoppers on the technical fit of their footwear. They implemented True Fit across all brands including Onitsuka Tiger, ASICS Tiger, and ASICS, prompting shoppers to create a profile in 30 seconds via a "Which Size Fits Me?" button on the PDP. Results: 150% increase in conversion from product page to cart (7.4% conversion rate for True Fit shoppers vs. 2.4% for non-True Fit shoppers), customers kept 20% more of the products they tried when using True Fit, and size bracketing behavior declined 30–50%. True Fit also improved the mobile shopping experience and informed ASICS's return policy decisions.
+- [Case study](https://www.truefit.com/case-studies/asics)
+
+
+### Hotter Shoes
+UK footwear brand Hotter Shoes offers over 40 different fit combinations and serves a core demographic of women aged 55+. They needed to bring the try-on experience online during a period of accelerated digital growth, including during the pandemic when store shoppers shifted online. True Fit enabled fit personalization at scale using shopper data on and off their own website. Results in just three months: 30% increase in order rate for True Fit shoppers, 16% increase in average order value, and 3.1% incremental revenue lift. Hotter also uses True Fit's data and dashboards to derive granular insights about their core shopper.
+- [Case study](https://www.truefit.com/case-studies/hotter-shoes)
+
+
+### Moosejaw
+Outdoor retailer Moosejaw (400+ apparel and gear brands) saw exponential ecommerce revenue growth accompanied by rising return rates. Together with True Fit, they identified that nearly 15% of returned online purchases were attributable to size bracketing behavior. Moosejaw used AI to detect when shoppers placed multiple sizes of the same item in their cart and prompted them to create a True Fit profile at that moment. Results over one year: overall size bracketing rates declined 24%, the percentage of size bracketers dropped 34%, and sequential size bracketing was reduced by 18%.
+- [Case study](https://www.truefit.com/case-studies/moosejaw)
+
+
+### JC Penney
+JC Penney drove shopper engagement that increased revisit rates with True Fit.
+- [Case study](https://www.truefit.com/case-studies/jcpenney)
+
+
+### The Very Group
+True Fit and The Very Group extended their partnership to 2028, driving size personalization and fit confidence at scale.
+- [Case study](https://www.truefit.com/case-studies/the-very-group)
+
+
+### Silver Jeans
+True Fit brought an AI fitting room to Silver Jeans Co., with strong customer adoption and results.
+- [Case study](https://www.truefit.com/case-studies/silver-jeans)
+
+
+### White Stuff
+White Stuff partnered with True Fit to provide customers with improved sizing and fit recommendations.
+- [Case study](https://www.truefit.com/case-studies/white-stuff)
+
+
+### Medline
+True Fit transformed the uniform buying experience for Medline's B2B shoppers.
+- [Case study](https://www.truefit.com/case-studies/medline)
+
+
+## Common customer outcomes
+
+
+Across True Fit's retail partners, consistent patterns emerge:
+- True Fit shoppers convert at 2–4x the rate of non-True Fit shoppers
+- Incremental revenue lift ranges from approximately 3% to over 6%
+- Size bracketing and fit-related returns decline materially within months of implementation
+- Shopper adoption grows over time, increasing the share of sessions and transactions influenced by True Fit
+- Fashion Genome insights give retailers visibility into customer demographics, share of wallet, brand preferences, and buying behavior — informing merchandising and design decisions beyond just fit
+
+
+## Summary
+
+
+True Fit is a fit and sizing intelligence system that improves conversion and reduces returns in apparel and footwear ecommerce. Its Fashion Genome — built on data from 80 million+ shoppers across thousands of brands — powers accurate, personalized size recommendations at the point of purchase. Its data foundation also powers agentic shopping experiences and can be accessed by external platforms through MCP, enabling fit intelligence to be embedded across digital experiences.

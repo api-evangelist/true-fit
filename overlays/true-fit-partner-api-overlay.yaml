@@ -1,0 +1,39 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the True Fit Partner API
+  version: 1.0.0
+extends: openapi/true-fit-partner-api-openapi.json
+x-provenance:
+  generated: '2026-08-05'
+  method: generated
+  source: harvested verbatim from the True Fit ReadMe API registry
+    (https://dash.readme.com/api/v1/api-registry/13sdjwjar5msgar595) via
+    https://techdocs.truefitcorp.com/reference/partner-overview
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: true-fit
+    x-apievangelist-harvested: '2026-08-05'
+    x-apievangelist-source: https://techdocs.truefitcorp.com/reference/partner-overview
+    x-apievangelist-artifacts:
+      authentication: authentication/true-fit-authentication.yml
+      conventions: conventions/true-fit-conventions.yml
+      errors: errors/true-fit-problem-types.yml
+      error_codes: errors/true-fit-error-codes.yml
+      data_model: data-model/true-fit-data-model.yml
+      lifecycle: lifecycle/true-fit-lifecycle.yml
+      skills: skills/_index.yml
+      mcp: mcp/true-fit-mcp.yml
+- target: $.info
+  update:
+    x-agentic-notes:
+      idempotency: none published; PUT /measurements is upsert-shaped but takes no
+        client idempotency key
+      pagination: none; breadth is served by the 1-100 item bulk endpoints
+      partial_failure: bulk responses are positional and per-item, so a failed item
+        never fails the batch
+      retry: userEstimationInProgress is the documented retry signal after a profile,
+        measurement or closet write
+- target: $.servers
+  update:
+    x-apievangelist-verified: '2026-08-05'

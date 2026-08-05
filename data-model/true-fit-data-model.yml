@@ -1,0 +1,94 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/true-fit-partner-api-openapi.json, openapi/true-fit-consumer-api-openapi.json
+docs: https://techdocs.truefitcorp.com/reference/partner-overview
+description: >-
+  Entity graph derived from the schema $refs and id-reference fields in the two published
+  OpenAPI documents. The spine is short: a partner user owns profiles, a profile owns
+  measurements and closet items, and a recommendation is the join of a profile with a
+  retailer product.
+entities:
+- name: PartnerUser
+  schema: null
+  identifiers:
+  - {field: tfPartnerUserId, description: True Fit's durable handle on the user, returned
+      by GET /id-sync}
+  - {field: partnerUserId, description: the partner's own identifier for the same person}
+  created_by: 'openapi/true-fit-partner-api-openapi.json#syncIds'
+  note: not modelled as a response schema; it exists only as the identifier pair carried
+    on every partner request
+- name: Profile
+  schema: 'openapi/true-fit-partner-api-openapi.json#/components/schemas/Profile'
+  key: profileId (uuid)
+  description: The person being shopped for. A user may hold several profiles, one per
+    recipient; there is no implicit "current" profile on the Partner API.
+  fields: [profileId, alias, department, userId, isActive, estimatedDob, originStore,
+    originLocale, registeredAt, savedAt, createdAt, updatedAt]
+  enums: [Department]
+- name: Measurements
+  schema: 'openapi/true-fit-partner-api-openapi.json#/components/schemas/MeasurementsResponse'
+  key: profileId
+  description: The measurement set attached to a profile. Written as a whole with
+    PUT .../measurements, so it behaves as a value object rather than a collection.
+  enums: [MeasurementPoint, Uom, GeneralMeasurementValue, ExactMeasurementValue]
+- name: ClosetItem
+  schema: 'openapi/true-fit-partner-api-openapi.json#/components/schemas/ClosetItem'
+  key: closetId
+  description: A garment the shopper already owns, used to calibrate fit. Must match a
+    size in True Fit's catalogue or the write fails.
+  fields: [closetId, brand, department, category, sellingLocale, hierarchyLabels,
+    sellingSize, updatedAt]
+  enums: [ClosetCategory, SizeType, Department]
+- name: RetailerProduct
+  schema: 'openapi/true-fit-partner-api-openapi.json#/components/schemas/BulkRequestItem'
+  key: retailerDomain + productId
+  description: A product identified by the retailer's own product id scoped to a registered
+    retailer hostname; supplied by the daily product catalog feed.
+  fields: [retailerDomain, productId, locale]
+- name: Recommendation
+  schema: 'openapi/true-fit-partner-api-openapi.json#/components/schemas/BulkRecommendationResult'
+  key: none (computed, positional in a bulk response)
+  fields: [success, recommendedSize, error]
+- name: GeneralGuidance
+  schema: 'openapi/true-fit-partner-api-openapi.json#/components/schemas/BulkGeneralGuidanceResult'
+  key: none (computed)
+  fields: [success, recommendationSummary, recommendationMessage, error]
+  note: profile-free — the anonymous fallback when a recommendation returns
+    incompleteProfile or noProfile
+- name: Brand
+  source: 'openapi/true-fit-consumer-api-openapi.json (GET /brands)'
+  key: brandId
+- name: BrandStyle
+  source: 'openapi/true-fit-consumer-api-openapi.json (GET /brands/{brandId}/styles)'
+  key: brandStyleId
+- name: Size
+  source: 'openapi/true-fit-consumer-api-openapi.json (GET /sizes)'
+  key: sizeId
+- name: ProductRating
+  source: 'openapi/true-fit-consumer-api-openapi.json (GET /profiles/{profileId}/product-ratings)'
+  key: productRatingId
+- name: SessionToken
+  source: 'openapi/true-fit-consumer-api-openapi.json (GET /token)'
+  key: token
+  note: rotates as the shopper interacts; carried in the X-TF-UserToken header
+relationships:
+- {from: PartnerUser, to: Profile, kind: has_many, via: tfPartnerUserId}
+- {from: Profile, to: Measurements, kind: has_one, via: profileId}
+- {from: Profile, to: ClosetItem, kind: has_many, via: profileId}
+- {from: Profile, to: Recommendation, kind: has_many, via: profileId}
+- {from: Profile, to: ProductRating, kind: has_many, via: profileId}
+- {from: Recommendation, to: RetailerProduct, kind: belongs_to, via: retailerDomain+productId}
+- {from: GeneralGuidance, to: RetailerProduct, kind: belongs_to, via: retailerDomain+productId}
+- {from: ClosetItem, to: Brand, kind: belongs_to, via: brand}
+- {from: ClosetItem, to: Size, kind: belongs_to, via: sellingSize}
+- {from: BrandStyle, to: Brand, kind: belongs_to, via: brandId}
+- {from: SessionToken, to: Profile, kind: has_many, via: session}
+vocabularies:
+  Department: [baby, boys, donotrecommend, girls, maternity, mens, not apparel, other,
+    unisexkids, womens, unisex]
+  ClosetCategory: [belts, bottoms, bras, dresses, hats, hosiery, intimates, gloves,
+    neckwear, nightgowns, not apparel, other, pajamabottoms, pajamatops, pajamasets,
+    robes, shoes, scarves, socks, suits]
+  SizeType: [regular, plus, juniors, petite, slim, bigandtall, curvy, unisex, tall, husky]
+  Uom: [cm, mm, ft, in, kg, year, st, lb, month]
+  GeneralMeasurementValue: [verySmall, small, typical, big, veryBig]
