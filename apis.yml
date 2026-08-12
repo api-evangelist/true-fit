@@ -28,64 +28,14 @@ tags:
 - Agentic Commerce
 - Model Context Protocol
 apis:
-- aid: true-fit:partner-api
-  name: True Fit Partner API
-  description: 'Server-to-server REST API for managing True Fit profiles on behalf of
-    your own users and requesting size recommendations for retailer products. Covers
-    identity sync, profiles, body measurements, closet items, bulk size recommendations
-    for up to 100 products, and anonymous aggregate general guidance. HTTP Basic auth
-    with an empty username and the partner API key as the password; GET /id-sync is
-    signed with HMAC-SHA256.'
-  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
-  baseURL: https://partner.truefitcorp.com/api
-  tags:
-  - Recommendations
-  - Profiles
-  - Measurements
-  - Closet
-  - Identity
-  properties:
-  - type: OpenAPI
-    url: openapi/true-fit-partner-api-openapi.json
-  - type: Overlay
-    url: overlays/true-fit-partner-api-overlay.yaml
-  - type: APIReference
-    url: https://techdocs.truefitcorp.com/reference/partner-overview
-  - type: Documentation
-    url: https://techdocs.truefitcorp.com/reference/partner-overview
-- aid: true-fit:consumer-api
-  name: True Fit Consumer API
-  description: 'Browser/device-facing REST API used to build a custom True Fit integration:
-    session tokens, shopper profiles and recipient profiles, closet items, brands,
-    sizes, bra sizes, inseams, sleeve lengths, style attributes, products, normalized
-    sizes, fit recommendations, product ratings, checkout tracking and analytics.
-    Requests are identified by a rotating token passed as a header; the API relies on
-    third-party cookies and withCredentials for cross-site recommendations.'
-  humanURL: https://techdocs.truefitcorp.com/reference/registration-api
-  baseURL: https://fitrec.truefitcorp.com/profile/public/v3
-  tags:
-  - Profiles
-  - Recommendations
-  - Closet
-  - Brands
-  - Sizes
-  properties:
-  - type: OpenAPI
-    url: openapi/true-fit-consumer-api-openapi.json
-  - type: Overlay
-    url: overlays/true-fit-consumer-api-overlay.yaml
-  - type: APIReference
-    url: https://techdocs.truefitcorp.com/reference
-  - type: Documentation
-    url: https://techdocs.truefitcorp.com/docs/overview-1
 - aid: true-fit:360-member-view-api
   name: True Fit 360 Member View API
-  description: 'Two-endpoint data API that packages True Fit machine-learning assets
-    for a retailer partner: a Metadata endpoint returning the descriptor of the current
-    weekly 360 Member View file (client id, created timestamp, OpenPGP algorithm, SHA-256
-    of the plaintext) and a Content endpoint streaming the encrypted newline-delimited
-    JSON file of shopper registration, likely-brand and likely-size predictions. Authorized
-    with an "Authorization: sha256 API_KEY" header issued during onboarding.'
+  description: >-
+    Two-endpoint data API that packages True Fit machine-learning assets for a retailer partner: a Metadata
+    endpoint returning the descriptor of the current weekly 360 Member View file (client id, created timestamp,
+    OpenPGP algorithm, SHA-256 of the plaintext) and a Content endpoint streaming the encrypted newline-delimited
+    JSON file of shopper registration, likely-brand and likely-size predictions. Authorized with an "Authorization:
+    sha256 API_KEY" header issued during onboarding.
   humanURL: https://techdocs.truefitcorp.com/docs/overview-2
   baseURL: https://true-360.truefitcorp.com/true-360/public/v1
   tags:
@@ -97,12 +47,398 @@ apis:
     url: https://techdocs.truefitcorp.com/docs/overview-2
   - type: APIReference
     url: https://techdocs.truefitcorp.com/docs/supported-apis
+- aid: true-fit:true-fit-analytics-api
+  name: True Fit Analytics API
+  description: Provide session information for more advanced reporting.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-analytics-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-auth-api
+  name: True Fit Auth API
+  description: Endpoints to allow saving and logging in to a True Fit account.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-auth-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-bra-sizes-api
+  name: True Fit Bra Sizes API
+  description: >-
+    The bra sizes that are available to choose from for the bra size measurement on a Women's profile.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Bra Sizes
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-bra-sizes-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-brands-api
+  name: True Fit Brands API
+  description: The brands that are available to choose from when entering a reference closet item.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Brands
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-brands-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-checkout-api
+  name: True Fit Checkout API
+  description: An endpoint for tracking checkout events.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Checkout
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-checkout-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-closet-api
+  name: True Fit Closet API
+  description: Information about the profile's closet.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Closet
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-closet-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-discovery-recommendation-api
+  name: True Fit Discovery Recommendation API
+  description: Retrieve True Fit powered product recommendations for the shopper profile.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Discovery Recommendation
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-discovery-recommendation-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-fit-recommendation-api
+  name: True Fit Fit Recommendation API
+  description: Retrieve True Fit powered size recommendations for a profile.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Fit Recommendation
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-fit-recommendation-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-identity-api
+  name: True Fit Identity API
+  description: Establishing a True Fit user for one of your users.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Identity
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-identity-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-inseams-api
+  name: True Fit Inseams API
+  description: The available inseam lengths to choose from for the inseam measurement on a profile.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Inseams
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-inseams-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-measurements-api
+  name: True Fit Measurements API
+  description: Body measurements attached to a profile.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Measurements
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-measurements-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-normalized-sizes-api
+  name: True Fit Normalized Sizes API
+  description: Retrieve normalized sizes for the shopper profile.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Normalized Sizes
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-normalized-sizes-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-product-ratings-api
+  name: True Fit Product Ratings API
+  description: An endpoint for rating discovery recommendations.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Product Ratings
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-product-ratings-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-products-api
+  name: True Fit Products API
+  description: The products available at a store.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-products-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-profile-api
+  name: True Fit Profile API
+  description: Information about the person being shopped for.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Profile
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-profile-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-profiles-api
+  name: True Fit Profiles API
+  description: Creating and managing fit profiles belonging to a partner user.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-profiles-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-recommendations-api
+  name: True Fit Recommendations API
+  description: Size recommendations and general fit guidance for retailer products.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Recommendations
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-recommendations-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-sizes-api
+  name: True Fit Sizes API
+  description: The sizes that are available to choose from when entering a reference closet item.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Sizes
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-sizes-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-sleeve-lengths-api
+  name: True Fit Sleeve Lengths API
+  description: >-
+    The available sleeve lengths to choose from for the sleeve length measurement on a profile.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Sleeve Lengths
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-sleeve-lengths-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-style-attributes-api
+  name: True Fit Style Attributes API
+  description: >-
+    The style attributes available for particular ageGroup, gender, category and optional class combination.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Style Attributes
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-style-attributes-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
+- aid: true-fit:true-fit-token-api
+  name: True Fit Token API
+  description: >-
+    A token is used to identify requests from a device and associate the requests with a session. As the
+    user interacts with True Fit, the token will update. The most recent token returned by True Fit should
+    be used on subsequent requests.
+  humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
+  baseURL: https://partner.truefitcorp.com/api
+  tags:
+  - Token
+  properties:
+  - type: OpenAPI
+    url: openapi/true-fit-token-api-openapi.yml
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/reference/partner-overview
+  - type: APIReference
+    url: https://techdocs.truefitcorp.com/reference
+  - type: Documentation
+    url: https://techdocs.truefitcorp.com/docs/overview-1
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/true-fit-consumer-api-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/true-fit-agentic-access.yml
 - type: DomainSecurity
