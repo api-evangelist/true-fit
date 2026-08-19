@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit - Consumer Bra Sizes API",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bra Sizes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the available bra sizes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/bra-sizes",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Identifier specifying the locale to use when retrieving suggested brands or any type of sizes e.g. sizes, bra sizes, inseams or sleeve lengths. This attribute is only required when the store supports multiple locales. Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US. "
+              }
+            ]
+          },
+          "docs": "Retrieve the available bra sizes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit Partner Identity API",
+    "version": "2026-08-05"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a True Fit user for one of your users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner.truefitcorp.com/api/id-sync",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "query",
+                "description": "Your partner identifier, issued during onboarding."
+              },
+              {
+                "name": "partnerUserId",
+                "value": "acme-user-42817",
+                "type": "query",
+                "description": "Your own stable identifier for the user."
+              },
+              {
+                "name": "redirectUri",
+                "value": "",
+                "type": "query",
+                "description": "When supplied, the response is a `302` redirect to this URI instead of a JSON body.\nIntended for browser-based flows; server-to-server integrations should omit it.\n"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "query",
+                "description": "Lowercase hex HMAC-SHA256 signature over the other query parameters."
+              }
+            ]
+          },
+          "docs": "Creates a True Fit user and maps one of your user identifiers to it. Call this once per\nuser, before any other endpoint.\n\n**Sync each user exactly once and store the returned `tfPartnerUserId`.** Re-syncing a\n`partnerUserId` that has already been synced is not supported: it issues a new\n`tfPartnerUserId` and detaches the profiles, measurements, and closet items written\nunder the previous one.\n\n### Signing the request\n\nRequests are signed with HMAC-SHA256 using the shared partner secret issued du"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

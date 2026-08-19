@@ -1,0 +1,245 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit - Consumer Profile API",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Profile",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the profiles on the current session.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/profiles",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve the profiles on the current session."
+        },
+        {
+          "info": {
+            "name": "Create a profile for a user. Or, link a Store User ID and retrieve the profiles for the current session.\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/profile/public/v3/{tla}/profiles",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              },
+              {
+                "name": "X-TF-StoreUserId",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Store Style IDs to request an Instant Profile for. Only used when passing the X-TF-StoreUserId header, not when creating a new profile."
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Identifier specifying the locale to use when retrieving suggested brands or any type of sizes e.g. sizes, bra sizes, inseams or sleeve lengths. This attribute is only required when the store supports multiple locales. Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US. "
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a profile for a user. Or, link a Store User ID and retrieve the profiles for the current session.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific profile by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific profile by id"
+        },
+        {
+          "info": {
+            "name": "Update a profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a profile"
+        },
+        {
+          "info": {
+            "name": "Delete a recipient from a shopper's profile.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a recipient from a shopper's profile."
+        },
+        {
+          "info": {
+            "name": "Get a Fit Recommendation for the given styles.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId/fit-recommendations",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Identifier specifying the locale to use when retrieving suggested brands or any type of sizes e.g. sizes, bra sizes, inseams or sleeve lengths. This attribute is only required when the store supports multiple locales. Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US. "
+              },
+              {
+                "name": "integrationPlatform",
+                "value": "",
+                "type": "query",
+                "description": "Specifies whether the call is being made from inside the context of an app or the web."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Store Style IDs to request Fit Recommendations for."
+              }
+            ]
+          },
+          "docs": "Get a Fit Recommendation for the given styles."
+        },
+        {
+          "info": {
+            "name": "Change the active profile on the session.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId/set-active",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Set the `profileId` on the path as an active profile."
+        },
+        {
+          "info": {
+            "name": "Get a category specific profile strength for a profile.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId/strength/:category",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a category specific profile strength for a profile."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

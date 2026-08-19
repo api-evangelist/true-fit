@@ -1,0 +1,140 @@
+openapi: 3.2.0
+info:
+  title: True Fit - Consumer Checkout API
+  description: "These APIs can be used to create a custom True Fit integration.\n\n# Getting Started\n\nHere are some general concepts - please see further below for the specific endpoint documentation.\n\n## Cookies\nThese APIs leverage third party cookies to enable users to receive recommendations across sites. In order for this to work correctly, when calling the APIs in the context of your website, you must configure the XMLHttpRequest object to use withCredentials=true. If you do not do this, True Fit users may not see recommendations when arriving on your site. For more information on the withCredentials flag, please see the [XMLHttpRequest spec](https://xhr.spec.whatwg.org/#the-withcredentials-attribute).\n\n## Tokens\n\nTrue Fit uses a token to identify the user and their associated session information. True Fit generates and manages tokens on the server side, while the client device is responsible for persisting tokens. Generally, a single token should be used to identify a single client device. The token will be cycled as a user interacts with True Fit to provide increased security and privacy. The token is required to be passed as a header on every endpoint (except the `/token` endpoint).\n\n## Profiles\n\nA profile is the entity that contains information about the person being shopped for. The profile entity itself can contain information such as gender, height, weight and age. When a profile is created, it is assigned an ID. That ID can be used in the path of other endpoints, such as adding closet items and requesting fit recommendations for that profile.\n\n## Creating a profile\n\nIn order to get a fit recommendation, a profile must be created. \nA profile is created by sending POST request to the `/profiles` endpoint. The created profile will be returned on the response, with the addition of an `id` field. A profile can be updated/modified by sending a PUT request to the `/profiles/{profileId}` endpoint.\n\nWhen shopping for other adults or children, a recipient profile should be created. These profiles will be created by sending POST requests to the same `/profiles` endpoint. The token on the request will be used to identify the shopper profile and associate recipients accordingly. \nPlease note that one kids recipient profile can be unnamed (no alias) and no kids recipient profile can have the same alias as another kids recipient profile. Adult recipient profiles must be named (has alias) and cannot have the same alias as another adult recipient profile. \n\n### Adding closet items\n\nIn addition to the fields on the Profile object itself, closet items can also be added for a profile. A closet item is an example article of clothing that the person already wears and likes, which True Fit uses to inform fit recommendations. Closet items are added by sending a POST request to `/profiles/{profileId}/closet` endpoint. Similar to Profiles, the created closet item is returned on the response, with the addition of an `id` field. A closet item can be updated by sending a PUT request to `/profiles/{profileId}/closet/{closetId}`.\n\nChild profiles can only have one closet item per category. In the event that a second closet item is saved, a validation error will be returned.\n\n## Getting a fit recommendation for a product\n\nIf the product is recommendable (see `GET /products`), and there is a profile on the session (see `GET /profiles`), then a fit recommendation request can be made for that profile and product. A fit recommendation request can be made by a GET request to the `/profiles/{profileId}/fit-recommendations` endpoint. The information required to get a recommendation varies by the gender of the Profile and the Category of the style in question. If True Fit is able to provide a recommendation, the `status` will be `success`. Otherwise, the `status` will indicate why the recommendation wasn't able to be produced.\n\n## Example Flow - Product Page\n1. Check if token has already been persisted (in a cookie, perhaps) - if not, make a GET request to the `/token` endpoint to get one, then persist it.\n1. Make a GET request to `/products/{styleId}` to get the product info.\n1. In parallel, make a GET request to `/profiles` to get the current profiles on the session (if any)\n1. If the product info shows that the product is not recommendable, then stop here. Otherwise continue.\n1. If the profiles request returns an empty list of profiles then give the user an opportunity to register for True Fit.\n1. If the user begins to register, update the token and use the information from the product info to determine the gender, age group, and category that is of interest.\n1. Have the user answer questions to create a profile and add a closet item for the category.\n1. Request a fit recommendation from the `/profiles/{profileId}/fit-recommendations` endpoint and present the recommendation to the user.\n\n## General API Behavior\n* A `404 - Not Found` will be returned when an unspecified endpoint is hit.\n* If a valid endpoint is hit with a method it doesn't support, a `405 -\nMethod Not Allowed` will be returned.\n* If a request has an invalid value, a `400 - Bad Request` will be returned \n* It is possible for any endpoint to return a `500 - Internal Server Error` if an unexpected error is encountered.\n* When True Fit is performing maitenence on the system, a `404 - Not Found` with the response header `X-TF-Disabled: StoreDisabled` will be returned for all endpoints. \n"
+  version: '3.0'
+servers:
+- url: /profile/public/v3/{tla}
+tags:
+- name: Checkout
+  description: An endpoint for tracking checkout events.
+paths:
+  /checkout:
+    post:
+      tags:
+      - Checkout
+      summary: Track a checkout event for the retailer when a user completes an order and checks out.
+      parameters:
+      - name: X-TF-UserToken
+        in: header
+        description: The session token for the current user.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-TF-StoreUserId
+        in: header
+        description: The store user id for the current user.
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: locale
+        in: query
+        description: 'Identifier specifying the locale to use when retrieving suggested brands or any type of sizes e.g. sizes, bra sizes, inseams or sleeve lengths. This attribute is only required when the store supports multiple locales. Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US. '
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutEvent'
+      responses:
+        '201':
+          description: Checkout event successfully tracked
+          headers:
+            X-TF-UserToken:
+              description: The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.
+              style: simple
+              explode: false
+              schema:
+                type: string
+            X-TF-UserTokenMaxAge:
+              description: This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).
+              style: simple
+              explode: false
+              schema:
+                type: integer
+        '400':
+          description: If line items are defined, but the checkout type is defined and is not LineItem. Or the type is LineItem and there are no products defined.
+components:
+  schemas:
+    CheckoutType:
+      type: string
+      enum:
+      - LineItem
+      - OrderNotify
+      - TrackCheckout
+      - TrackCheckoutApi
+    CheckoutEvent:
+      required:
+      - orderId
+      type: object
+      properties:
+        orderId:
+          type: string
+          example: '236272'
+        deviceType:
+          $ref: '#/components/schemas/DeviceType'
+        integrationPlatform:
+          $ref: '#/components/schemas/IntegrationPlatform'
+        widgetHidden:
+          type: boolean
+          example: false
+        storeExperimentKey:
+          type: string
+          example: TestGroupA
+        checkoutType:
+          $ref: '#/components/schemas/CheckoutType'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+    DeviceType:
+      type: string
+      enum:
+      - desktop
+      - mobile
+    IntegrationPlatform:
+      type: string
+      enum:
+      - web
+      - app
+    LineItem:
+      required:
+      - currency
+      - price
+      - productId
+      - quantity
+      type: object
+      properties:
+        productId:
+          type: string
+          example: shirt-123
+        quantity:
+          type: integer
+          example: 1
+        price:
+          type: number
+          example: 12.99
+        currency:
+          type: string
+          example: USD
+        colorId:
+          type: string
+          example: Blue
+        size:
+          type: string
+          example: large
+        sku:
+          type: string
+          example: 034592
+        salesGroup:
+          type: string
+          example: ''
+x-explorer-enabled: false

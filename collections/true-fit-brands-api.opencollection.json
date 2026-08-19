@@ -1,0 +1,235 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit - Consumer Brands API",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Brands",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the available brands for the given combination of category, gender, and age group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/brands",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ageGroup",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve the available brands for the given combination of category, gender, and age group."
+        },
+        {
+          "info": {
+            "name": "Retrieve the brand object based on a brandId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/brands/:brandId",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the brand object based on a brandId."
+        },
+        {
+          "info": {
+            "name": "Retrieve the suggested brands for the given combination of category, gender, and age group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/brands/suggested",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ageGroup",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Identifier specifying the locale to use when retrieving suggested brands or any type of sizes e.g. sizes, bra sizes, inseams or sleeve lengths. This attribute is only required when the store supports multiple locales. Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US. "
+              },
+              {
+                "name": "age",
+                "value": "",
+                "type": "query",
+                "description": "Specify to retrieve suggestions for this target age (in years)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The max count of brands to return."
+              }
+            ]
+          },
+          "docs": "Retrieve the suggested brands for the given combination of category, gender, and age group."
+        },
+        {
+          "info": {
+            "name": "Retrieve the brand styles for the brand, category, gender, and age group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/brands/:brandId/styles",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ageGroup",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the brand styles for the brand, category, gender, and age group."
+        },
+        {
+          "info": {
+            "name": "Retrieve the brand style object for the brand style id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/brands/:brandId/styles/:brandStyleId",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "brandStyleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the brand style object for the brand style id."
+        },
+        {
+          "info": {
+            "name": "Retrieve the classes for the brand, category, gender, and age group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/brands/:brandId/classes",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ageGroup",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "brandId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the classes for the brand, category, gender, and age group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

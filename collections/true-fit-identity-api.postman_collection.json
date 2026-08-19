@@ -1,0 +1,407 @@
+{
+  "item": [
+    {
+      "id": "a7ba4894-a851-4a12-83d9-4649eb8cdd6a",
+      "name": "Identity",
+      "description": {
+        "content": "Establishing a True Fit user for one of your users.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c3519b11-ed18-4b81-899f-44a1101bab3b",
+          "name": "Create a True Fit user for one of your users",
+          "request": {
+            "name": "Create a True Fit user for one of your users",
+            "description": {
+              "content": "Creates a True Fit user and maps one of your user identifiers to it. Call this once per\nuser, before any other endpoint.\n\n**Sync each user exactly once and store the returned `tfPartnerUserId`.** Re-syncing a\n`partnerUserId` that has already been synced is not supported: it issues a new\n`tfPartnerUserId` and detaches the profiles, measurements, and closet items written\nunder the previous one.\n\n### Signing the request\n\nRequests are signed with HMAC-SHA256 using the shared partner secret issued during\nonboarding. Build the canonical string from every query parameter **except** `hash`,\nsorted by parameter name, URL-encoding each value:\n\n```\ncanonical = \"partnerId=<value>&partnerUserId=<value>\"          # sorted, hash excluded\nhash      = hex(hmac_sha256(partnerSecret, canonical))\n```\n\n`redirectUri`, when present, participates in the signature like any other parameter.\nThe comparison is timing-safe and the hash must be lowercase hex.\n\nThis endpoint does **not** use Basic authentication - do not send an `Authorization`\nheader.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "id-sync"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerId",
+                  "value": "<string>",
+                  "description": "(Required) Your partner identifier, issued during onboarding."
+                },
+                {
+                  "disabled": false,
+                  "key": "partnerUserId",
+                  "value": "<string>",
+                  "description": "(Required) Your own stable identifier for the user."
+                },
+                {
+                  "disabled": false,
+                  "key": "redirectUri",
+                  "value": "<uri>",
+                  "description": "When supplied, the response is a `302` redirect to this URI instead of a JSON body.\nIntended for browser-based flows; server-to-server integrations should omit it.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "hash",
+                  "value": "<string>",
+                  "description": "(Required) Lowercase hex HMAC-SHA256 signature over the other query parameters."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c2f7bd11-c044-48c0-9a7e-df2b0079665e",
+              "name": "The newly created user mapping.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "id-sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerId",
+                      "value": "acme"
+                    },
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "redirectUri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tfPartnerUserId\": \"p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfcb9bd6-4ecc-4d3a-b4cb-350de495a9ad",
+              "name": "Returned instead of `200` when `redirectUri` was supplied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "id-sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerId",
+                      "value": "acme"
+                    },
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "redirectUri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Location",
+                  "value": "https://uuCXZgqfJcFvwXQaD.fficTEycXsD8dPLU5ZrKGX2-Mz4PpHR6sxag-dObXrHt3nFo87MRm1FgXH",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5393dc58-8549-4e80-af46-0adabcba73c0",
+              "name": "`partnerId` or `partnerUserId` was not supplied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "id-sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerId",
+                      "value": "acme"
+                    },
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "redirectUri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": \"Missing required params\",\n  \"error\": \"Bad Request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c84a88ba-e3eb-4a5a-b926-1e2118996801",
+              "name": "The `hash` parameter is missing or the signature does not match.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "id-sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerId",
+                      "value": "acme"
+                    },
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "redirectUri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Invalid HMAC signature\",\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "979a6cf4-90e6-432b-b42e-5a0c46064945",
+              "name": "The `partnerId` is unknown or disabled. Returned before credentials are checked, so an\ninvalid API key against an unknown partner is a `404`, not a `401`.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "id-sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerId",
+                      "value": "acme"
+                    },
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "redirectUri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Unsupported partner\",\n  \"error\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partner.truefitcorp.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b8181177-987c-49f7-ad78-a94e642e3c54",
+    "name": "True Fit Partner Identity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These APIs can be used to manage True Fit profiles on behalf of your own users and to\nrequest size recommendations for retailer products.\n\n# Getting Started\n\nHere are the general concepts - please see further below for the specific endpoint\ndocumentation.\n\n## Base URL\n\nEvery path in this reference is relative to the base URL, which already includes the\n`/api` prefix:\n\n```\nhttps://partner.truefitcorp.com/api\n```\n\n## Authentication\n\nAll `/partner/{partnerId}/**` endpoints use HTTP Basic authentication. The **username is\nempty** and the **password is your partner API key**:\n\n```\nAuthorization: Basic <base64(\":\" + apiKey)>\n```\n\nNote the leading colon. `base64(apiKey)` without it has no separator and is rejected\nwith `401`.\n\nAn unknown or disabled `partnerId` returns `404` **before** credentials are checked, so a\n`404` on your first call points at the `partnerId` or the environment, not at the key.\n\n`GET /id-sync` is authenticated differently - it is signed with HMAC-SHA256 rather than\nBasic auth. See that endpoint for the signing scheme.\n\n## Identifying a user\n\nPartner endpoints operate on a True Fit user, not on your identifier directly.\n`GET /id-sync` creates that user and maps one of your identifiers to it. Call it once per\nuser, store the `tfPartnerUserId` it returns, and drive every later request from that.\n\nExcept for `POST /general-guidance/bulk`, every endpoint needs a user identifier as a\nquery parameter:\n\n* `tfPartnerUserId` - the identifier returned by `GET /id-sync`. Preferred: it is a\n  durable handle on one specific True Fit user and its data.\n* `partnerUserId` - your own identifier for the user, as passed to `GET /id-sync`.\n\nSupply at least one; omitting both returns `400`. If you send both, `tfPartnerUserId`\ntakes precedence. An identifier that was never synced returns `401 Unknown partner user`,\nwhich means \"call `GET /id-sync` first\" rather than \"bad credentials\".\n\n## Profiles\n\nA profile is the entity that holds information about the person being shopped for -\ndepartment, alias, measurements, and closet items. When a profile is created it is\nassigned a `profileId`, which is then used in the path of the measurements, closet, and\nrecommendation endpoints.\n\nA user may have several profiles, one per person they shop for. List them with\n`GET /profile` and address them explicitly by `profileId`; there is no implicit \"current\"\nprofile in this API.\n\nProfiles you create record your `partnerId` as their `originStore`.\n\n## Getting a size recommendation\n\nA profile needs measurements, closet items, or both before it can be sized: a profile\ncarrying neither has nothing to size against and returns `incompleteProfile`. Add\nmeasurements with `PUT /profile/{profileId}/measurements` and closet items with\n`POST /profile/{profileId}/closet`, then call\n`POST /profile/{profileId}/recommendation/bulk`.\n\nProfile writes trigger asynchronous body estimation, so a recommendation requested\nimmediately after one may return `userEstimationInProgress`. Retry after a short delay.\n\nWhen no profile exists - anonymous visitors, or a product page before registration -\nuse `POST /general-guidance/bulk` instead. It returns how a product ran for shoppers\ngenerally, needs no user identifier, and is the natural fallback when a recommendation\nreturns `incompleteProfile` or `noProfile`.\n\n## Example Flow - Product Page\n\n1. Once per user, call `GET /id-sync` and persist the returned `tfPartnerUserId`.\n2. Call `GET /profile` to list the user's profiles.\n3. If the list is empty, give the user an opportunity to register, then create a profile\n   with `POST /profile`.\n4. Add what you know about the user: `PUT /profile/{profileId}/measurements`, and\n   `POST /profile/{profileId}/closet` for garments they already own.\n5. Call `POST /profile/{profileId}/recommendation/bulk` with the products on the page and\n   present `recommendedSize` for each successful result.\n6. For products that return `success: false`, or when no profile exists, fall back to\n   `POST /general-guidance/bulk`.\n\n## Bulk requests\n\nBoth bulk endpoints take a JSON **array** of 1 to 100 items and return an array of the\n**same length and in the same order**, so results can be matched to requests by position.\nEach result also echoes the `retailerDomain`, `productId`, and `locale` you sent.\n\nFailures are per item: each result carries `success: true` with its data, or\n`success: false` with an `error` string. One unrecognised product does not fail the batch,\nand the HTTP status is still a success status.\n\n`retailerDomain` accepts a hostname or a full URL, from which only the hostname is used -\nprotocol, port, path, and query string are discarded, and matching is case-insensitive.\n`www.` is not stripped, so confirm with True Fit which exact hostnames are registered for\nyour retailers.\n\n## Request bodies\n\nEnum values are documented in their canonical lowercase form but matched\ncase-insensitively, so `Womens` and `womens` are equally valid - the stored and returned\nvalue is always lowercase. Fields not listed in a schema are ignored rather than rejected.\n\n## General API Behavior\n\n* Success statuses vary by endpoint. Empty-bodied writes return `200` in some places and\n  `204` in others, and both bulk endpoints return `201`. Treat any 2xx as success rather\n  than matching an exact code.\n* A `400 - Bad Request` is returned when a body or query string fails validation, or when\n  no user identifier is supplied.\n* A `401 - Unauthorized` is returned for a missing or wrong API key, and for a user\n  identifier that has no True Fit mapping.\n* A `404 - Not Found` is returned for an unknown or disabled `partnerId`, and for a\n  `profileId` that does not exist or does not belong to the identified user. Another\n  user's profile returns `404` rather than `403` so that the API cannot be used to detect\n  whether a profile exists.\n* It is possible for any endpoint to return a `500 - Internal Server Error` if an\n  unexpected error is encountered.\n* Validation failures carry a field-keyed error map and, unlike other errors, no\n  `statusCode` field:\n\n```json\n{ \"message\": \"Validation failed\", \"error\": { \"0.retailerDomain\": \"Invalid input: expected string, received undefined\" } }\n```\n\nArray indices appear as the first path segment, so `0.retailerDomain` is the\n`retailerDomain` field of the first item in a bulk request. All other errors use the\nstandard shape:\n\n```json\n{ \"statusCode\": 404, \"message\": \"Profile not found\", \"error\": \"Not Found\" }\n```\n\n## Rate limits\n\nNo rate limits are enforced today. Expected request volume should be agreed during\nonboarding.\n\n\nContact Support:\n Name: True Fit\n Email: tech@truefit.com",
+      "type": "text/plain"
+    }
+  }
+}

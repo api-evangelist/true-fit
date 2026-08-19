@@ -4,13 +4,11 @@ status: candidate
 source: openapi/true-fit-partner-api-openapi.json
 docs: https://www.truefit.com/mcp-fit-intelligence
 spec_page: https://www.truefit.com/fit-intelligence-spec
-description: >-
-  True Fit publicly markets a "Fit Intelligence Layer via MCP" as one of its activation
-  paths, described in section 7 of its own technical specification. NO public MCP endpoint,
-  tools/list manifest, registry entry or connection instructions were discoverable — the
-  MCP layer is arranged through sales ("Get a Demo"). The tools below are DERIVED from the
-  published Partner API operations as a candidate surface; they are NOT True Fit's
-  published tool names and must not be read as such.
+description: True Fit publicly markets a "Fit Intelligence Layer via MCP" as one of its activation paths,
+  described in section 7 of its own technical specification. NO public MCP endpoint, tools/list manifest,
+  registry entry or connection instructions were discoverable — the MCP layer is arranged through sales
+  ("Get a Demo"). The tools below are DERIVED from the published Partner API operations as a candidate
+  surface; they are NOT True Fit's published tool names and must not be read as such.
 server:
   name: true-fit-fit-intelligence
   published: false
@@ -18,22 +16,25 @@ server:
   transport: unknown
   access: sales-gated
   probes:
-  - {url: 'https://mcp.truefit.com/', result: NXDOMAIN}
-  - {url: 'https://mcp.truefitcorp.com/mcp', result: NXDOMAIN}
-  - {url: 'https://partner.truefitcorp.com/mcp', http_status: 404}
-  - {url: 'https://fitrec.truefitcorp.com/mcp', http_status: 404}
+  - url: https://mcp.truefit.com/
+    result: NXDOMAIN
+  - url: https://mcp.truefitcorp.com/mcp
+    result: NXDOMAIN
+  - url: https://partner.truefitcorp.com/mcp
+    http_status: 404
+  - url: https://fitrec.truefitcorp.com/mcp
+    http_status: 404
 provider_stated_capabilities:
   source: https://www.truefit.com/fit-intelligence-spec
   capabilities:
   - Integration of fit intelligence into AI agents and shopping assistants
-  - Programmatic access to fit recommendations and shopper fit context from any
-    MCP-compatible system
-  - Standardized fit guidance across PDP, conversational agents, site search, customer
-    support, returns and exchange flows, PLP size filtering and inventory workflows
+  - Programmatic access to fit recommendations and shopper fit context from any MCP-compatible system
+  - Standardized fit guidance across PDP, conversational agents, site search, customer support, returns
+    and exchange flows, PLP size filtering and inventory workflows
   security_model:
     authentication: scoped tokens and role-based access control
-    data_minimization: agents receive only size recommendations and fit confidence scores,
-      not underlying shopper data
+    data_minimization: agents receive only size recommendations and fit confidence scores, not underlying
+      shopper data
     auditability: end-to-end encryption, audit logging, real-time monitoring
     revocability: access can be revoked or scoped at any time
 tools:
@@ -41,8 +42,8 @@ tools:
   description: Recommend sizes for up to 100 products for a given fit profile
   source_operation: openapi/true-fit-partner-api-openapi.json#getBulkRecommendation
 - name: get_general_fit_guidance
-  description: Get aggregate "runs small / runs large" guidance for up to 100 products,
-    with no profile required
+  description: Get aggregate "runs small / runs large" guidance for up to 100 products, with no profile
+    required
   source_operation: openapi/true-fit-partner-api-openapi.json#getBulkGeneralGuidance
 - name: sync_user
   description: Create a True Fit user and map one of your identifiers to it
@@ -77,3 +78,9 @@ tools:
 - name: delete_closet_item
   description: Delete a closet item
   source_operation: openapi/true-fit-partner-api-openapi.json#deleteClosetItem
+deployment:
+  mode: none
+  verified: derived
+  tools: 13
+  checked: '2026-08-12'
+  source: catalog MCP census

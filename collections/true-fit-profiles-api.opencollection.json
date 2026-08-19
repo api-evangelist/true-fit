@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit Partner Profiles API",
+    "version": "2026-08-05"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List the user's profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner.truefitcorp.com/api/partner/:partnerId/profile",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "path",
+                "description": "Your partner identifier, issued during onboarding."
+              },
+              {
+                "name": "partnerUserId",
+                "value": "acme-user-42817",
+                "type": "query",
+                "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+              },
+              {
+                "name": "tfPartnerUserId",
+                "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55",
+                "type": "query",
+                "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+              }
+            ]
+          },
+          "docs": "Returns every profile belonging to the user, oldest first is not guaranteed - treat the\norder as unspecified and address profiles by `profileId`. A user with no profiles yet\nreturns an empty array.\n"
+        },
+        {
+          "info": {
+            "name": "Create a profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner.truefitcorp.com/api/partner/:partnerId/profile",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "path",
+                "description": "Your partner identifier, issued during onboarding."
+              },
+              {
+                "name": "partnerUserId",
+                "value": "acme-user-42817",
+                "type": "query",
+                "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+              },
+              {
+                "name": "tfPartnerUserId",
+                "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55",
+                "type": "query",
+                "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a profile for the user. The created profile records your `partnerId` as its\n`originStore`. An empty object is a valid body; both fields are optional.\n"
+        },
+        {
+          "info": {
+            "name": "Update a profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://partner.truefitcorp.com/api/partner/:partnerId/profile/:profileId",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "path",
+                "description": "Your partner identifier, issued during onboarding."
+              },
+              {
+                "name": "profileId",
+                "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                "type": "path",
+                "description": "A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+              },
+              {
+                "name": "partnerUserId",
+                "value": "acme-user-42817",
+                "type": "query",
+                "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+              },
+              {
+                "name": "tfPartnerUserId",
+                "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55",
+                "type": "query",
+                "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially updates the profile. Only the fields you send are changed. Updating a profile\nre-runs body estimation, so a subsequent recommendation may briefly return\n`userEstimationInProgress`.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://partner.truefitcorp.com/api/partner/:partnerId/profile/:profileId",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "path",
+                "description": "Your partner identifier, issued during onboarding."
+              },
+              {
+                "name": "profileId",
+                "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                "type": "path",
+                "description": "A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+              },
+              {
+                "name": "partnerUserId",
+                "value": "acme-user-42817",
+                "type": "query",
+                "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+              },
+              {
+                "name": "tfPartnerUserId",
+                "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55",
+                "type": "query",
+                "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+              }
+            ]
+          },
+          "docs": "Delete a profile"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

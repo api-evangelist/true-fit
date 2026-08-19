@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit - Consumer Style Attributes API",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Style Attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve available style attributes for the given category, ageGroup, gender, and optional class combination.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/style-attributes",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ageGroup",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "classification",
+                "value": "",
+                "type": "query",
+                "description": "An optional class paremeter retrieved from the /brands/{brandId}/classes endpoint."
+              }
+            ]
+          },
+          "docs": "Retrieve available style attributes for the given category, ageGroup, gender, and optional class combination."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

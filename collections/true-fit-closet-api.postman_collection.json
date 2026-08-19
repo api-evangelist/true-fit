@@ -1,0 +1,2331 @@
+{
+  "item": [
+    {
+      "id": "065aa925-3035-4ce8-aa33-eddeaf7720be",
+      "name": "Closet",
+      "description": {
+        "content": "Information about the profile's closet.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b1605de1-e2f3-467a-9176-4e2e7d5231d1",
+          "name": "Retrieve the closet items for the given profile.",
+          "request": {
+            "name": "Retrieve the closet items for the given profile.",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId",
+                "closet"
+              ],
+              "host": [
+                "{{profiles-profileId-closet-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "25ec10fc-5879-460e-9602-3d7e72c6611d",
+              "name": "The closet items for the given profile, filtered by category if specified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId",
+                    "closet"
+                  ],
+                  "host": [
+                    "{{profiles-profileId-closet-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "182"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"ageGroup\": \"Adult\",\n    \"brandId\": \"string\",\n    \"category\": \"Bottoms\",\n    \"gender\": \"Female\",\n    \"id\": \"someClosetId\",\n    \"classification\": \"string\",\n    \"sizeId\": \"string\",\n    \"brandStyleId\": \"string\",\n    \"styles\": {\n      \"WomensBraBandFit\": \"JustRight\",\n      \"WomensBraCupFit\": \"Overflows\",\n      \"WomensBraStyle\": \"MediumCoverage\",\n      \"WomensSilhouette\": \"ALine\",\n      \"WomensTopsStyle\": \"Blouse\",\n      \"WomensSleeveLength\": \"LongSleeve\",\n      \"WomensBottomsStyle\": \"Flare\",\n      \"WomensRise\": \"High\",\n      \"MensPantsFit\": \"Relaxed\",\n      \"MensBottomsStyle\": \"Straight\",\n      \"ClosetItemAge\": \"OneYearOrOlder\",\n      \"FitDescription\": \"JustRight\"\n    },\n    \"isExpired\": false\n  },\n  {\n    \"ageGroup\": \"Adult\",\n    \"brandId\": \"string\",\n    \"category\": \"Bottoms\",\n    \"gender\": \"Female\",\n    \"id\": \"someClosetId\",\n    \"classification\": \"string\",\n    \"sizeId\": \"string\",\n    \"brandStyleId\": \"string\",\n    \"styles\": {\n      \"WomensBraBandFit\": \"RidesUp\",\n      \"WomensBraCupFit\": \"JustRight\",\n      \"WomensBraStyle\": \"LowCoverage\",\n      \"WomensSilhouette\": \"Wrap\",\n      \"WomensTopsStyle\": \"Blouse\",\n      \"WomensSleeveLength\": \"Strapless\",\n      \"WomensBottomsStyle\": \"Flare\",\n      \"WomensRise\": \"Mid\",\n      \"MensPantsFit\": \"SemiFitted\",\n      \"MensBottomsStyle\": \"Boot\",\n      \"ClosetItemAge\": \"OneYearOrOlder\",\n      \"FitDescription\": \"JustRight\"\n    },\n    \"isExpired\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6789645c-d3ae-43f8-8854-78be1bbd6625",
+          "name": "Saves a closet item for the given profile.",
+          "request": {
+            "name": "Saves a closet item for the given profile.",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId",
+                "closet"
+              ],
+              "host": [
+                "{{profiles-profileId-closet-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ageGroup\": \"<string>\",\n  \"brandId\": \"<string>\",\n  \"category\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"sizeId\": \"<string>\",\n  \"brandStyleId\": \"<string>\",\n  \"styles\": {\n    \"WomensBraBandFit\": \"<string>\",\n    \"WomensBraCupFit\": \"<string>\",\n    \"WomensBraStyle\": \"<string>\",\n    \"WomensSilhouette\": \"<string>\",\n    \"WomensTopsStyle\": \"<string>\",\n    \"WomensSleeveLength\": \"<string>\",\n    \"WomensBottomsStyle\": \"<string>\",\n    \"WomensRise\": \"<string>\",\n    \"MensPantsFit\": \"<string>\",\n    \"MensBottomsStyle\": \"<string>\",\n    \"ClosetItemAge\": \"<string>\",\n    \"FitDescription\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c449c79-15ff-4d60-b52c-9f2347440a47",
+              "name": "The closet item that was successfully created.\nThe classification is either a value returned from the /brands/{brandId}/classes endpoint or one of the following - 'NotSure' or 'NoneOfThese'\nThe brand style id is either the id of a brand style returned from the /brands/{brandId}/styles endpoint or one of the following - 'NotSure' or 'NoneOfThese'\nThe style attributes is a map that is composed of a styleType key and an associated value in the values list returned from the `/style-attributes` endpoint for the styleType and one of the following - `NotSure` or `NoneOfThese`\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId",
+                    "closet"
+                  ],
+                  "host": [
+                    "{{profiles-profileId-closet-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "182"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ageGroup\": \"Adult\",\n  \"brandId\": \"<string>\",\n  \"category\": \"Bottoms\",\n  \"gender\": \"Female\",\n  \"id\": \"someClosetId\",\n  \"classification\": \"<string>\",\n  \"sizeId\": \"<string>\",\n  \"brandStyleId\": \"<string>\",\n  \"styles\": {\n    \"WomensBraBandFit\": \"<string>\",\n    \"WomensBraCupFit\": \"<string>\",\n    \"WomensBraStyle\": \"<string>\",\n    \"WomensSilhouette\": \"<string>\",\n    \"WomensTopsStyle\": \"<string>\",\n    \"WomensSleeveLength\": \"<string>\",\n    \"WomensBottomsStyle\": \"<string>\",\n    \"WomensRise\": \"<string>\",\n    \"MensPantsFit\": \"<string>\",\n    \"MensBottomsStyle\": \"<string>\",\n    \"ClosetItemAge\": \"<string>\",\n    \"FitDescription\": \"<string>\"\n  },\n  \"isExpired\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "095609bf-8fbe-47c6-8fca-4c1a6b3df732",
+          "name": "Get a specific closet item by ID.",
+          "request": {
+            "name": "Get a specific closet item by ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId",
+                "closet",
+                ":closetId"
+              ],
+              "host": [
+                "{{profiles-profileId-closet-closetId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "closetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b3b1fe7-3f09-4c84-acf7-2166298206ec",
+              "name": "The closet item with that ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId",
+                    "closet",
+                    ":closetId"
+                  ],
+                  "host": [
+                    "{{profiles-profileId-closet-closetId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "closetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "182"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ageGroup\": \"Adult\",\n  \"brandId\": \"<string>\",\n  \"category\": \"Bottoms\",\n  \"gender\": \"Female\",\n  \"id\": \"someClosetId\",\n  \"classification\": \"<string>\",\n  \"sizeId\": \"<string>\",\n  \"brandStyleId\": \"<string>\",\n  \"styles\": {\n    \"WomensBraBandFit\": \"<string>\",\n    \"WomensBraCupFit\": \"<string>\",\n    \"WomensBraStyle\": \"<string>\",\n    \"WomensSilhouette\": \"<string>\",\n    \"WomensTopsStyle\": \"<string>\",\n    \"WomensSleeveLength\": \"<string>\",\n    \"WomensBottomsStyle\": \"<string>\",\n    \"WomensRise\": \"<string>\",\n    \"MensPantsFit\": \"<string>\",\n    \"MensBottomsStyle\": \"<string>\",\n    \"ClosetItemAge\": \"<string>\",\n    \"FitDescription\": \"<string>\"\n  },\n  \"isExpired\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8fe62e6-0f9d-47cd-b444-0db672cc67d4",
+          "name": "Updates a closet item for the given profile.",
+          "request": {
+            "name": "Updates a closet item for the given profile.",
+            "description": {
+              "content": "The closetId in the path must match the id in the body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId",
+                "closet",
+                ":closetId"
+              ],
+              "host": [
+                "{{profiles-profileId-closet-closetId-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "stillFits",
+                  "value": "<boolean>",
+                  "description": "Passed as true if an expired closet item still fits the child profile.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "closetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ageGroup\": \"<string>\",\n  \"brandId\": \"<string>\",\n  \"category\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"sizeId\": \"<string>\",\n  \"brandStyleId\": \"<string>\",\n  \"styles\": {\n    \"WomensBraBandFit\": \"<string>\",\n    \"WomensBraCupFit\": \"<string>\",\n    \"WomensBraStyle\": \"<string>\",\n    \"WomensSilhouette\": \"<string>\",\n    \"WomensTopsStyle\": \"<string>\",\n    \"WomensSleeveLength\": \"<string>\",\n    \"WomensBottomsStyle\": \"<string>\",\n    \"WomensRise\": \"<string>\",\n    \"MensPantsFit\": \"<string>\",\n    \"MensBottomsStyle\": \"<string>\",\n    \"ClosetItemAge\": \"<string>\",\n    \"FitDescription\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96b95da0-02ab-4eef-a29a-f67a7e087959",
+              "name": "The closet item that was successfully created.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId",
+                    "closet",
+                    ":closetId"
+                  ],
+                  "host": [
+                    "{{profiles-profileId-closet-closetId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stillFits",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "closetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "182"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ageGroup\": \"Adult\",\n  \"brandId\": \"<string>\",\n  \"category\": \"Bottoms\",\n  \"gender\": \"Female\",\n  \"id\": \"someClosetId\",\n  \"classification\": \"<string>\",\n  \"sizeId\": \"<string>\",\n  \"brandStyleId\": \"<string>\",\n  \"styles\": {\n    \"WomensBraBandFit\": \"<string>\",\n    \"WomensBraCupFit\": \"<string>\",\n    \"WomensBraStyle\": \"<string>\",\n    \"WomensSilhouette\": \"<string>\",\n    \"WomensTopsStyle\": \"<string>\",\n    \"WomensSleeveLength\": \"<string>\",\n    \"WomensBottomsStyle\": \"<string>\",\n    \"WomensRise\": \"<string>\",\n    \"MensPantsFit\": \"<string>\",\n    \"MensBottomsStyle\": \"<string>\",\n    \"ClosetItemAge\": \"<string>\",\n    \"FitDescription\": \"<string>\"\n  },\n  \"isExpired\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b48b6c5-4c81-42b9-b7f4-377bcc289048",
+          "name": "Deletes a Closet Item",
+          "request": {
+            "name": "Deletes a Closet Item",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId",
+                "closet",
+                ":closetId"
+              ],
+              "host": [
+                "{{profiles-profileId-closet-closetId-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "stillFits",
+                  "value": "<boolean>",
+                  "description": "Passed as false if the expired closet item no longer fits for the child profile.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "closetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f80720bc-1f53-4be2-9fb3-003b7cff0845",
+              "name": "The closet item that was successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId",
+                    "closet",
+                    ":closetId"
+                  ],
+                  "host": [
+                    "{{profiles-profileId-closet-closetId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stillFits",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "closetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "182"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25fa877b-e07d-4be7-8db5-7d4ddfde3a85",
+          "name": "List the profile's closet items",
+          "request": {
+            "name": "List the profile's closet items",
+            "description": {},
+            "url": {
+              "path": [
+                "partner",
+                ":partnerId",
+                "profile",
+                ":profileId",
+                "closet"
+              ],
+              "host": [
+                "{{partner-partnerId-profile-profileId-closet-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerUserId",
+                  "value": "<string>",
+                  "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tfPartnerUserId",
+                  "value": "<string>",
+                  "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerId",
+                  "description": "(Required) Your partner identifier, issued during onboarding."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "profileId",
+                  "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f85744c2-ff16-4629-8de4-45d799bce329",
+              "name": "The profile's closet items. String fields are returned lowercased - `sellingSize`\nis the exception and is stored and returned verbatim.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"closetId\": \"1893471\",\n    \"department\": \"womens\",\n    \"category\": \"bottoms\",\n    \"hierarchyLabels\": [\n      \"womens\",\n      \"bottoms\"\n    ],\n    \"brand\": \"nike\",\n    \"sellingLocale\": \"us\",\n    \"sellingSize\": \"L\",\n    \"sizeVariants\": {\n      \"sizeType\": \"regular\"\n    },\n    \"fitAttributes\": null,\n    \"updatedAt\": \"2026-07-31T16:02:10.000Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ff0f9d5-f778-43b9-ad5b-d468b69c9125",
+              "name": "Missing or invalid Basic credentials, or a user identifier that does not match a known\npartner user.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Missing Basic auth credentials\",\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a7d106c-4ebf-4f90-b9a8-e3d60c77ca05",
+              "name": "The `profileId` does not exist or does not belong to the identified user. Also returned\nwhen the `partnerId` is unknown or disabled.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Profile not found\",\n  \"error\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f66e3284-b9fa-41e7-b18a-02671d86a631",
+          "name": "Add a closet item",
+          "request": {
+            "name": "Add a closet item",
+            "description": {
+              "content": "Adds a garment the user owns. The submitted combination of `brand`, `department`,\n`category`, `sellingLocale`, `hierarchyLabels`, `sellingSize`, and\n`sizeVariants.sizeType` must resolve to a size that exists in True Fit's catalogue -\narbitrary garments cannot be added. See the integration guide for how to pick values\nthat validate.\n\nAdding a closet item re-runs body estimation, so a recommendation requested\nimmediately afterwards may return `userEstimationInProgress`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                ":partnerId",
+                "profile",
+                ":profileId",
+                "closet"
+              ],
+              "host": [
+                "{{partner-partnerId-profile-profileId-closet-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerUserId",
+                  "value": "<string>",
+                  "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tfPartnerUserId",
+                  "value": "<string>",
+                  "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerId",
+                  "description": "(Required) Your partner identifier, issued during onboarding."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "profileId",
+                  "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"department\": \"<string>\",\n  \"category\": \"<string>\",\n  \"hierarchyLabels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"brand\": \"<string>\",\n  \"sellingLocale\": \"<string>\",\n  \"sellingSize\": \"<string,null>\",\n  \"sizeVariants\": {\n    \"sizeType\": \"<string>\",\n    \"sleeveLength\": \"<string>\",\n    \"shoeWidth\": \"<string>\",\n    \"cupSize\": \"<string>\"\n  },\n  \"fitAttributes\": \"<object,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "76592267-49fb-45c5-96d2-d180cb389b1f",
+              "name": "Closet item added. No response body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"department\": \"womens\",\n  \"category\": \"bottoms\",\n  \"hierarchyLabels\": [\n    \"womens\",\n    \"bottoms\"\n  ],\n  \"brand\": \"Nike\",\n  \"sellingLocale\": \"US\",\n  \"sellingSize\": \"L\",\n  \"sizeVariants\": {\n    \"sizeType\": \"regular\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "599c9fe8-900b-4c94-b5a5-891e9f3eebc8",
+              "name": "The request body or query string failed schema validation. `error` maps each failing\nfield path to its message; array indices appear as the first path segment.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"department\": \"womens\",\n  \"category\": \"bottoms\",\n  \"hierarchyLabels\": [\n    \"womens\",\n    \"bottoms\"\n  ],\n  \"brand\": \"Nike\",\n  \"sellingLocale\": \"US\",\n  \"sellingSize\": \"L\",\n  \"sizeVariants\": {\n    \"sizeType\": \"regular\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"error\": {\n    \"0.retailerDomain\": \"Invalid input: expected string, received undefined\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68958fb9-1ab9-427d-9759-0727ab34dea1",
+              "name": "Missing or invalid Basic credentials, or a user identifier that does not match a known\npartner user.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"department\": \"womens\",\n  \"category\": \"bottoms\",\n  \"hierarchyLabels\": [\n    \"womens\",\n    \"bottoms\"\n  ],\n  \"brand\": \"Nike\",\n  \"sellingLocale\": \"US\",\n  \"sellingSize\": \"L\",\n  \"sizeVariants\": {\n    \"sizeType\": \"regular\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Missing Basic auth credentials\",\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08e27094-07c9-4ebc-b981-5047060f8a98",
+              "name": "The `profileId` does not exist or does not belong to the identified user. Also returned\nwhen the `partnerId` is unknown or disabled.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"department\": \"womens\",\n  \"category\": \"bottoms\",\n  \"hierarchyLabels\": [\n    \"womens\",\n    \"bottoms\"\n  ],\n  \"brand\": \"Nike\",\n  \"sellingLocale\": \"US\",\n  \"sellingSize\": \"L\",\n  \"sizeVariants\": {\n    \"sizeType\": \"regular\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Profile not found\",\n  \"error\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59666dcd-a611-42a6-8889-8b086ce95ddf",
+              "name": "A server error. On these endpoints it also indicates a closet item that does not match a\nsize in True Fit's catalogue, in which case retrying the identical payload will not\nsucceed. Verify the `brand`, `department`, `category`, `sellingLocale`, `hierarchyLabels`,\n`sellingSize`, and `sizeVariants.sizeType` combination; `sellingSize: null` is not\naccepted.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"department\": \"womens\",\n  \"category\": \"bottoms\",\n  \"hierarchyLabels\": [\n    \"womens\",\n    \"bottoms\"\n  ],\n  \"brand\": \"Nike\",\n  \"sellingLocale\": \"US\",\n  \"sellingSize\": \"L\",\n  \"sizeVariants\": {\n    \"sizeType\": \"regular\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5bba5c44-40da-4baa-acf0-ca50ab3d9126",
+          "name": "Update a closet item",
+          "request": {
+            "name": "Update a closet item",
+            "description": {
+              "content": "Partially updates a closet item. The fields you send are merged over the stored item and\nthe merged result is re-validated against True Fit's size catalogue, so a partial update\ncan be rejected because of fields you did not send.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                ":partnerId",
+                "profile",
+                ":profileId",
+                "closet",
+                ":closetItemId"
+              ],
+              "host": [
+                "{{partner-partnerId-profile-profileId-closet-closetItemId-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerUserId",
+                  "value": "<string>",
+                  "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tfPartnerUserId",
+                  "value": "<string>",
+                  "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerId",
+                  "description": "(Required) Your partner identifier, issued during onboarding."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "profileId",
+                  "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "closetItemId",
+                  "description": "(Required) A closet item identifier, from the `closetId` field of `GET /closet`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"department\": \"<string>\",\n  \"category\": \"<string>\",\n  \"hierarchyLabels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"brand\": \"<string>\",\n  \"sellingLocale\": \"<string>\",\n  \"sellingSize\": \"<string,null>\",\n  \"sizeVariants\": {\n    \"sizeType\": \"<string>\",\n    \"sleeveLength\": \"<string>\",\n    \"shoeWidth\": \"<string>\",\n    \"cupSize\": \"<string>\"\n  },\n  \"fitAttributes\": \"<object,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ba08b45-8fa0-44c1-b9f0-b498a23f74d8",
+              "name": "Closet item updated. No response body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet",
+                    ":closetItemId"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-closetItemId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "closetItemId",
+                      "description": "(Required) A closet item identifier, from the `closetId` field of `GET /closet`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellingSize\": \"M\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ad048706-bf79-4658-8bf8-02e4e0c5a4dc",
+              "name": "The request body or query string failed schema validation. `error` maps each failing\nfield path to its message; array indices appear as the first path segment.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet",
+                    ":closetItemId"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-closetItemId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "closetItemId",
+                      "description": "(Required) A closet item identifier, from the `closetId` field of `GET /closet`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellingSize\": \"M\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"error\": {\n    \"0.retailerDomain\": \"Invalid input: expected string, received undefined\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2507d1e-f6fd-4322-844e-c5cfb42948bd",
+              "name": "Missing or invalid Basic credentials, or a user identifier that does not match a known\npartner user.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet",
+                    ":closetItemId"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-closetItemId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "closetItemId",
+                      "description": "(Required) A closet item identifier, from the `closetId` field of `GET /closet`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellingSize\": \"M\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Missing Basic auth credentials\",\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64d5ae2d-5e0a-45be-ae09-fd9ce2e0a74a",
+              "name": "The `profileId` does not exist or does not belong to the identified user. Also returned\nwhen the `partnerId` is unknown or disabled.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet",
+                    ":closetItemId"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-closetItemId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "closetItemId",
+                      "description": "(Required) A closet item identifier, from the `closetId` field of `GET /closet`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellingSize\": \"M\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Profile not found\",\n  \"error\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "295eadc2-210a-497a-a152-a945f83f0873",
+              "name": "A server error. On these endpoints it also indicates a closet item that does not match a\nsize in True Fit's catalogue, in which case retrying the identical payload will not\nsucceed. Verify the `brand`, `department`, `category`, `sellingLocale`, `hierarchyLabels`,\n`sellingSize`, and `sizeVariants.sizeType` combination; `sellingSize: null` is not\naccepted.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet",
+                    ":closetItemId"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-closetItemId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "closetItemId",
+                      "description": "(Required) A closet item identifier, from the `closetId` field of `GET /closet`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sellingSize\": \"M\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 500,\n  \"message\": \"Internal server error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8d602a9-5bf0-4f32-a7ab-d74e76d5cf1d",
+          "name": "Delete a closet item",
+          "request": {
+            "name": "Delete a closet item",
+            "description": {},
+            "url": {
+              "path": [
+                "partner",
+                ":partnerId",
+                "profile",
+                ":profileId",
+                "closet",
+                ":closetItemId"
+              ],
+              "host": [
+                "{{partner-partnerId-profile-profileId-closet-closetItemId-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerUserId",
+                  "value": "<string>",
+                  "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tfPartnerUserId",
+                  "value": "<string>",
+                  "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerId",
+                  "description": "(Required) Your partner identifier, issued during onboarding."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "profileId",
+                  "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "closetItemId",
+                  "description": "(Required) A closet item identifier, from the `closetId` field of `GET /closet`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5c3380c8-2623-4ec6-8fd5-5875b33e6724",
+              "name": "Deleted. No response body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet",
+                    ":closetItemId"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-closetItemId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "closetItemId",
+                      "description": "(Required) A closet item identifier, from the `closetId` field of `GET /closet`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "35d85283-061a-460e-a85a-596b2e24dd04",
+              "name": "Missing or invalid Basic credentials, or a user identifier that does not match a known\npartner user.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet",
+                    ":closetItemId"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-closetItemId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "closetItemId",
+                      "description": "(Required) A closet item identifier, from the `closetId` field of `GET /closet`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Missing Basic auth credentials\",\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cd18e37-1b86-401c-8c47-4b82c6e8acb2",
+              "name": "The `profileId` does not exist or does not belong to the identified user. Also returned\nwhen the `partnerId` is unknown or disabled.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId",
+                    "closet",
+                    ":closetItemId"
+                  ],
+                  "host": [
+                    "{{partner-partnerId-profile-profileId-closet-closetItemId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "closetItemId",
+                      "description": "(Required) A closet item identifier, from the `closetId` field of `GET /closet`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Profile not found\",\n  \"error\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/profile/public/v3/{{tla}}",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "/profile/public/v3/{{tla}}",
+      "key": "profiles-profileId-closet-Url"
+    },
+    {
+      "type": "string",
+      "value": "/profile/public/v3/{{tla}}",
+      "key": "profiles-profileId-closet-closetId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://partner.truefitcorp.com/api",
+      "key": "partner-partnerId-profile-profileId-closet-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://partner.truefitcorp.com/api",
+      "key": "partner-partnerId-profile-profileId-closet-closetItemId-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "b7da3830-337d-4387-857b-025b9cd14927",
+    "name": "True Fit Closet API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Closet across 2 of this provider's published API definitions: true-fit-consumer-api-openapi.json, true-fit-partner-api-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

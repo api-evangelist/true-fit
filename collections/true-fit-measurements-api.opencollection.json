@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit Partner Measurements API",
+    "version": "2026-08-05"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Measurements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read the profile's measurements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner.truefitcorp.com/api/partner/:partnerId/profile/:profileId/measurements",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "path",
+                "description": "Your partner identifier, issued during onboarding."
+              },
+              {
+                "name": "profileId",
+                "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                "type": "path",
+                "description": "A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+              },
+              {
+                "name": "partnerUserId",
+                "value": "acme-user-42817",
+                "type": "query",
+                "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+              },
+              {
+                "name": "tfPartnerUserId",
+                "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55",
+                "type": "query",
+                "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+              }
+            ]
+          },
+          "docs": "Read the profile's measurements"
+        },
+        {
+          "info": {
+            "name": "Add or replace measurements",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://partner.truefitcorp.com/api/partner/:partnerId/profile/:profileId/measurements",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "path",
+                "description": "Your partner identifier, issued during onboarding."
+              },
+              {
+                "name": "profileId",
+                "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                "type": "path",
+                "description": "A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+              },
+              {
+                "name": "partnerUserId",
+                "value": "acme-user-42817",
+                "type": "query",
+                "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+              },
+              {
+                "name": "tfPartnerUserId",
+                "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55",
+                "type": "query",
+                "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upserts the measurements you send. Measurement points you omit are left untouched;\nthis is not a full replacement of the measurement set.\n\nWriting measurements re-runs body estimation, so a recommendation requested\nimmediately afterwards may return `userEstimationInProgress`. Retry after a short delay.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

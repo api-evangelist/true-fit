@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit - Consumer Normalized Sizes API",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Normalized Sizes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve normalized sizes for the shopper profile.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/normalized-sizes",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "merchantCategoryId",
+                "value": "",
+                "type": "query",
+                "description": "Numeric category ID."
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ageGroup",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve normalized sizes for the shopper profile."
+        },
+        {
+          "info": {
+            "name": "Determine if provided category is recommendable.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/normalized-sizes/recommendable",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "merchantCategoryId",
+                "value": "",
+                "type": "query",
+                "description": "Numeric category ID."
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ageGroup",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Determine if provided category is recommendable."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

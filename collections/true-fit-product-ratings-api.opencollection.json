@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit - Consumer Product Ratings API",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Product Ratings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all product ratings for the user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId/product-ratings",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get all product ratings for the user."
+        },
+        {
+          "info": {
+            "name": "Save the user's product rating.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId/product-ratings",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Save the user's product rating."
+        },
+        {
+          "info": {
+            "name": "Update the user's product rating.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId/product-ratings/:productRatingId",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "productRatingId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the user's product rating."
+        },
+        {
+          "info": {
+            "name": "Deletes a user's product rating.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId/product-ratings/:productRatingId",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "productRatingId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a user's product rating."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

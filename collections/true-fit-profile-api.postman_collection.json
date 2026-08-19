@@ -1,0 +1,1198 @@
+{
+  "item": [
+    {
+      "id": "bb787478-ed87-45e2-80be-ccb0b6c4e6f2",
+      "name": "Profile",
+      "description": {
+        "content": "Information about the person being shopped for.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4ef79f0d-75e3-44ba-8763-357b0a99be90",
+          "name": "Retrieve the profiles on the current session.",
+          "request": {
+            "name": "Retrieve the profiles on the current session.",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "78e21d7b-385a-4153-8208-3b3d292ab53e",
+              "name": "A list of profiles that the user has created. Will be empty if the user has not interacted with True Fit yet.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "5437"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"gender\": \"Male\",\n    \"id\": \"someProfileId\",\n    \"height\": {\n      \"value\": 5,\n      \"secondValue\": 6,\n      \"uom\": \"FtIn\"\n    },\n    \"weight\": {\n      \"value\": 145,\n      \"uom\": \"Lb\"\n    },\n    \"age\": {\n      \"years\": 55,\n      \"months\": 5\n    },\n    \"braSizeId\": \"string\",\n    \"inseam\": {\n      \"exact\": {\n        \"uom\": \"string\",\n        \"value\": 699\n      },\n      \"general\": \"ExtraLong\"\n    },\n    \"sleeveLength\": {\n      \"exact\": {\n        \"uom\": \"string\",\n        \"value\": 1693\n      },\n      \"general\": \"WayTooShort\"\n    },\n    \"ageGroup\": \"Adult\",\n    \"alias\": \"string\",\n    \"isActive\": false,\n    \"isShopper\": false\n  },\n  {\n    \"gender\": \"Female\",\n    \"id\": \"someProfileId\",\n    \"height\": {\n      \"value\": 5,\n      \"secondValue\": 6,\n      \"uom\": \"FtIn\"\n    },\n    \"weight\": {\n      \"value\": 145,\n      \"uom\": \"Lb\"\n    },\n    \"age\": {\n      \"years\": 65,\n      \"months\": 7\n    },\n    \"braSizeId\": \"string\",\n    \"inseam\": {\n      \"exact\": {\n        \"uom\": \"string\",\n        \"value\": 9670\n      },\n      \"general\": \"Long\"\n    },\n    \"sleeveLength\": {\n      \"exact\": {\n        \"uom\": \"string\",\n        \"value\": 7428\n      },\n      \"general\": \"WayTooShort\"\n    },\n    \"ageGroup\": \"Adult\",\n    \"alias\": \"string\",\n    \"isActive\": false,\n    \"isShopper\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d38b0cd-4b6b-4a9c-a4f7-cb33ceae54ff",
+          "name": "Create a profile for a user. Or, link a Store User ID and retrieve the profiles for the current session.\n",
+          "request": {
+            "name": "Create a profile for a user. Or, link a Store User ID and retrieve the profiles for the current session.\n",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<string>",
+                  "description": "Store Style IDs to request an Instant Profile for. Only used when passing the X-TF-StoreUserId header, not when creating a new profile."
+                },
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<string>",
+                  "description": "Store Style IDs to request an Instant Profile for. Only used when passing the X-TF-StoreUserId header, not when creating a new profile."
+                },
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "Identifier specifying the locale to use when retrieving suggested brands or any type of sizes e.g. sizes, bra sizes, inseams or sleeve lengths. This attribute is only required when the store supports multiple locales. Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US. "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Use this header when retrieving the profiles for the current session, while associating the session with a Store User ID. This is required to support features like Instant Profiles and Store Credentials.\n\nIf the user is not currently logged in to a store account, `null` or `undefined` must be passed as the value. The Store User ID must be an anonymous unique identifier for the current user. (not a name or email address, for example)\n\n**If this header is on the request, the request body must be empty. The response will be a (potentially empty) list of Profiles.**\n",
+                "key": "X-TF-StoreUserId",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"gender\": \"<string>\",\n  \"height\": {\n    \"secondValue\": \"<integer>\",\n    \"uom\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"weight\": {\n    \"uom\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"age\": {\n    \"years\": \"<integer>\",\n    \"months\": \"<integer>\"\n  },\n  \"braSizeId\": \"<string>\",\n  \"inseam\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"sleeveLength\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"ageGroup\": \"Adult\",\n  \"alias\": \"<string>\",\n  \"isShopper\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "795b8fbc-2605-4571-9049-ac2a291c0511",
+              "name": "Profile successfully created. \n\nOr, profiles on the session successfully retrieved (see `X-TF-StoreUserId` header description). If `X-TF-StoreUserId` is passed, the response will be a (potentially empty) list of Profiles.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Use this header when retrieving the profiles for the current session, while associating the session with a Store User ID. This is required to support features like Instant Profiles and Store Credentials.\n\nIf the user is not currently logged in to a store account, `null` or `undefined` must be passed as the value. The Store User ID must be an anonymous unique identifier for the current user. (not a name or email address, for example)\n\n**If this header is on the request, the request body must be empty. The response will be a (potentially empty) list of Profiles.**\n",
+                    "key": "X-TF-StoreUserId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gender\": \"<string>\",\n  \"height\": {\n    \"value\": 5,\n    \"secondValue\": 6,\n    \"uom\": \"FtIn\"\n  },\n  \"weight\": {\n    \"value\": 145,\n    \"uom\": \"Lb\"\n  },\n  \"age\": {\n    \"years\": \"<integer>\",\n    \"months\": \"<integer>\"\n  },\n  \"braSizeId\": \"<string>\",\n  \"inseam\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"sleeveLength\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"ageGroup\": \"Adult\",\n  \"alias\": \"<string>\",\n  \"isShopper\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "5437"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"gender\": \"<string>\",\n  \"id\": \"someProfileId\",\n  \"height\": {\n    \"value\": 5,\n    \"secondValue\": 6,\n    \"uom\": \"FtIn\"\n  },\n  \"weight\": {\n    \"value\": 145,\n    \"uom\": \"Lb\"\n  },\n  \"age\": {\n    \"years\": \"<integer>\",\n    \"months\": \"<integer>\"\n  },\n  \"braSizeId\": \"<string>\",\n  \"inseam\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"sleeveLength\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"ageGroup\": \"Adult\",\n  \"alias\": \"<string>\",\n  \"isActive\": false,\n  \"isShopper\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5937ce7d-2296-4ca7-b473-65f1c1334f11",
+              "name": "Profile not created due to bad data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Use this header when retrieving the profiles for the current session, while associating the session with a Store User ID. This is required to support features like Instant Profiles and Store Credentials.\n\nIf the user is not currently logged in to a store account, `null` or `undefined` must be passed as the value. The Store User ID must be an anonymous unique identifier for the current user. (not a name or email address, for example)\n\n**If this header is on the request, the request body must be empty. The response will be a (potentially empty) list of Profiles.**\n",
+                    "key": "X-TF-StoreUserId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gender\": \"<string>\",\n  \"height\": {\n    \"value\": 5,\n    \"secondValue\": 6,\n    \"uom\": \"FtIn\"\n  },\n  \"weight\": {\n    \"value\": 145,\n    \"uom\": \"Lb\"\n  },\n  \"age\": {\n    \"years\": \"<integer>\",\n    \"months\": \"<integer>\"\n  },\n  \"braSizeId\": \"<string>\",\n  \"inseam\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"sleeveLength\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"ageGroup\": \"Adult\",\n  \"alias\": \"<string>\",\n  \"isShopper\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"AliasLength\",\n      \"message\": \"string\"\n    },\n    {\n      \"reason\": \"HeightOutOfRange\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8ce3e24-78d1-4e70-a535-a1a571213fac",
+          "name": "Retrieve a specific profile by id",
+          "request": {
+            "name": "Retrieve a specific profile by id",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0f462db-1906-4df0-a2ac-92131c912055",
+              "name": "Profile successfully retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "5437"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"gender\": \"<string>\",\n  \"id\": \"someProfileId\",\n  \"height\": {\n    \"value\": 5,\n    \"secondValue\": 6,\n    \"uom\": \"FtIn\"\n  },\n  \"weight\": {\n    \"value\": 145,\n    \"uom\": \"Lb\"\n  },\n  \"age\": {\n    \"years\": \"<integer>\",\n    \"months\": \"<integer>\"\n  },\n  \"braSizeId\": \"<string>\",\n  \"inseam\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"sleeveLength\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"ageGroup\": \"Adult\",\n  \"alias\": \"<string>\",\n  \"isActive\": false,\n  \"isShopper\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ccfd11c-0976-407e-aab6-270a1c4c11b9",
+          "name": "Update a profile",
+          "request": {
+            "name": "Update a profile",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"gender\": \"<string>\",\n  \"height\": {\n    \"secondValue\": \"<integer>\",\n    \"uom\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"weight\": {\n    \"uom\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"age\": {\n    \"years\": \"<integer>\",\n    \"months\": \"<integer>\"\n  },\n  \"braSizeId\": \"<string>\",\n  \"inseam\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"sleeveLength\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"ageGroup\": \"Adult\",\n  \"alias\": \"<string>\",\n  \"isShopper\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "012e9f51-1ad3-4109-bdcf-bd2115fbd5a2",
+              "name": "Profile successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "5437"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"gender\": \"<string>\",\n  \"id\": \"someProfileId\",\n  \"height\": {\n    \"value\": 5,\n    \"secondValue\": 6,\n    \"uom\": \"FtIn\"\n  },\n  \"weight\": {\n    \"value\": 145,\n    \"uom\": \"Lb\"\n  },\n  \"age\": {\n    \"years\": \"<integer>\",\n    \"months\": \"<integer>\"\n  },\n  \"braSizeId\": \"<string>\",\n  \"inseam\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"sleeveLength\": {\n    \"exact\": {\n      \"uom\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"general\": \"<string>\"\n  },\n  \"ageGroup\": \"Adult\",\n  \"alias\": \"<string>\",\n  \"isActive\": false,\n  \"isShopper\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be0bc68e-f8d4-4cba-b658-335de9e0f2e4",
+              "name": "Profile not updated due to bad data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"UnexpectedError\",\n      \"message\": \"string\"\n    },\n    {\n      \"reason\": \"DuplicateAlias\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77418ebf-95fa-444c-857b-6b8b8d592950",
+          "name": "Delete a recipient from a shopper's profile.",
+          "request": {
+            "name": "Delete a recipient from a shopper's profile.",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c29dfe7-f1e8-4579-86e8-8b9dfd750c55",
+              "name": "Profile successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "5437"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "296a6cd8-8cfe-46bb-9fcb-eb14723cbe86",
+              "name": "A shopper user cannot be deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1801becc-e5d2-4f4f-a82b-5b73cc1e9ae6",
+          "name": "Get a Fit Recommendation for the given styles.",
+          "request": {
+            "name": "Get a Fit Recommendation for the given styles.",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId",
+                "fit-recommendations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "Identifier specifying the locale to use when retrieving suggested brands or any type of sizes e.g. sizes, bra sizes, inseams or sleeve lengths. This attribute is only required when the store supports multiple locales. Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US. "
+                },
+                {
+                  "disabled": false,
+                  "key": "integrationPlatform",
+                  "value": "<string>",
+                  "description": "Specifies whether the call is being made from inside the context of an app or the web."
+                },
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<string>",
+                  "description": "(Required) Store Style IDs to request Fit Recommendations for."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a13f6d45-46e0-4ed5-a785-28421a901e5a",
+              "name": "The Fit Recommendation results for the requested styles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId",
+                    "fit-recommendations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "integrationPlatform",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "5437"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"status\": \"unrecommendabledepartment\",\n    \"styleId\": \"string\",\n    \"bestSize\": {\n      \"size\": \"string\",\n      \"recommended\": false,\n      \"score\": 1.285135311020623,\n      \"overallFit\": 4.143363176754153,\n      \"poms\": [\n        {\n          \"measurementPoint\": \"Neck\",\n          \"pomType\": \"Length\",\n          \"value\": 4.095329552977436\n        },\n        {\n          \"measurementPoint\": \"FootLength\",\n          \"pomType\": \"Width\",\n          \"value\": 2.961218175248165\n        }\n      ]\n    },\n    \"sizeUp\": {\n      \"size\": \"string\",\n      \"recommended\": false,\n      \"score\": 4.059490108444126,\n      \"overallFit\": 0.4281832393399987,\n      \"poms\": [\n        {\n          \"measurementPoint\": \"SleeveLength\",\n          \"pomType\": \"Girth\",\n          \"value\": 2.0962731514391524\n        },\n        {\n          \"measurementPoint\": \"FootWidth\",\n          \"pomType\": \"Width\",\n          \"value\": 3.5421308267045224\n        }\n      ]\n    },\n    \"sizeDown\": {\n      \"size\": \"string\",\n      \"recommended\": true,\n      \"score\": 1.0884392491510977,\n      \"overallFit\": 5.549542370495294,\n      \"poms\": [\n        {\n          \"measurementPoint\": \"SleeveLength\",\n          \"pomType\": \"Length\",\n          \"value\": 2.170787402876353\n        },\n        {\n          \"measurementPoint\": \"Inseam\",\n          \"pomType\": \"Girth\",\n          \"value\": 6.87720917700115\n        }\n      ]\n    },\n    \"refreshAfter\": 9730\n  },\n  {\n    \"status\": \"sizenotavailable\",\n    \"styleId\": \"string\",\n    \"bestSize\": {\n      \"size\": \"string\",\n      \"recommended\": false,\n      \"score\": 3.61060809941974,\n      \"overallFit\": 4.3338336824867145,\n      \"poms\": [\n        {\n          \"measurementPoint\": \"Waist\",\n          \"pomType\": \"Length\",\n          \"value\": 1.197467357105865\n        },\n        {\n          \"measurementPoint\": \"Shoulders\",\n          \"pomType\": \"Length\",\n          \"value\": 3.797517494672804\n        }\n      ]\n    },\n    \"sizeUp\": {\n      \"size\": \"string\",\n      \"recommended\": false,\n      \"score\": 4.121252120346875,\n      \"overallFit\": 5.133127416007447,\n      \"poms\": [\n        {\n          \"measurementPoint\": \"Shoulders\",\n          \"pomType\": \"Girth\",\n          \"value\": 2.9830660950296872\n        },\n        {\n          \"measurementPoint\": \"Waist\",\n          \"pomType\": \"Length\",\n          \"value\": 1.5452633732104066\n        }\n      ]\n    },\n    \"sizeDown\": {\n      \"size\": \"string\",\n      \"recommended\": true,\n      \"score\": 4.10012830923041,\n      \"overallFit\": 1.7988223298680808,\n      \"poms\": [\n        {\n          \"measurementPoint\": \"Thigh\",\n          \"pomType\": \"Width\",\n          \"value\": 5.272096861835562\n        },\n        {\n          \"measurementPoint\": \"FootLength\",\n          \"pomType\": \"Width\",\n          \"value\": 5.847027715567338\n        }\n      ]\n    },\n    \"refreshAfter\": 1285\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c7f879f-f6f4-4d26-a285-c8dbbfcf528d",
+          "name": "Change the active profile on the session.",
+          "request": {
+            "name": "Change the active profile on the session.",
+            "description": {
+              "content": "Set the `profileId` on the path as an active profile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId",
+                "set-active"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a4bca6f-ced6-44db-af98-3e430628ed89",
+              "name": "The profile was successfully set as active.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId",
+                    "set-active"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "5437"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "24ca47ac-7276-451e-b1ea-abfcf93a65ed",
+              "name": "The profile ID passed is invalid or cannot be used to set the active profile.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId",
+                    "set-active"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f1405ca-af27-4643-9410-613e55ee8bb7",
+          "name": "Get a category specific profile strength for a profile.",
+          "request": {
+            "name": "Get a category specific profile strength for a profile.",
+            "description": {},
+            "url": {
+              "path": [
+                "profiles",
+                ":profileId",
+                "strength",
+                ":category"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "category",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03ee463b-2688-42ae-a243-878eed3da816",
+              "name": "The Profile Strength result for the requested category.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "profiles",
+                    ":profileId",
+                    "strength",
+                    ":category"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "category",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "5437"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"strength\": 70,\n    \"remainingQuestions\": [\n      \"BodyShape\",\n      \"ClosetItem\"\n    ]\n  },\n  {\n    \"strength\": 70,\n    \"remainingQuestions\": [\n      \"BodyShape\",\n      \"ClosetItem\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/profile/public/v3/{{tla}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2a845a04-5294-45c2-91b0-eb717a65e021",
+    "name": "True Fit - Consumer Profile API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These APIs can be used to create a custom True Fit integration.\n\n# Getting Started\n\nHere are some general concepts - please see further below for the specific endpoint documentation.\n\n## Cookies\nThese APIs leverage third party cookies to enable users to receive recommendations across sites. In order for this to work correctly, when calling the APIs in the context of your website, you must configure the XMLHttpRequest object to use withCredentials=true. If you do not do this, True Fit users may not see recommendations when arriving on your site. For more information on the withCredentials flag, please see the [XMLHttpRequest spec](https://xhr.spec.whatwg.org/#the-withcredentials-attribute).\n\n## Tokens\n\nTrue Fit uses a token to identify the user and their associated session information. True Fit generates and manages tokens on the server side, while the client device is responsible for persisting tokens. Generally, a single token should be used to identify a single client device. The token will be cycled as a user interacts with True Fit to provide increased security and privacy. The token is required to be passed as a header on every endpoint (except the `/token` endpoint).\n\n## Profiles\n\nA profile is the entity that contains information about the person being shopped for. The profile entity itself can contain information such as gender, height, weight and age. When a profile is created, it is assigned an ID. That ID can be used in the path of other endpoints, such as adding closet items and requesting fit recommendations for that profile.\n\n## Creating a profile\n\nIn order to get a fit recommendation, a profile must be created. \nA profile is created by sending POST request to the `/profiles` endpoint. The created profile will be returned on the response, with the addition of an `id` field. A profile can be updated/modified by sending a PUT request to the `/profiles/{profileId}` endpoint.\n\nWhen shopping for other adults or children, a recipient profile should be created. These profiles will be created by sending POST requests to the same `/profiles` endpoint. The token on the request will be used to identify the shopper profile and associate recipients accordingly. \nPlease note that one kids recipient profile can be unnamed (no alias) and no kids recipient profile can have the same alias as another kids recipient profile. Adult recipient profiles must be named (has alias) and cannot have the same alias as another adult recipient profile. \n\n### Adding closet items\n\nIn addition to the fields on the Profile object itself, closet items can also be added for a profile. A closet item is an example article of clothing that the person already wears and likes, which True Fit uses to inform fit recommendations. Closet items are added by sending a POST request to `/profiles/{profileId}/closet` endpoint. Similar to Profiles, the created closet item is returned on the response, with the addition of an `id` field. A closet item can be updated by sending a PUT request to `/profiles/{profileId}/closet/{closetId}`.\n\nChild profiles can only have one closet item per category. In the event that a second closet item is saved, a validation error will be returned.\n\n## Getting a fit recommendation for a product\n\nIf the product is recommendable (see `GET /products`), and there is a profile on the session (see `GET /profiles`), then a fit recommendation request can be made for that profile and product. A fit recommendation request can be made by a GET request to the `/profiles/{profileId}/fit-recommendations` endpoint. The information required to get a recommendation varies by the gender of the Profile and the Category of the style in question. If True Fit is able to provide a recommendation, the `status` will be `success`. Otherwise, the `status` will indicate why the recommendation wasn't able to be produced.\n\n## Example Flow - Product Page\n1. Check if token has already been persisted (in a cookie, perhaps) - if not, make a GET request to the `/token` endpoint to get one, then persist it.\n1. Make a GET request to `/products/{styleId}` to get the product info.\n1. In parallel, make a GET request to `/profiles` to get the current profiles on the session (if any)\n1. If the product info shows that the product is not recommendable, then stop here. Otherwise continue.\n1. If the profiles request returns an empty list of profiles then give the user an opportunity to register for True Fit.\n1. If the user begins to register, update the token and use the information from the product info to determine the gender, age group, and category that is of interest.\n1. Have the user answer questions to create a profile and add a closet item for the category.\n1. Request a fit recommendation from the `/profiles/{profileId}/fit-recommendations` endpoint and present the recommendation to the user.\n\n## General API Behavior\n* A `404 - Not Found` will be returned when an unspecified endpoint is hit.\n* If a valid endpoint is hit with a method it doesn't support, a `405 -\nMethod Not Allowed` will be returned.\n* If a request has an invalid value, a `400 - Bad Request` will be returned \n* It is possible for any endpoint to return a `500 - Internal Server Error` if an unexpected error is encountered.\n* When True Fit is performing maitenence on the system, a `404 - Not Found` with the response header `X-TF-Disabled: StoreDisabled` will be returned for all endpoints. \n",
+      "type": "text/plain"
+    }
+  }
+}

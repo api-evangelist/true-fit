@@ -1,0 +1,216 @@
+{
+  "item": [
+    {
+      "id": "b98deb93-b0a5-4716-83e6-b7379dad8c10",
+      "name": "Checkout",
+      "description": {
+        "content": "An endpoint for tracking checkout events.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "150ba104-d2b4-46f6-99e5-61f73e535774",
+          "name": "Track a checkout event for the retailer when a user completes an order and checks out.",
+          "request": {
+            "name": "Track a checkout event for the retailer when a user completes an order and checks out.",
+            "description": {},
+            "url": {
+              "path": [
+                "checkout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "Identifier specifying the locale to use when retrieving suggested brands or any type of sizes e.g. sizes, bra sizes, inseams or sleeve lengths. This attribute is only required when the store supports multiple locales. Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US. "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The session token for the current user.",
+                "key": "X-TF-UserToken",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The store user id for the current user.",
+                "key": "X-TF-StoreUserId",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"integrationPlatform\": \"<string>\",\n  \"widgetHidden\": \"<boolean>\",\n  \"storeExperimentKey\": \"<string>\",\n  \"checkoutType\": \"<string>\",\n  \"products\": [\n    {\n      \"currency\": \"<string>\",\n      \"price\": \"<number>\",\n      \"productId\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"colorId\": \"<string>\",\n      \"size\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"salesGroup\": \"<string>\"\n    },\n    {\n      \"currency\": \"<string>\",\n      \"price\": \"<number>\",\n      \"productId\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"colorId\": \"<string>\",\n      \"size\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"salesGroup\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2fea3ad7-058a-446b-858c-74aa7a2ce72c",
+              "name": "Checkout event successfully tracked",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The store user id for the current user.",
+                    "key": "X-TF-StoreUserId",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderId\": \"236272\",\n  \"deviceType\": \"<string>\",\n  \"integrationPlatform\": \"<string>\",\n  \"widgetHidden\": false,\n  \"storeExperimentKey\": \"TestGroupA\",\n  \"checkoutType\": \"<string>\",\n  \"products\": [\n    {\n      \"currency\": \"USD\",\n      \"price\": 12.99,\n      \"productId\": \"shirt-123\",\n      \"quantity\": 1,\n      \"colorId\": \"Blue\",\n      \"size\": \"large\",\n      \"sku\": \"<string>\",\n      \"salesGroup\": \"\"\n    },\n    {\n      \"currency\": \"USD\",\n      \"price\": 12.99,\n      \"productId\": \"shirt-123\",\n      \"quantity\": 1,\n      \"colorId\": \"Blue\",\n      \"size\": \"large\",\n      \"sku\": \"<string>\",\n      \"salesGroup\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The updated token for the user. This updated token should be used on all following requests. This header is only present when the token has cycled.",
+                  "key": "X-TF-UserToken",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "This will be most useful when storing the token as a cookie. The value is the suggested max age of the token (in seconds).",
+                  "key": "X-TF-UserTokenMaxAge",
+                  "value": "3652"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "814bca4d-c00d-4b15-9ef5-13f0bec95e91",
+              "name": "If line items are defined, but the checkout type is defined and is not LineItem. Or the type is LineItem and there are no products defined.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The session token for the current user.",
+                    "key": "X-TF-UserToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The store user id for the current user.",
+                    "key": "X-TF-StoreUserId",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderId\": \"236272\",\n  \"deviceType\": \"<string>\",\n  \"integrationPlatform\": \"<string>\",\n  \"widgetHidden\": false,\n  \"storeExperimentKey\": \"TestGroupA\",\n  \"checkoutType\": \"<string>\",\n  \"products\": [\n    {\n      \"currency\": \"USD\",\n      \"price\": 12.99,\n      \"productId\": \"shirt-123\",\n      \"quantity\": 1,\n      \"colorId\": \"Blue\",\n      \"size\": \"large\",\n      \"sku\": \"<string>\",\n      \"salesGroup\": \"\"\n    },\n    {\n      \"currency\": \"USD\",\n      \"price\": 12.99,\n      \"productId\": \"shirt-123\",\n      \"quantity\": 1,\n      \"colorId\": \"Blue\",\n      \"size\": \"large\",\n      \"sku\": \"<string>\",\n      \"salesGroup\": \"\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/profile/public/v3/{{tla}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ebfd2349-78dd-415a-9cce-79fa3cb5304f",
+    "name": "True Fit - Consumer Checkout API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These APIs can be used to create a custom True Fit integration.\n\n# Getting Started\n\nHere are some general concepts - please see further below for the specific endpoint documentation.\n\n## Cookies\nThese APIs leverage third party cookies to enable users to receive recommendations across sites. In order for this to work correctly, when calling the APIs in the context of your website, you must configure the XMLHttpRequest object to use withCredentials=true. If you do not do this, True Fit users may not see recommendations when arriving on your site. For more information on the withCredentials flag, please see the [XMLHttpRequest spec](https://xhr.spec.whatwg.org/#the-withcredentials-attribute).\n\n## Tokens\n\nTrue Fit uses a token to identify the user and their associated session information. True Fit generates and manages tokens on the server side, while the client device is responsible for persisting tokens. Generally, a single token should be used to identify a single client device. The token will be cycled as a user interacts with True Fit to provide increased security and privacy. The token is required to be passed as a header on every endpoint (except the `/token` endpoint).\n\n## Profiles\n\nA profile is the entity that contains information about the person being shopped for. The profile entity itself can contain information such as gender, height, weight and age. When a profile is created, it is assigned an ID. That ID can be used in the path of other endpoints, such as adding closet items and requesting fit recommendations for that profile.\n\n## Creating a profile\n\nIn order to get a fit recommendation, a profile must be created. \nA profile is created by sending POST request to the `/profiles` endpoint. The created profile will be returned on the response, with the addition of an `id` field. A profile can be updated/modified by sending a PUT request to the `/profiles/{profileId}` endpoint.\n\nWhen shopping for other adults or children, a recipient profile should be created. These profiles will be created by sending POST requests to the same `/profiles` endpoint. The token on the request will be used to identify the shopper profile and associate recipients accordingly. \nPlease note that one kids recipient profile can be unnamed (no alias) and no kids recipient profile can have the same alias as another kids recipient profile. Adult recipient profiles must be named (has alias) and cannot have the same alias as another adult recipient profile. \n\n### Adding closet items\n\nIn addition to the fields on the Profile object itself, closet items can also be added for a profile. A closet item is an example article of clothing that the person already wears and likes, which True Fit uses to inform fit recommendations. Closet items are added by sending a POST request to `/profiles/{profileId}/closet` endpoint. Similar to Profiles, the created closet item is returned on the response, with the addition of an `id` field. A closet item can be updated by sending a PUT request to `/profiles/{profileId}/closet/{closetId}`.\n\nChild profiles can only have one closet item per category. In the event that a second closet item is saved, a validation error will be returned.\n\n## Getting a fit recommendation for a product\n\nIf the product is recommendable (see `GET /products`), and there is a profile on the session (see `GET /profiles`), then a fit recommendation request can be made for that profile and product. A fit recommendation request can be made by a GET request to the `/profiles/{profileId}/fit-recommendations` endpoint. The information required to get a recommendation varies by the gender of the Profile and the Category of the style in question. If True Fit is able to provide a recommendation, the `status` will be `success`. Otherwise, the `status` will indicate why the recommendation wasn't able to be produced.\n\n## Example Flow - Product Page\n1. Check if token has already been persisted (in a cookie, perhaps) - if not, make a GET request to the `/token` endpoint to get one, then persist it.\n1. Make a GET request to `/products/{styleId}` to get the product info.\n1. In parallel, make a GET request to `/profiles` to get the current profiles on the session (if any)\n1. If the product info shows that the product is not recommendable, then stop here. Otherwise continue.\n1. If the profiles request returns an empty list of profiles then give the user an opportunity to register for True Fit.\n1. If the user begins to register, update the token and use the information from the product info to determine the gender, age group, and category that is of interest.\n1. Have the user answer questions to create a profile and add a closet item for the category.\n1. Request a fit recommendation from the `/profiles/{profileId}/fit-recommendations` endpoint and present the recommendation to the user.\n\n## General API Behavior\n* A `404 - Not Found` will be returned when an unspecified endpoint is hit.\n* If a valid endpoint is hit with a method it doesn't support, a `405 -\nMethod Not Allowed` will be returned.\n* If a request has an invalid value, a `400 - Bad Request` will be returned \n* It is possible for any endpoint to return a `500 - Internal Server Error` if an unexpected error is encountered.\n* When True Fit is performing maitenence on the system, a `404 - Not Found` with the response header `X-TF-Disabled: StoreDisabled` will be returned for all endpoints. \n",
+      "type": "text/plain"
+    }
+  }
+}

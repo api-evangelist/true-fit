@@ -1,0 +1,1358 @@
+{
+  "item": [
+    {
+      "id": "c2fbbf66-f3b8-4eab-a447-df980d0cb19c",
+      "name": "Profiles",
+      "description": {
+        "content": "Creating and managing fit profiles belonging to a partner user.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dd247dfe-e1d9-459c-8782-21449187e982",
+          "name": "List the user's profiles",
+          "request": {
+            "name": "List the user's profiles",
+            "description": {
+              "content": "Returns every profile belonging to the user, oldest first is not guaranteed - treat the\norder as unspecified and address profiles by `profileId`. A user with no profiles yet\nreturns an empty array.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                ":partnerId",
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerUserId",
+                  "value": "<string>",
+                  "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tfPartnerUserId",
+                  "value": "<string>",
+                  "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerId",
+                  "description": "(Required) Your partner identifier, issued during onboarding."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "417f3297-8dfc-4065-97a0-95d35196dc1a",
+              "name": "The user's profiles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"profileId\": \"7c9e6679-7425-40de-944b-e07fc1f90ae7\",\n    \"alias\": \"Primary\",\n    \"department\": \"womens\",\n    \"isActive\": false,\n    \"estimatedDob\": \"1994-03-01T00:00:00.000Z\",\n    \"originStore\": \"acme\",\n    \"originLocale\": null,\n    \"createdAt\": \"2026-07-14T09:12:44.000Z\",\n    \"updatedAt\": \"2026-07-31T16:02:10.000Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68eb8dfc-7c7a-44ac-af4a-cad4dde62118",
+              "name": "Neither `partnerUserId` nor `tfPartnerUserId` was supplied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": \"tfPartnerUserId or partnerUserId query parameter is required\",\n  \"error\": \"Bad Request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "147eead3-c207-4ed4-b2c4-7ef0961f30c1",
+              "name": "Missing or invalid Basic credentials, or a user identifier that does not match a known\npartner user.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Missing Basic auth credentials\",\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "819c3a6b-50ba-4cd1-92a4-134065458c72",
+              "name": "The `partnerId` is unknown or disabled. Returned before credentials are checked, so an\ninvalid API key against an unknown partner is a `404`, not a `401`.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Unsupported partner\",\n  \"error\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbb372b5-efa0-48c6-aedc-8ca472e67868",
+          "name": "Create a profile",
+          "request": {
+            "name": "Create a profile",
+            "description": {
+              "content": "Creates a profile for the user. The created profile records your `partnerId` as its\n`originStore`. An empty object is a valid body; both fields are optional.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                ":partnerId",
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerUserId",
+                  "value": "<string>",
+                  "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tfPartnerUserId",
+                  "value": "<string>",
+                  "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerId",
+                  "description": "(Required) Your partner identifier, issued during onboarding."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"department\": \"<string>\",\n  \"alias\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8802530-ec76-46e3-aa73-400caa91ca00",
+              "name": "The created profile.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"Primary\",\n  \"department\": \"womens\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"profileId\": \"89330ae5-7fdc-b687-b55f-0098ca2692b8\",\n  \"isActive\": true,\n  \"estimatedDob\": \"1960-12-04T08:24:27.435Z\",\n  \"originStore\": \"acme\",\n  \"originLocale\": \"en_US\",\n  \"createdAt\": null,\n  \"updatedAt\": \"1962-06-08T17:34:34.480Z\",\n  \"alias\": \"Primary\",\n  \"department\": \"womens\",\n  \"userId\": \"string\",\n  \"registeredAt\": null,\n  \"savedAt\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b40b872a-4eba-41a1-b7d6-976d58f55598",
+              "name": "The request body or query string failed schema validation. `error` maps each failing\nfield path to its message; array indices appear as the first path segment.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"Primary\",\n  \"department\": \"womens\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"error\": {\n    \"0.retailerDomain\": \"Invalid input: expected string, received undefined\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa711a10-0457-4092-b2ca-de326a3b0351",
+              "name": "Missing or invalid Basic credentials, or a user identifier that does not match a known\npartner user.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"Primary\",\n  \"department\": \"womens\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Missing Basic auth credentials\",\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fbe7ab8-7ccc-4779-a7c8-95254b016654",
+              "name": "The `partnerId` is unknown or disabled. Returned before credentials are checked, so an\ninvalid API key against an unknown partner is a `404`, not a `401`.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"Primary\",\n  \"department\": \"womens\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Unsupported partner\",\n  \"error\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d62c14ee-5fcc-42f7-bea5-89438f9b65b1",
+          "name": "Update a profile",
+          "request": {
+            "name": "Update a profile",
+            "description": {
+              "content": "Partially updates the profile. Only the fields you send are changed. Updating a profile\nre-runs body estimation, so a subsequent recommendation may briefly return\n`userEstimationInProgress`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partner",
+                ":partnerId",
+                "profile",
+                ":profileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerUserId",
+                  "value": "<string>",
+                  "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tfPartnerUserId",
+                  "value": "<string>",
+                  "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerId",
+                  "description": "(Required) Your partner identifier, issued during onboarding."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "profileId",
+                  "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"department\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"registeredAt\": \"<dateTime>\",\n  \"savedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1b163923-2978-4fc5-8d2d-2ec0874fb77e",
+              "name": "Updated. No response body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"Weekend\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "774f5381-8232-4bb2-881b-869d196a2e74",
+              "name": "The request body or query string failed schema validation. `error` maps each failing\nfield path to its message; array indices appear as the first path segment.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"Weekend\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Validation failed\",\n  \"error\": {\n    \"0.retailerDomain\": \"Invalid input: expected string, received undefined\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5046dfa7-bd91-4246-b179-a915a1b3d922",
+              "name": "Missing or invalid Basic credentials, or a user identifier that does not match a known\npartner user.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"Weekend\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Missing Basic auth credentials\",\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b388df61-de47-4c04-9779-bd3a327f6853",
+              "name": "The `profileId` does not exist or does not belong to the identified user. Also returned\nwhen the `partnerId` is unknown or disabled.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"Weekend\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Profile not found\",\n  \"error\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "624b8b76-b02c-4a87-bc05-d0bec3d4f559",
+          "name": "Delete a profile",
+          "request": {
+            "name": "Delete a profile",
+            "description": {},
+            "url": {
+              "path": [
+                "partner",
+                ":partnerId",
+                "profile",
+                ":profileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerUserId",
+                  "value": "<string>",
+                  "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tfPartnerUserId",
+                  "value": "<string>",
+                  "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "partnerId",
+                  "description": "(Required) Your partner identifier, issued during onboarding."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "profileId",
+                  "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7a2132a8-7622-4723-af05-fa46feb5fd07",
+              "name": "Deleted. No response body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3dd55eef-ac28-4dd1-9386-4688b1c1df1b",
+              "name": "Missing or invalid Basic credentials, or a user identifier that does not match a known\npartner user.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Missing Basic auth credentials\",\n  \"error\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38bc4862-a0ad-4a90-8b0f-33456e0b26cb",
+              "name": "The `profileId` does not exist or does not belong to the identified user. Also returned\nwhen the `partnerId` is unknown or disabled.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partner",
+                    ":partnerId",
+                    "profile",
+                    ":profileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerUserId",
+                      "value": "acme-user-42817"
+                    },
+                    {
+                      "key": "tfPartnerUserId",
+                      "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "partnerId",
+                      "description": "(Required) Your partner identifier, issued during onboarding."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "profileId",
+                      "description": "(Required) A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"Profile not found\",\n  \"error\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partner.truefitcorp.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "65b71e4e-9e9d-4c28-bdbc-4821e9b9438b",
+    "name": "True Fit Partner Profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "These APIs can be used to manage True Fit profiles on behalf of your own users and to\nrequest size recommendations for retailer products.\n\n# Getting Started\n\nHere are the general concepts - please see further below for the specific endpoint\ndocumentation.\n\n## Base URL\n\nEvery path in this reference is relative to the base URL, which already includes the\n`/api` prefix:\n\n```\nhttps://partner.truefitcorp.com/api\n```\n\n## Authentication\n\nAll `/partner/{partnerId}/**` endpoints use HTTP Basic authentication. The **username is\nempty** and the **password is your partner API key**:\n\n```\nAuthorization: Basic <base64(\":\" + apiKey)>\n```\n\nNote the leading colon. `base64(apiKey)` without it has no separator and is rejected\nwith `401`.\n\nAn unknown or disabled `partnerId` returns `404` **before** credentials are checked, so a\n`404` on your first call points at the `partnerId` or the environment, not at the key.\n\n`GET /id-sync` is authenticated differently - it is signed with HMAC-SHA256 rather than\nBasic auth. See that endpoint for the signing scheme.\n\n## Identifying a user\n\nPartner endpoints operate on a True Fit user, not on your identifier directly.\n`GET /id-sync` creates that user and maps one of your identifiers to it. Call it once per\nuser, store the `tfPartnerUserId` it returns, and drive every later request from that.\n\nExcept for `POST /general-guidance/bulk`, every endpoint needs a user identifier as a\nquery parameter:\n\n* `tfPartnerUserId` - the identifier returned by `GET /id-sync`. Preferred: it is a\n  durable handle on one specific True Fit user and its data.\n* `partnerUserId` - your own identifier for the user, as passed to `GET /id-sync`.\n\nSupply at least one; omitting both returns `400`. If you send both, `tfPartnerUserId`\ntakes precedence. An identifier that was never synced returns `401 Unknown partner user`,\nwhich means \"call `GET /id-sync` first\" rather than \"bad credentials\".\n\n## Profiles\n\nA profile is the entity that holds information about the person being shopped for -\ndepartment, alias, measurements, and closet items. When a profile is created it is\nassigned a `profileId`, which is then used in the path of the measurements, closet, and\nrecommendation endpoints.\n\nA user may have several profiles, one per person they shop for. List them with\n`GET /profile` and address them explicitly by `profileId`; there is no implicit \"current\"\nprofile in this API.\n\nProfiles you create record your `partnerId` as their `originStore`.\n\n## Getting a size recommendation\n\nA profile needs measurements, closet items, or both before it can be sized: a profile\ncarrying neither has nothing to size against and returns `incompleteProfile`. Add\nmeasurements with `PUT /profile/{profileId}/measurements` and closet items with\n`POST /profile/{profileId}/closet`, then call\n`POST /profile/{profileId}/recommendation/bulk`.\n\nProfile writes trigger asynchronous body estimation, so a recommendation requested\nimmediately after one may return `userEstimationInProgress`. Retry after a short delay.\n\nWhen no profile exists - anonymous visitors, or a product page before registration -\nuse `POST /general-guidance/bulk` instead. It returns how a product ran for shoppers\ngenerally, needs no user identifier, and is the natural fallback when a recommendation\nreturns `incompleteProfile` or `noProfile`.\n\n## Example Flow - Product Page\n\n1. Once per user, call `GET /id-sync` and persist the returned `tfPartnerUserId`.\n2. Call `GET /profile` to list the user's profiles.\n3. If the list is empty, give the user an opportunity to register, then create a profile\n   with `POST /profile`.\n4. Add what you know about the user: `PUT /profile/{profileId}/measurements`, and\n   `POST /profile/{profileId}/closet` for garments they already own.\n5. Call `POST /profile/{profileId}/recommendation/bulk` with the products on the page and\n   present `recommendedSize` for each successful result.\n6. For products that return `success: false`, or when no profile exists, fall back to\n   `POST /general-guidance/bulk`.\n\n## Bulk requests\n\nBoth bulk endpoints take a JSON **array** of 1 to 100 items and return an array of the\n**same length and in the same order**, so results can be matched to requests by position.\nEach result also echoes the `retailerDomain`, `productId`, and `locale` you sent.\n\nFailures are per item: each result carries `success: true` with its data, or\n`success: false` with an `error` string. One unrecognised product does not fail the batch,\nand the HTTP status is still a success status.\n\n`retailerDomain` accepts a hostname or a full URL, from which only the hostname is used -\nprotocol, port, path, and query string are discarded, and matching is case-insensitive.\n`www.` is not stripped, so confirm with True Fit which exact hostnames are registered for\nyour retailers.\n\n## Request bodies\n\nEnum values are documented in their canonical lowercase form but matched\ncase-insensitively, so `Womens` and `womens` are equally valid - the stored and returned\nvalue is always lowercase. Fields not listed in a schema are ignored rather than rejected.\n\n## General API Behavior\n\n* Success statuses vary by endpoint. Empty-bodied writes return `200` in some places and\n  `204` in others, and both bulk endpoints return `201`. Treat any 2xx as success rather\n  than matching an exact code.\n* A `400 - Bad Request` is returned when a body or query string fails validation, or when\n  no user identifier is supplied.\n* A `401 - Unauthorized` is returned for a missing or wrong API key, and for a user\n  identifier that has no True Fit mapping.\n* A `404 - Not Found` is returned for an unknown or disabled `partnerId`, and for a\n  `profileId` that does not exist or does not belong to the identified user. Another\n  user's profile returns `404` rather than `403` so that the API cannot be used to detect\n  whether a profile exists.\n* It is possible for any endpoint to return a `500 - Internal Server Error` if an\n  unexpected error is encountered.\n* Validation failures carry a field-keyed error map and, unlike other errors, no\n  `statusCode` field:\n\n```json\n{ \"message\": \"Validation failed\", \"error\": { \"0.retailerDomain\": \"Invalid input: expected string, received undefined\" } }\n```\n\nArray indices appear as the first path segment, so `0.retailerDomain` is the\n`retailerDomain` field of the first item in a bulk request. All other errors use the\nstandard shape:\n\n```json\n{ \"statusCode\": 404, \"message\": \"Profile not found\", \"error\": \"Not Found\" }\n```\n\n## Rate limits\n\nNo rate limits are enforced today. Expected request volume should be agreed during\nonboarding.\n\n\nContact Support:\n Name: True Fit\n Email: tech@truefit.com",
+      "type": "text/plain"
+    }
+  }
+}

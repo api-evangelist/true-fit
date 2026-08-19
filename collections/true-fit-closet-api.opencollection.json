@@ -1,0 +1,366 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit Closet API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Closet",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the closet items for the given profile.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId/closet",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve the closet items for the given profile."
+        },
+        {
+          "info": {
+            "name": "Saves a closet item for the given profile.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId/closet",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Saves a closet item for the given profile."
+        },
+        {
+          "info": {
+            "name": "Get a specific closet item by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId/closet/:closetId",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "closetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a specific closet item by ID."
+        },
+        {
+          "info": {
+            "name": "Updates a closet item for the given profile.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId/closet/:closetId",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "closetId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "stillFits",
+                "value": "",
+                "type": "query",
+                "description": "Passed as true if an expired closet item still fits the child profile.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The closetId in the path must match the id in the body."
+        },
+        {
+          "info": {
+            "name": "Deletes a Closet Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/profile/public/v3/{tla}/profiles/:profileId/closet/:closetId",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "profileId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "closetId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "stillFits",
+                "value": "",
+                "type": "query",
+                "description": "Passed as false if the expired closet item no longer fits for the child profile.\n"
+              }
+            ]
+          },
+          "docs": "Deletes a Closet Item"
+        },
+        {
+          "info": {
+            "name": "List the profile's closet items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/partner/:partnerId/profile/:profileId/closet",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "path",
+                "description": "Your partner identifier, issued during onboarding."
+              },
+              {
+                "name": "profileId",
+                "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                "type": "path",
+                "description": "A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+              },
+              {
+                "name": "partnerUserId",
+                "value": "acme-user-42817",
+                "type": "query",
+                "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+              },
+              {
+                "name": "tfPartnerUserId",
+                "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55",
+                "type": "query",
+                "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List the profile's closet items"
+        },
+        {
+          "info": {
+            "name": "Add a closet item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/profile/public/v3/{tla}/partner/:partnerId/profile/:profileId/closet",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "path",
+                "description": "Your partner identifier, issued during onboarding."
+              },
+              {
+                "name": "profileId",
+                "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                "type": "path",
+                "description": "A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+              },
+              {
+                "name": "partnerUserId",
+                "value": "acme-user-42817",
+                "type": "query",
+                "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+              },
+              {
+                "name": "tfPartnerUserId",
+                "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55",
+                "type": "query",
+                "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Adds a garment the user owns. The submitted combination of `brand`, `department`,\n`category`, `sellingLocale`, `hierarchyLabels`, `sellingSize`, and\n`sizeVariants.sizeType` must resolve to a size that exists in True Fit's catalogue -\narbitrary garments cannot be added. See the integration guide for how to pick values\nthat validate.\n\nAdding a closet item re-runs body estimation, so a recommendation requested\nimmediately afterwards may return `userEstimationInProgress`.\n"
+        },
+        {
+          "info": {
+            "name": "Update a closet item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/profile/public/v3/{tla}/partner/:partnerId/profile/:profileId/closet/:closetItemId",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "path",
+                "description": "Your partner identifier, issued during onboarding."
+              },
+              {
+                "name": "profileId",
+                "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                "type": "path",
+                "description": "A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+              },
+              {
+                "name": "closetItemId",
+                "value": "1893471",
+                "type": "path",
+                "description": "A closet item identifier, from the `closetId` field of `GET /closet`."
+              },
+              {
+                "name": "partnerUserId",
+                "value": "acme-user-42817",
+                "type": "query",
+                "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+              },
+              {
+                "name": "tfPartnerUserId",
+                "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55",
+                "type": "query",
+                "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Partially updates a closet item. The fields you send are merged over the stored item and\nthe merged result is re-validated against True Fit's size catalogue, so a partial update\ncan be rejected because of fields you did not send.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a closet item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/profile/public/v3/{tla}/partner/:partnerId/profile/:profileId/closet/:closetItemId",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "path",
+                "description": "Your partner identifier, issued during onboarding."
+              },
+              {
+                "name": "profileId",
+                "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                "type": "path",
+                "description": "A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+              },
+              {
+                "name": "closetItemId",
+                "value": "1893471",
+                "type": "path",
+                "description": "A closet item identifier, from the `closetId` field of `GET /closet`."
+              },
+              {
+                "name": "partnerUserId",
+                "value": "acme-user-42817",
+                "type": "query",
+                "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+              },
+              {
+                "name": "tfPartnerUserId",
+                "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55",
+                "type": "query",
+                "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a closet item"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

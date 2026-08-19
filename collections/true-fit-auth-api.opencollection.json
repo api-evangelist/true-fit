@@ -1,0 +1,181 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit - Consumer Auth API",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the current authentication state.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/auth",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get the current authentication state."
+        },
+        {
+          "info": {
+            "name": "Save a True Fit account using an email address and password.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/profile/public/v3/{tla}/auth/save",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Identifier specifying the locale of the user (if available; falls back to en_US). Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Save a True Fit account using an email address and password."
+        },
+        {
+          "info": {
+            "name": "Log in to a True Fit account using an email address and password.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/profile/public/v3/{tla}/auth/login",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Identifier specifying the language that the forgot password email uses (if available; falls back to en_US). Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Log in to a True Fit account using an email address and password."
+        },
+        {
+          "info": {
+            "name": "Logs the current user out of their True Fit account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/profile/public/v3/{tla}/auth/logout",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Logs the current user out of their True Fit account."
+        },
+        {
+          "info": {
+            "name": "Update an email address and/or password for a saved True Fit account.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/profile/public/v3/{tla}/auth/update",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an email address and/or password for a saved True Fit account."
+        },
+        {
+          "info": {
+            "name": "Request a password reset e-mail for a forgotten password.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/profile/public/v3/{tla}/auth/forgot",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Identifier specifying the language that the forgot password email uses (if available; falls back to en_US). Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request a password reset e-mail for a forgotten password."
+        },
+        {
+          "info": {
+            "name": "Recover a forgotten password via a password reset token sent to the user after calling /auth/forgot.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/profile/public/v3/{tla}/auth/recover",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Recover a forgotten password via a password reset token sent to the user after calling /auth/forgot."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

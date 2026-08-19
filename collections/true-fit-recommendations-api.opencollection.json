@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit Partner Recommendations API",
+    "version": "2026-08-05"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recommendations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Recommend sizes for up to 100 products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner.truefitcorp.com/api/partner/:partnerId/profile/:profileId/recommendation/bulk",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "path",
+                "description": "Your partner identifier, issued during onboarding."
+              },
+              {
+                "name": "profileId",
+                "value": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+                "type": "path",
+                "description": "A profile belonging to the identified user, from `GET /profile`. Profiles belonging to\nanother user return `404` rather than `403`, so the endpoint cannot be used to probe\nfor the existence of other users' profiles.\n"
+              },
+              {
+                "name": "partnerUserId",
+                "value": "acme-user-42817",
+                "type": "query",
+                "description": "Your own identifier for the user, as passed to `GET /id-sync`. Send either this or\n`tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.\n"
+              },
+              {
+                "name": "tfPartnerUserId",
+                "value": "p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55",
+                "type": "query",
+                "description": "True Fit's identifier for the user, returned by `GET /id-sync`. Send either this or\n`partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a recommended size per product for the given profile.\n\nThe response array has the **same length and order as the request array**, so results\ncan be matched positionally. Each result also echoes the `retailerDomain`, `productId`,\nand `locale` you sent. Failures are per item: a product that cannot be recommended\nreturns `success: false` with an `error`, and does not fail the other items.\n\nThis is a `POST` because the product list is sent in the body; it has no side effects\nand returns `201"
+        },
+        {
+          "info": {
+            "name": "Get aggregate fit guidance for up to 100 products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner.truefitcorp.com/api/partner/:partnerId/general-guidance/bulk",
+            "params": [
+              {
+                "name": "partnerId",
+                "value": "acme",
+                "type": "path",
+                "description": "Your partner identifier, issued during onboarding."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns crowd-sourced fit guidance for products - how the product ran for other\nshoppers - without reference to any individual user.\n\nUnlike every other endpoint, this one needs **no user identifier**: the partner API key\nalone authorizes it, and no `partnerUserId` or `tfPartnerUserId` query parameter is\nrequired. Use it for anonymous visitors and for product pages where no profile exists.\n\nThe response array has the same length and order as the request array, and failures are\nper item.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

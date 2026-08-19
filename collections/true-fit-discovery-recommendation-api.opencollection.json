@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit - Consumer Discovery Recommendation API",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Discovery Recommendation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve product recommendations for the shopper profile.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/style-recommendations",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Identifier specifying the locale to use when retrieving suggested brands or any type of sizes e.g. sizes, bra sizes, inseams or sleeve lengths. This attribute is only required when the store supports multiple locales. Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US. "
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of products to return on a request. The current maximum limit is 24 products, and the default limit is 6."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Store Style IDs to exclude from Discovery Recommendations."
+              },
+              {
+                "name": "currentStyle",
+                "value": "",
+                "type": "query",
+                "description": "Store style ID of the product the user is currently viewing, if applicable."
+              }
+            ]
+          },
+          "docs": "Retrieve product recommendations for the shopper profile."
+        },
+        {
+          "info": {
+            "name": "Determine if style recommendations are currently available\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/profile/public/v3/{tla}/style-recommendations/available",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Determine if style recommendations are currently available\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

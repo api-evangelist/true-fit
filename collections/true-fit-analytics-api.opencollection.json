@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "True Fit - Consumer Analytics API",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send session information to True Fit for more advanced reporting.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/profile/public/v3/{tla}/analytics/tracking",
+            "headers": [
+              {
+                "name": "X-TF-UserToken",
+                "value": ""
+              },
+              {
+                "name": "X-TF-StoreUserId",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Identifier specifying the locale to use when retrieving suggested brands or any type of sizes e.g. sizes, bra sizes, inseams or sleeve lengths. This attribute is only required when the store supports multiple locales. Use an ISO 639 language code followed by an ISO 3166 country code, e.g. en_US. "
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send session information to True Fit for more advanced reporting."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
