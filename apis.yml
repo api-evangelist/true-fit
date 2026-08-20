@@ -26,6 +26,18 @@ tags:
 - Personalization
 - Artificial Intelligence
 - Agentic Commerce
+- MCP
+tags_raw:
+- Company
+- Fit and Sizing
+- Apparel
+- Footwear
+- Retail
+- E-Commerce
+- Recommendations
+- Personalization
+- Artificial Intelligence
+- Agentic Commerce
 - Model Context Protocol
 apis:
 - aid: true-fit:360-member-view-api
@@ -71,6 +83,8 @@ apis:
   humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
   baseURL: https://partner.truefitcorp.com/api
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -288,6 +302,8 @@ apis:
   humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
   baseURL: https://partner.truefitcorp.com/api
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
