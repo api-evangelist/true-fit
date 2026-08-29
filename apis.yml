@@ -8,6 +8,18 @@ description: 'True Fit Corporation is an AI-powered fit and sizing intelligence 
   product-detail-page JavaScript widget, a Shopify app, native iOS/Android/React Native
   SDKs, a documented Partner REST API and Consumer REST API, a 360 Member View data
   API, and a Fit Intelligence Layer exposed to AI agents over the Model Context Protocol.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://cdn.prod.website-files.com/64ee50f98275d03e3242bdef/69d410679088692a9df73243_256px%20webclip.png
 url: https://raw.githubusercontent.com/api-evangelist/true-fit/refs/heads/main/apis.yml
 x-type: company
