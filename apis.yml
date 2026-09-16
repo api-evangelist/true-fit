@@ -1,13 +1,12 @@
 aid: true-fit
 name: True Fit
-description: 'True Fit Corporation is an AI-powered fit and sizing intelligence platform
-  for apparel and footwear ecommerce. Its Fashion Genome dataset is built on roughly
-  two decades of real purchase-and-return outcomes across 100M+ registered shoppers,
-  60M unique products and 91K+ brands, and powers size recommendations, fit confidence
-  scores, cross-brand size calibration and shopper fit profiles. True Fit ships as a
-  product-detail-page JavaScript widget, a Shopify app, native iOS/Android/React Native
-  SDKs, a documented Partner REST API and Consumer REST API, a 360 Member View data
-  API, and a Fit Intelligence Layer exposed to AI agents over the Model Context Protocol.'
+description: True Fit Corporation is an AI-powered fit and sizing intelligence platform for apparel and
+  footwear ecommerce. Its Fashion Genome dataset is built on roughly two decades of real purchase-and-return
+  outcomes across 100M+ registered shoppers, 60M unique products and 91K+ brands, and powers size recommendations,
+  fit confidence scores, cross-brand size calibration and shopper fit profiles. True Fit ships as a product-detail-page
+  JavaScript widget, a Shopify app, native iOS/Android/React Native SDKs, a documented Partner REST API
+  and Consumer REST API, a 360 Member View data API, and a Fit Intelligence Layer exposed to AI agents
+  over the Model Context Protocol.
 deliveryModel:
   model: saas
   open_source: false
@@ -40,7 +39,7 @@ x-type: company
 x-source: harvest:secondary-market
 specificationVersion: '0.23'
 created: '2026-08-05'
-modified: '2026-08-05'
+modified: '2026-09-16'
 tags:
 - Company
 - Fit and Sizing
@@ -68,12 +67,11 @@ tags_raw:
 apis:
 - aid: true-fit:360-member-view-api
   name: True Fit 360 Member View API
-  description: >-
-    Two-endpoint data API that packages True Fit machine-learning assets for a retailer partner: a Metadata
-    endpoint returning the descriptor of the current weekly 360 Member View file (client id, created timestamp,
-    OpenPGP algorithm, SHA-256 of the plaintext) and a Content endpoint streaming the encrypted newline-delimited
-    JSON file of shopper registration, likely-brand and likely-size predictions. Authorized with an "Authorization:
-    sha256 API_KEY" header issued during onboarding.
+  description: 'Two-endpoint data API that packages True Fit machine-learning assets for a retailer partner:
+    a Metadata endpoint returning the descriptor of the current weekly 360 Member View file (client id,
+    created timestamp, OpenPGP algorithm, SHA-256 of the plaintext) and a Content endpoint streaming the
+    encrypted newline-delimited JSON file of shopper registration, likely-brand and likely-size predictions.
+    Authorized with an "Authorization: sha256 API_KEY" header issued during onboarding.'
   humanURL: https://techdocs.truefitcorp.com/docs/overview-2
   baseURL: https://true-360.truefitcorp.com/true-360/public/v1
   tags:
@@ -125,8 +123,8 @@ apis:
     url: https://techdocs.truefitcorp.com/docs/overview-1
 - aid: true-fit:true-fit-bra-sizes-api
   name: True Fit Bra Sizes API
-  description: >-
-    The bra sizes that are available to choose from for the bra size measurement on a Women's profile.
+  description: The bra sizes that are available to choose from for the bra size measurement on a Women's
+    profile.
   humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
   baseURL: https://partner.truefitcorp.com/api
   tags:
@@ -215,7 +213,7 @@ apis:
   - type: Documentation
     url: https://techdocs.truefitcorp.com/docs/overview-1
 - aid: true-fit:true-fit-fit-recommendation-api
-  name: True Fit Fit Recommendation API
+  name: True Fit Recommendation API
   description: Retrieve True Fit powered size recommendations for a profile.
   humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
   baseURL: https://partner.truefitcorp.com/api
@@ -416,8 +414,7 @@ apis:
     url: https://techdocs.truefitcorp.com/docs/overview-1
 - aid: true-fit:true-fit-sleeve-lengths-api
   name: True Fit Sleeve Lengths API
-  description: >-
-    The available sleeve lengths to choose from for the sleeve length measurement on a profile.
+  description: The available sleeve lengths to choose from for the sleeve length measurement on a profile.
   humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
   baseURL: https://partner.truefitcorp.com/api
   tags:
@@ -435,8 +432,8 @@ apis:
     url: https://techdocs.truefitcorp.com/docs/overview-1
 - aid: true-fit:true-fit-style-attributes-api
   name: True Fit Style Attributes API
-  description: >-
-    The style attributes available for particular ageGroup, gender, category and optional class combination.
+  description: The style attributes available for particular ageGroup, gender, category and optional class
+    combination.
   humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
   baseURL: https://partner.truefitcorp.com/api
   tags:
@@ -454,10 +451,9 @@ apis:
     url: https://techdocs.truefitcorp.com/docs/overview-1
 - aid: true-fit:true-fit-token-api
   name: True Fit Token API
-  description: >-
-    A token is used to identify requests from a device and associate the requests with a session. As the
-    user interacts with True Fit, the token will update. The most recent token returned by True Fit should
-    be used on subsequent requests.
+  description: A token is used to identify requests from a device and associate the requests with a session.
+    As the user interacts with True Fit, the token will update. The most recent token returned by True
+    Fit should be used on subsequent requests.
   humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
   baseURL: https://partner.truefitcorp.com/api
   tags:
@@ -549,7 +545,10 @@ common:
   url: data-model/true-fit-data-model.yml
 - type: X-MCPServerCandidate
   url: mcp/true-fit-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: ToolCrosswalk
   url: mcp/true-fit-tool-crosswalk.yml
 - type: AgentSkill
