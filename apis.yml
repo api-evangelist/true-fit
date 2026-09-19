@@ -346,6 +346,8 @@ apis:
   humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
   baseURL: https://partner.truefitcorp.com/api
   tags:
+  - Profiles
+  tags_raw:
   - Profile
   properties:
   - type: OpenAPI
@@ -457,6 +459,8 @@ apis:
   humanURL: https://techdocs.truefitcorp.com/reference/partner-overview
   baseURL: https://partner.truefitcorp.com/api
   tags:
+  - Tokens
+  tags_raw:
   - Token
   properties:
   - type: OpenAPI
