@@ -1,0 +1,30 @@
+# Front Door AI Index — true-fit — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: true-fit
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.truefit.com
+  final_host: www.truefit.com
+  ownership: own
+  owner: true-fit
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 20
+  host_score: 20
+  density: 8.8
+  words: 2274
+  tiers:
+    agentic: 5
+    core: 15
+    model: 0
+  ambiguous: 52
+  top_terms:
+    intelligence: 30
+    agent: 20
+    AI: 15
+    agentic: 4
+    cognitive: 2
+    MCP: 1
