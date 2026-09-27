@@ -127,6 +127,45 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Classification:
+      type: string
+      description: "###### Possible Mens Shoes Classifications\n* AthleticSneakers\n* Casual \n* Dress\n* Sandals\n* Boots\n###### Possible Womens Shoes Classifications\n* AthleticSneakers\n* Flats\n* Sandals\n* Boots\n* Heels\n"
+      example: General
+      enum:
+      - AthleticSneakers
+      - Boots
+      - Casual
+      - CasualShirts
+      - Dress
+      - DressShirts
+      - Flats
+      - General
+      - Heels
+      - Jeans
+      - Pants
+      - Sandals
+    Category:
+      type: string
+      example: Bottoms
+      enum:
+      - Bottoms
+      - Dresses
+      - Shoes
+      - Tops
+      - Bras
+    AgeGroup:
+      type: string
+      example: Adult
+      enum:
+      - Adult
+      - Child
+    Gender:
+      type: string
+      example: Female
+      enum:
+      - Female
+      - Male
+      - Unisex
     Product:
       required:
       - recommendable
@@ -153,43 +192,4 @@ components:
           type: string
         styleName:
           type: string
-    Classification:
-      type: string
-      description: "###### Possible Mens Shoes Classifications\n* AthleticSneakers\n* Casual \n* Dress\n* Sandals\n* Boots\n###### Possible Womens Shoes Classifications\n* AthleticSneakers\n* Flats\n* Sandals\n* Boots\n* Heels\n"
-      example: General
-      enum:
-      - AthleticSneakers
-      - Boots
-      - Casual
-      - CasualShirts
-      - Dress
-      - DressShirts
-      - Flats
-      - General
-      - Heels
-      - Jeans
-      - Pants
-      - Sandals
-    AgeGroup:
-      type: string
-      example: Adult
-      enum:
-      - Adult
-      - Child
-    Category:
-      type: string
-      example: Bottoms
-      enum:
-      - Bottoms
-      - Dresses
-      - Shoes
-      - Tops
-      - Bras
-    Gender:
-      type: string
-      example: Female
-      enum:
-      - Female
-      - Male
-      - Unisex
 x-explorer-enabled: false

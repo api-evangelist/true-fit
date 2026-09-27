@@ -149,13 +149,23 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DiscoveryRecommendationsUnavailable:
-      type: object
-      properties:
-        refreshAfter:
-          type: integer
-          description: If we can't provide discovery recommendations at the moment, the amount of time in milliseconds to wait before trying to retrieve a recommendation again.
-          example: 500
+    Classification:
+      type: string
+      description: "###### Possible Mens Shoes Classifications\n* AthleticSneakers\n* Casual \n* Dress\n* Sandals\n* Boots\n###### Possible Womens Shoes Classifications\n* AthleticSneakers\n* Flats\n* Sandals\n* Boots\n* Heels\n"
+      example: General
+      enum:
+      - AthleticSneakers
+      - Boots
+      - Casual
+      - CasualShirts
+      - Dress
+      - DressShirts
+      - Flats
+      - General
+      - Heels
+      - Jeans
+      - Pants
+      - Sandals
     Category:
       type: string
       example: Bottoms
@@ -165,6 +175,13 @@ components:
       - Shoes
       - Tops
       - Bras
+    DiscoveryRecommendationsResultSet:
+      type: object
+      properties:
+        recommendations:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscoveryRecommendation'
     DiscoveryRecommendation:
       required:
       - product
@@ -174,6 +191,19 @@ components:
           $ref: '#/components/schemas/Product'
         colorId:
           type: string
+    AgeGroup:
+      type: string
+      example: Adult
+      enum:
+      - Adult
+      - Child
+    Gender:
+      type: string
+      example: Female
+      enum:
+      - Female
+      - Male
+      - Unisex
     Product:
       required:
       - recommendable
@@ -200,41 +230,11 @@ components:
           type: string
         styleName:
           type: string
-    DiscoveryRecommendationsResultSet:
+    DiscoveryRecommendationsUnavailable:
       type: object
       properties:
-        recommendations:
-          type: array
-          items:
-            $ref: '#/components/schemas/DiscoveryRecommendation'
-    Classification:
-      type: string
-      description: "###### Possible Mens Shoes Classifications\n* AthleticSneakers\n* Casual \n* Dress\n* Sandals\n* Boots\n###### Possible Womens Shoes Classifications\n* AthleticSneakers\n* Flats\n* Sandals\n* Boots\n* Heels\n"
-      example: General
-      enum:
-      - AthleticSneakers
-      - Boots
-      - Casual
-      - CasualShirts
-      - Dress
-      - DressShirts
-      - Flats
-      - General
-      - Heels
-      - Jeans
-      - Pants
-      - Sandals
-    AgeGroup:
-      type: string
-      example: Adult
-      enum:
-      - Adult
-      - Child
-    Gender:
-      type: string
-      example: Female
-      enum:
-      - Female
-      - Male
-      - Unisex
+        refreshAfter:
+          type: integer
+          description: If we can't provide discovery recommendations at the moment, the amount of time in milliseconds to wait before trying to retrieve a recommendation again.
+          example: 500
 x-explorer-enabled: false

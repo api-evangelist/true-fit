@@ -148,13 +148,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    SizeGroup:
-      type: string
-      description: The optional group the size belongs to. This is used only for display purposes. This can be either `Kids` or `LittleKids`
-      example: Kids
-      enum:
-      - Kids
-      - LittleKids
     Size:
       required:
       - id
@@ -180,6 +173,13 @@ components:
           type: boolean
         sizeGroup:
           $ref: '#/components/schemas/SizeGroup'
+    SizeGroup:
+      type: string
+      description: The optional group the size belongs to. This is used only for display purposes. This can be either `Kids` or `LittleKids`
+      example: Kids
+      enum:
+      - Kids
+      - LittleKids
     SizeType:
       type: string
       example: Regular

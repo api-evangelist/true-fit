@@ -66,40 +66,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    IntegrationPlatform:
-      type: string
-      enum:
-      - web
-      - app
-    CheckoutEvent:
-      required:
-      - orderId
-      type: object
-      properties:
-        orderId:
-          type: string
-          example: '236272'
-        deviceType:
-          $ref: '#/components/schemas/DeviceType'
-        integrationPlatform:
-          $ref: '#/components/schemas/IntegrationPlatform'
-        widgetHidden:
-          type: boolean
-          example: false
-        storeExperimentKey:
-          type: string
-          example: TestGroupA
-        checkoutType:
-          $ref: '#/components/schemas/CheckoutType'
-        products:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineItem'
-    DeviceType:
-      type: string
-      enum:
-      - desktop
-      - mobile
     LineItem:
       required:
       - currency
@@ -132,6 +98,40 @@ components:
         salesGroup:
           type: string
           example: ''
+    IntegrationPlatform:
+      type: string
+      enum:
+      - web
+      - app
+    DeviceType:
+      type: string
+      enum:
+      - desktop
+      - mobile
+    CheckoutEvent:
+      required:
+      - orderId
+      type: object
+      properties:
+        orderId:
+          type: string
+          example: '236272'
+        deviceType:
+          $ref: '#/components/schemas/DeviceType'
+        integrationPlatform:
+          $ref: '#/components/schemas/IntegrationPlatform'
+        widgetHidden:
+          type: boolean
+          example: false
+        storeExperimentKey:
+          type: string
+          example: TestGroupA
+        checkoutType:
+          $ref: '#/components/schemas/CheckoutType'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
     CheckoutType:
       type: string
       enum:

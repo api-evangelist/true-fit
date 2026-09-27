@@ -64,11 +64,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DeviceType:
-      type: string
-      enum:
-      - desktop
-      - mobile
     IntegrationPlatform:
       type: string
       enum:
@@ -93,4 +88,9 @@ components:
           type: string
           description: Identifier of any test group user is which the user is included.
           example: control
+    DeviceType:
+      type: string
+      enum:
+      - desktop
+      - mobile
 x-explorer-enabled: false

@@ -165,51 +165,6 @@ paths:
           $ref: '#/components/responses/UnsupportedPartner'
 components:
   schemas:
-    BulkRequest:
-      type: array
-      description: Between 1 and 100 items. Duplicate products are permitted and each gets its own result.
-      minItems: 1
-      maxItems: 100
-      items:
-        $ref: '#/components/schemas/BulkRequestItem'
-    BulkRecommendationResult:
-      description: 'One result, echoing the request item''s fields. Match results to requests by position.
-
-        '
-      oneOf:
-      - title: Recommended
-        allOf:
-        - $ref: '#/components/schemas/BulkRequestItem'
-        - type: object
-          required:
-          - success
-          - recommendedSize
-          properties:
-            success:
-              type: boolean
-              const: true
-            recommendedSize:
-              type: string
-              description: The recommended size label, as the retailer prints it.
-              example: '10'
-      - title: Not recommended
-        allOf:
-        - $ref: '#/components/schemas/BulkRequestItem'
-        - type: object
-          required:
-          - success
-          - error
-          properties:
-            success:
-              type: boolean
-              const: false
-            error:
-              type: string
-              description: "Why no size was returned.\n\nDomain resolution:\n  * `Invalid retailerDomain` - the value could not be parsed as a hostname.\n  * `Unsupported retailer domain` - the hostname is not mapped to a retailer.\n  * `No recommendation returned for product` - the product is unknown to True Fit.\n\nFit outcomes:\n  * `incompleteProfile` - the profile lacks the measurements needed for this garment.\n  * `noProfile` - the profile no longer exists.\n  * `userEstimationInProgress` - body estimation is still running after a\n    profile, measurement, or closet write. Retry after a short delay.\n  * `noSizesFitTheUser` - no stocked size fits.\n  * `invalidGender` - the product's department does not apply to this profile.\n  * `unrecommendableDepartment` - the product is in a department True Fit does\n    not size, such as accessories.\n  * `productMissingData` - the product lacks the garment data needed to size it.\n  * `recommendationDisabled` - recommendations are turned off for that retailer.\n  * `error` - an unexpected failure. Safe to retry.\n"
-              examples:
-              - Unsupported retailer domain
-              - incompleteProfile
-              - userEstimationInProgress
     BulkRequestItem:
       type: object
       required:
@@ -246,22 +201,21 @@ components:
 
             '
           example: en_US
-    Error:
+    ValidationError:
       type: object
-      description: Standard error body.
+      description: Schema validation failure. Note this body carries no `statusCode`.
       required:
-      - statusCode
       - message
+      - error
       properties:
-        statusCode:
-          type: integer
-          example: 404
         message:
           type: string
-          example: Profile not found
+          example: Validation failed
         error:
-          type: string
-          example: Not Found
+          type: object
+          description: Failing field path to error message.
+          additionalProperties:
+            type: string
     BulkGeneralGuidanceResult:
       description: 'One result, echoing the request item''s fields. Match results to requests by position.
 
@@ -304,69 +258,67 @@ components:
               examples:
               - Unsupported retailer domain
               - No general guidance returned for product
-    ValidationError:
+    Error:
       type: object
-      description: Schema validation failure. Note this body carries no `statusCode`.
+      description: Standard error body.
       required:
+      - statusCode
       - message
-      - error
       properties:
+        statusCode:
+          type: integer
+          example: 404
         message:
           type: string
-          example: Validation failed
+          example: Profile not found
         error:
-          type: object
-          description: Failing field path to error message.
-          additionalProperties:
-            type: string
-  parameters:
-    profileId:
-      name: profileId
-      in: path
-      required: true
-      description: 'A profile belonging to the identified user, from `GET /profile`. Profiles belonging to
-
-        another user return `404` rather than `403`, so the endpoint cannot be used to probe
-
-        for the existence of other users'' profiles.
+          type: string
+          example: Not Found
+    BulkRecommendationResult:
+      description: 'One result, echoing the request item''s fields. Match results to requests by position.
 
         '
-      schema:
-        type: string
-        format: uuid
-      example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-    partnerUserId:
-      name: partnerUserId
-      in: query
-      required: false
-      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
-
-        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
-
-        '
-      schema:
-        type: string
-      example: acme-user-42817
-    tfPartnerUserId:
-      name: tfPartnerUserId
-      in: query
-      required: false
-      description: 'True Fit''s identifier for the user, returned by `GET /id-sync`. Send either this or
-
-        `partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.
-
-        '
-      schema:
-        type: string
-      example: p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55
-    partnerId:
-      name: partnerId
-      in: path
-      required: true
-      description: Your partner identifier, issued during onboarding.
-      schema:
-        type: string
-      example: acme
+      oneOf:
+      - title: Recommended
+        allOf:
+        - $ref: '#/components/schemas/BulkRequestItem'
+        - type: object
+          required:
+          - success
+          - recommendedSize
+          properties:
+            success:
+              type: boolean
+              const: true
+            recommendedSize:
+              type: string
+              description: The recommended size label, as the retailer prints it.
+              example: '10'
+      - title: Not recommended
+        allOf:
+        - $ref: '#/components/schemas/BulkRequestItem'
+        - type: object
+          required:
+          - success
+          - error
+          properties:
+            success:
+              type: boolean
+              const: false
+            error:
+              type: string
+              description: "Why no size was returned.\n\nDomain resolution:\n  * `Invalid retailerDomain` - the value could not be parsed as a hostname.\n  * `Unsupported retailer domain` - the hostname is not mapped to a retailer.\n  * `No recommendation returned for product` - the product is unknown to True Fit.\n\nFit outcomes:\n  * `incompleteProfile` - the profile lacks the measurements needed for this garment.\n  * `noProfile` - the profile no longer exists.\n  * `userEstimationInProgress` - body estimation is still running after a\n    profile, measurement, or closet write. Retry after a short delay.\n  * `noSizesFitTheUser` - no stocked size fits.\n  * `invalidGender` - the product's department does not apply to this profile.\n  * `unrecommendableDepartment` - the product is in a department True Fit does\n    not size, such as accessories.\n  * `productMissingData` - the product lacks the garment data needed to size it.\n  * `recommendationDisabled` - recommendations are turned off for that retailer.\n  * `error` - an unexpected failure. Safe to retry.\n"
+              examples:
+              - Unsupported retailer domain
+              - incompleteProfile
+              - userEstimationInProgress
+    BulkRequest:
+      type: array
+      description: Between 1 and 100 items. Duplicate products are permitted and each gets its own result.
+      minItems: 1
+      maxItems: 100
+      items:
+        $ref: '#/components/schemas/BulkRequestItem'
   responses:
     ProfileNotFound:
       description: 'The `profileId` does not exist or does not belong to the identified user. Also returned
@@ -383,22 +335,6 @@ components:
               value:
                 statusCode: 404
                 message: Profile not found
-                error: Not Found
-    UnsupportedPartner:
-      description: 'The `partnerId` is unknown or disabled. Returned before credentials are checked, so an
-
-        invalid API key against an unknown partner is a `404`, not a `401`.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            unsupportedPartner:
-              value:
-                statusCode: 404
-                message: Unsupported partner
                 error: Not Found
     ValidationFailed:
       description: 'The request body or query string failed schema validation. `error` maps each failing
@@ -448,6 +384,70 @@ components:
                 statusCode: 401
                 message: Unknown partner user
                 error: Unauthorized
+    UnsupportedPartner:
+      description: 'The `partnerId` is unknown or disabled. Returned before credentials are checked, so an
+
+        invalid API key against an unknown partner is a `404`, not a `401`.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            unsupportedPartner:
+              value:
+                statusCode: 404
+                message: Unsupported partner
+                error: Not Found
+  parameters:
+    profileId:
+      name: profileId
+      in: path
+      required: true
+      description: 'A profile belonging to the identified user, from `GET /profile`. Profiles belonging to
+
+        another user return `404` rather than `403`, so the endpoint cannot be used to probe
+
+        for the existence of other users'' profiles.
+
+        '
+      schema:
+        type: string
+        format: uuid
+      example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+    partnerId:
+      name: partnerId
+      in: path
+      required: true
+      description: Your partner identifier, issued during onboarding.
+      schema:
+        type: string
+      example: acme
+    tfPartnerUserId:
+      name: tfPartnerUserId
+      in: query
+      required: false
+      description: 'True Fit''s identifier for the user, returned by `GET /id-sync`. Send either this or
+
+        `partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.
+
+        '
+      schema:
+        type: string
+      example: p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55
+    partnerUserId:
+      name: partnerUserId
+      in: query
+      required: false
+      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
+
+        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
+
+        '
+      schema:
+        type: string
+      example: acme-user-42817
   securitySchemes:
     partnerApiKey:
       type: http

@@ -187,21 +187,6 @@ components:
         refreshAfter:
           type: integer
           description: If we can't provide the normalized sizes at the moment, the amount of time in milliseconds to wait before trying to retrieve a recommendation again.
-    NormalizedSize:
-      required:
-      - merchantCategoryId
-      - normalizedSizes
-      type: object
-      properties:
-        merchantCategoryId:
-          type: integer
-        gender:
-          type: string
-        ageGroup:
-          type: string
-        normalizedSize:
-          type: integer
-          description: Normalized size corresponding to the merchantCategoryId.
     SupportedSizeTypes:
       required:
       - merchantCategoryId
@@ -217,4 +202,19 @@ components:
         supportedSizeTypes:
           type: integer
           description: Supported size types bitmap corresponding to the merchantCategoryId
+    NormalizedSize:
+      required:
+      - merchantCategoryId
+      - normalizedSizes
+      type: object
+      properties:
+        merchantCategoryId:
+          type: integer
+        gender:
+          type: string
+        ageGroup:
+          type: string
+        normalizedSize:
+          type: integer
+          description: Normalized size corresponding to the merchantCategoryId.
 x-explorer-enabled: false

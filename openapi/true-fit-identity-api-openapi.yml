@@ -160,18 +160,6 @@ components:
           type: string
           example: Not Found
   responses:
-    MissingIdSyncParams:
-      description: '`partnerId` or `partnerUserId` was not supplied.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            missingParams:
-              value:
-                statusCode: 400
-                message: Missing required params
-                error: Bad Request
     UnsupportedPartner:
       description: 'The `partnerId` is unknown or disabled. Returned before credentials are checked, so an
 
@@ -188,6 +176,18 @@ components:
                 statusCode: 404
                 message: Unsupported partner
                 error: Not Found
+    MissingIdSyncParams:
+      description: '`partnerId` or `partnerUserId` was not supplied.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            missingParams:
+              value:
+                statusCode: 400
+                message: Missing required params
+                error: Bad Request
   securitySchemes:
     partnerApiKey:
       type: http

@@ -434,6 +434,185 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    body:
+      oneOf:
+      - $ref: '#/components/schemas/AdultProfile'
+      - $ref: '#/components/schemas/ChildProfile'
+    AdultProfile_sleeveLength_exact:
+      required:
+      - uom
+      - value
+      type: object
+      properties:
+        uom:
+          type: string
+          description: The `uom` from the Available Length object returned from the available sleeve length endpoint.
+        value:
+          type: integer
+          description: One of the values from the Available Length object from the available sleeve length endpoint that corresponds to the given `uom`.
+    ValidationFailure:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+      description: Contains a list of ValidationErrors
+    HeightCm:
+      required:
+      - uom
+      - value
+      type: object
+      properties:
+        value:
+          maximum: 260
+          minimum: 60
+          type: integer
+        uom:
+          type: string
+          enum:
+          - Cm
+      description: Height in centimeters.
+      example:
+        value: 175
+        uom: Cm
+    ProfileStrength:
+      type: object
+      properties:
+        strength:
+          type: integer
+          description: Value ranges from 0 to 100.
+          readOnly: true
+          example: 85
+        remainingQuestions:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/ProfileStrengthQuestions'
+      example:
+        strength: 70
+        remainingQuestions:
+        - BodyShape
+        - ClosetItem
+    FitDetailsResultSet:
+      required:
+      - status
+      - styleId
+      type: object
+      properties:
+        styleId:
+          type: string
+          description: The store style ID that this result corresponds to.
+        status:
+          type: string
+          description: If the status is success, render the fit details page. If the status is estimationinprogress, a refershAfter should also come back on the FitDetailsResultSet, and another call for a fit rec should be made after the refreshAfter delay. For any other status, don't render the fit details page.
+          enum:
+          - error
+          - incompletegarment
+          - incompleteprofile
+          - invaliddepartment
+          - success
+          - estimationinprogress
+          - sizenotavailable
+          - unrecommendabledepartment
+        bestSize:
+          $ref: '#/components/schemas/FitDetails'
+        sizeUp:
+          $ref: '#/components/schemas/FitDetails'
+        sizeDown:
+          $ref: '#/components/schemas/FitDetails'
+        refreshAfter:
+          type: integer
+          description: If we can't provide a recommendation at the moment, the amount of time in milliseconds to wait before trying to retrieve a recommendation again.
+    AdultProfile_age:
+      required:
+      - years
+      type: object
+      properties:
+        years:
+          maximum: 125
+          minimum: 2
+          type: integer
+        months:
+          maximum: 11
+          minimum: 0
+          type: integer
+    ChildProfile:
+      required:
+      - gender
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: This field is populated by the server, never created by the client.
+          readOnly: true
+          example: someProfileId
+        gender:
+          type: string
+          enum:
+          - Female
+          - Male
+        age:
+          $ref: '#/components/schemas/AdultProfile_age'
+        ageGroup:
+          type: string
+          default: Adult
+          enum:
+          - Adult
+          - Child
+        alias:
+          type: string
+          description: The name given to this profile by the user.
+        isActive:
+          type: boolean
+          description: Is this profile active on the session. Only one profile in each ageGroup can be active at a time.
+          readOnly: true
+        isShopper:
+          type: boolean
+          description: Is this the shopper profile on the session. Only one profile in can be the shopper.
+          readOnly: true
+    AdultProfile_inseam_exact:
+      required:
+      - uom
+      - value
+      type: object
+      properties:
+        uom:
+          type: string
+          description: The `uom` from the Available Length object returned from the available inseams endpoint.
+        value:
+          type: integer
+          description: One of the values from the Available Length object from the available inseams endpoint that corresponds to the given `uom`.
+    AdultProfile_inseam:
+      type: object
+      properties:
+        exact:
+          $ref: '#/components/schemas/AdultProfile_inseam_exact'
+        general:
+          type: string
+          enum:
+          - Short
+          - Regular
+          - Long
+          - ExtraLong
+      description: Exactly one field either `exact` or `general` should be included on this object
+      example: '{"exact":{"value":30,"uom":"In"}}'
+    AdultProfile_sleeveLength:
+      type: object
+      properties:
+        exact:
+          $ref: '#/components/schemas/AdultProfile_sleeveLength_exact'
+        general:
+          type: string
+          enum:
+          - WayTooShort
+          - TooShort
+          - JustRight
+          - TooLong
+          - WayTooLong
+      description: Exactly one field either `exact` or `general` should be included on this object
+      example: '{"general":"WayTooShort"}'
     FitMeasurementPoint:
       required:
       - measurementPoint
@@ -469,167 +648,24 @@ components:
           description: 'A value between 0 - 7 that represents how good of a fit an item is at a specific point. 0 represents snuggest, 3 or 4 represent an ideal fit, and 7 represents loosest.
 
             '
-    WeightStLb:
-      required:
-      - secondValue
-      - uom
-      - value
-      type: object
-      properties:
-        value:
-          maximum: 89
-          minimum: 3
-          type: integer
-        secondValue:
-          maximum: 13
-          minimum: 0
-          type: integer
-        uom:
-          type: string
-          enum:
-          - StLb
-      description: Weight in stones and pounds.
-    HeightCm:
+    WeightLb:
       required:
       - uom
       - value
       type: object
       properties:
         value:
-          maximum: 260
-          minimum: 60
+          maximum: 1250
+          minimum: 50
           type: integer
         uom:
           type: string
           enum:
-          - Cm
-      description: Height in centimeters.
+          - Lb
+      description: Weight in pounds.
       example:
-        value: 175
-        uom: Cm
-    HeightFtIn:
-      required:
-      - secondValue
-      - uom
-      - value
-      type: object
-      properties:
-        value:
-          maximum: 8
-          minimum: 2
-          type: integer
-        secondValue:
-          maximum: 11
-          minimum: 0
-          type: integer
-        uom:
-          type: string
-          enum:
-          - FtIn
-      description: Height in feet and inches.
-      example:
-        value: 5
-        secondValue: 6
-        uom: FtIn
-    AdultProfile_inseam:
-      type: object
-      properties:
-        exact:
-          $ref: '#/components/schemas/AdultProfile_inseam_exact'
-        general:
-          type: string
-          enum:
-          - Short
-          - Regular
-          - Long
-          - ExtraLong
-      description: Exactly one field either `exact` or `general` should be included on this object
-      example: '{"exact":{"value":30,"uom":"In"}}'
-    FitDetailsResultSet:
-      required:
-      - status
-      - styleId
-      type: object
-      properties:
-        styleId:
-          type: string
-          description: The store style ID that this result corresponds to.
-        status:
-          type: string
-          description: If the status is success, render the fit details page. If the status is estimationinprogress, a refershAfter should also come back on the FitDetailsResultSet, and another call for a fit rec should be made after the refreshAfter delay. For any other status, don't render the fit details page.
-          enum:
-          - error
-          - incompletegarment
-          - incompleteprofile
-          - invaliddepartment
-          - success
-          - estimationinprogress
-          - sizenotavailable
-          - unrecommendabledepartment
-        bestSize:
-          $ref: '#/components/schemas/FitDetails'
-        sizeUp:
-          $ref: '#/components/schemas/FitDetails'
-        sizeDown:
-          $ref: '#/components/schemas/FitDetails'
-        refreshAfter:
-          type: integer
-          description: If we can't provide a recommendation at the moment, the amount of time in milliseconds to wait before trying to retrieve a recommendation again.
-    ValidationFailure:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
-      description: Contains a list of ValidationErrors
-    AdultProfile_age:
-      required:
-      - years
-      type: object
-      properties:
-        years:
-          maximum: 125
-          minimum: 2
-          type: integer
-        months:
-          maximum: 11
-          minimum: 0
-          type: integer
-    ProfileStrength:
-      type: object
-      properties:
-        strength:
-          type: integer
-          description: Value ranges from 0 to 100.
-          readOnly: true
-          example: 85
-        remainingQuestions:
-          type: array
-          readOnly: true
-          items:
-            $ref: '#/components/schemas/ProfileStrengthQuestions'
-      example:
-        strength: 70
-        remainingQuestions:
-        - BodyShape
-        - ClosetItem
-    body:
-      oneOf:
-      - $ref: '#/components/schemas/AdultProfile'
-      - $ref: '#/components/schemas/ChildProfile'
-    AdultProfile_sleeveLength_exact:
-      required:
-      - uom
-      - value
-      type: object
-      properties:
-        uom:
-          type: string
-          description: The `uom` from the Available Length object returned from the available sleeve length endpoint.
-        value:
-          type: integer
-          description: One of the values from the Available Length object from the available sleeve length endpoint that corresponds to the given `uom`.
+        value: 145
+        uom: Lb
     ValidationError:
       type: object
       properties:
@@ -650,11 +686,44 @@ components:
 
             '
       description: An error that occurred as a result of sending bad data.
-    ProfileStrengthQuestions:
-      type: string
-      enum:
-      - BodyShape
-      - ClosetItem
+    FitDetails:
+      required:
+      - size
+      type: object
+      properties:
+        size:
+          type: string
+        recommended:
+          type: boolean
+        score:
+          maximum: 5
+          minimum: 1
+          type: number
+          description: A value between 1.0 and 5.0 that determines how good the overall fit of an item is.
+        overallFit:
+          maximum: 7
+          minimum: 0
+          type: number
+          description: A value between 0 - 7 that represents how good the overall fit of an item is. 0 represents snuggest, 3 or 4 represent an ideal fit, and 7 represents loosest. This should only come back if the list of poms are empty.
+        poms:
+          type: array
+          items:
+            $ref: '#/components/schemas/FitMeasurementPoint'
+    WeightKg:
+      required:
+      - uom
+      - value
+      type: object
+      properties:
+        value:
+          maximum: 500
+          minimum: 22
+          type: integer
+        uom:
+          type: string
+          enum:
+          - Kg
+      description: Weight in kilograms.
     AdultProfile:
       required:
       - gender
@@ -712,124 +781,55 @@ components:
         isShopper:
           type: boolean
           description: Is this the shopper profile on the session. Only one profile in can be the shopper.
-    ChildProfile:
+    WeightStLb:
       required:
-      - gender
-      - id
-      type: object
-      properties:
-        id:
-          type: string
-          description: This field is populated by the server, never created by the client.
-          readOnly: true
-          example: someProfileId
-        gender:
-          type: string
-          enum:
-          - Female
-          - Male
-        age:
-          $ref: '#/components/schemas/AdultProfile_age'
-        ageGroup:
-          type: string
-          default: Adult
-          enum:
-          - Adult
-          - Child
-        alias:
-          type: string
-          description: The name given to this profile by the user.
-        isActive:
-          type: boolean
-          description: Is this profile active on the session. Only one profile in each ageGroup can be active at a time.
-          readOnly: true
-        isShopper:
-          type: boolean
-          description: Is this the shopper profile on the session. Only one profile in can be the shopper.
-          readOnly: true
-    AdultProfile_sleeveLength:
-      type: object
-      properties:
-        exact:
-          $ref: '#/components/schemas/AdultProfile_sleeveLength_exact'
-        general:
-          type: string
-          enum:
-          - WayTooShort
-          - TooShort
-          - JustRight
-          - TooLong
-          - WayTooLong
-      description: Exactly one field either `exact` or `general` should be included on this object
-      example: '{"general":"WayTooShort"}'
-    AdultProfile_inseam_exact:
-      required:
+      - secondValue
       - uom
       - value
       type: object
       properties:
-        uom:
-          type: string
-          description: The `uom` from the Available Length object returned from the available inseams endpoint.
         value:
+          maximum: 89
+          minimum: 3
           type: integer
-          description: One of the values from the Available Length object from the available inseams endpoint that corresponds to the given `uom`.
-    FitDetails:
-      required:
-      - size
-      type: object
-      properties:
-        size:
-          type: string
-        recommended:
-          type: boolean
-        score:
-          maximum: 5
-          minimum: 1
-          type: number
-          description: A value between 1.0 and 5.0 that determines how good the overall fit of an item is.
-        overallFit:
-          maximum: 7
+        secondValue:
+          maximum: 13
           minimum: 0
-          type: number
-          description: A value between 0 - 7 that represents how good the overall fit of an item is. 0 represents snuggest, 3 or 4 represent an ideal fit, and 7 represents loosest. This should only come back if the list of poms are empty.
-        poms:
-          type: array
-          items:
-            $ref: '#/components/schemas/FitMeasurementPoint'
-    WeightKg:
+          type: integer
+        uom:
+          type: string
+          enum:
+          - StLb
+      description: Weight in stones and pounds.
+    HeightFtIn:
       required:
+      - secondValue
       - uom
       - value
       type: object
       properties:
         value:
-          maximum: 500
-          minimum: 22
+          maximum: 8
+          minimum: 2
+          type: integer
+        secondValue:
+          maximum: 11
+          minimum: 0
           type: integer
         uom:
           type: string
           enum:
-          - Kg
-      description: Weight in kilograms.
-    WeightLb:
-      required:
-      - uom
-      - value
-      type: object
-      properties:
-        value:
-          maximum: 1250
-          minimum: 50
-          type: integer
-        uom:
-          type: string
-          enum:
-          - Lb
-      description: Weight in pounds.
+          - FtIn
+      description: Height in feet and inches.
       example:
-        value: 145
-        uom: Lb
+        value: 5
+        secondValue: 6
+        uom: FtIn
+    ProfileStrengthQuestions:
+      type: string
+      enum:
+      - BodyShape
+      - ClosetItem
   requestBodies:
     Profile:
       description: Profile object that represents the person being shopped for.

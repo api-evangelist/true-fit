@@ -115,6 +115,101 @@ paths:
           $ref: '#/components/responses/ProfileNotFound'
 components:
   schemas:
+    ExactMeasurementValue:
+      type: object
+      description: 'A numeric measurement. Compound values use both unit pairs: 5''6" is
+
+        `{ unit: "ft", value: 5, secondUnit: "in", secondValue: 6 }`.
+
+        '
+      required:
+      - unit
+      - value
+      properties:
+        unit:
+          allOf:
+          - $ref: '#/components/schemas/Uom'
+          description: Primary unit - `ft` for feet, `kg` for kilograms, and so on.
+        value:
+          type: number
+          example: 5
+        secondUnit:
+          allOf:
+          - $ref: '#/components/schemas/Uom'
+          description: Secondary unit, used alongside the primary - `in` for inches with `ft` for feet.
+        secondValue:
+          type: number
+          example: 6
+    MeasurementsResponse:
+      type: object
+      required:
+      - exactMeasurements
+      - generalMeasurements
+      properties:
+        exactMeasurements:
+          type: object
+          propertyNames:
+            $ref: '#/components/schemas/MeasurementPoint'
+          additionalProperties:
+            $ref: '#/components/schemas/ExactMeasurementResponseValue'
+        generalMeasurements:
+          type: object
+          propertyNames:
+            $ref: '#/components/schemas/MeasurementPoint'
+          additionalProperties:
+            $ref: '#/components/schemas/GeneralMeasurementValue'
+    MeasurementsRequest:
+      type: object
+      description: 'Measurements to upsert. Points you omit are left unchanged. At least one of the two
+
+        maps should be present; an empty object is accepted and is a no-op.
+
+        '
+      properties:
+        exactMeasurements:
+          type: object
+          description: Numeric measurements keyed by measurement point.
+          propertyNames:
+            $ref: '#/components/schemas/MeasurementPoint'
+          additionalProperties:
+            $ref: '#/components/schemas/ExactMeasurementValue'
+        generalMeasurements:
+          type: object
+          description: 'Qualitative measurements keyed by measurement point - how the user describes a body
+
+            point, or how they prefer a garment to fit there.
+
+            '
+          propertyNames:
+            $ref: '#/components/schemas/MeasurementPoint'
+          additionalProperties:
+            $ref: '#/components/schemas/GeneralMeasurementValue'
+    GeneralMeasurementValue:
+      type: string
+      description: A qualitative measurement - how the user describes a body point or fit preference.
+      enum:
+      - verySmall
+      - small
+      - typical
+      - big
+      - veryBig
+      example: typical
+    Error:
+      type: object
+      description: Standard error body.
+      required:
+      - statusCode
+      - message
+      properties:
+        statusCode:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: Profile not found
+        error:
+          type: string
+          example: Not Found
     Uom:
       type: string
       description: Unit of measure.
@@ -129,6 +224,26 @@ components:
       - lb
       - month
       example: in
+    ExactMeasurementResponseValue:
+      allOf:
+      - $ref: '#/components/schemas/ExactMeasurementValue'
+      - type: object
+        required:
+        - normalizedValue
+        - normalizedUnit
+        properties:
+          normalizedValue:
+            type: number
+            description: The measurement converted to True Fit's standard unit for that point.
+            example: 66
+          normalizedUnit:
+            type: string
+            description: 'Standard unit for the point - `in` for lengths and girths, `lb` for weight,
+
+              `month` for age.
+
+              '
+            example: in
     MeasurementPoint:
       type: string
       description: A point on the body that can carry a measurement. Case-sensitive.
@@ -167,96 +282,6 @@ components:
       - sleeveWidth
       - age
       example: height
-    MeasurementsRequest:
-      type: object
-      description: 'Measurements to upsert. Points you omit are left unchanged. At least one of the two
-
-        maps should be present; an empty object is accepted and is a no-op.
-
-        '
-      properties:
-        exactMeasurements:
-          type: object
-          description: Numeric measurements keyed by measurement point.
-          propertyNames:
-            $ref: '#/components/schemas/MeasurementPoint'
-          additionalProperties:
-            $ref: '#/components/schemas/ExactMeasurementValue'
-        generalMeasurements:
-          type: object
-          description: 'Qualitative measurements keyed by measurement point - how the user describes a body
-
-            point, or how they prefer a garment to fit there.
-
-            '
-          propertyNames:
-            $ref: '#/components/schemas/MeasurementPoint'
-          additionalProperties:
-            $ref: '#/components/schemas/GeneralMeasurementValue'
-    MeasurementsResponse:
-      type: object
-      required:
-      - exactMeasurements
-      - generalMeasurements
-      properties:
-        exactMeasurements:
-          type: object
-          propertyNames:
-            $ref: '#/components/schemas/MeasurementPoint'
-          additionalProperties:
-            $ref: '#/components/schemas/ExactMeasurementResponseValue'
-        generalMeasurements:
-          type: object
-          propertyNames:
-            $ref: '#/components/schemas/MeasurementPoint'
-          additionalProperties:
-            $ref: '#/components/schemas/GeneralMeasurementValue'
-    ExactMeasurementResponseValue:
-      allOf:
-      - $ref: '#/components/schemas/ExactMeasurementValue'
-      - type: object
-        required:
-        - normalizedValue
-        - normalizedUnit
-        properties:
-          normalizedValue:
-            type: number
-            description: The measurement converted to True Fit's standard unit for that point.
-            example: 66
-          normalizedUnit:
-            type: string
-            description: 'Standard unit for the point - `in` for lengths and girths, `lb` for weight,
-
-              `month` for age.
-
-              '
-            example: in
-    Error:
-      type: object
-      description: Standard error body.
-      required:
-      - statusCode
-      - message
-      properties:
-        statusCode:
-          type: integer
-          example: 404
-        message:
-          type: string
-          example: Profile not found
-        error:
-          type: string
-          example: Not Found
-    GeneralMeasurementValue:
-      type: string
-      description: A qualitative measurement - how the user describes a body point or fit preference.
-      enum:
-      - verySmall
-      - small
-      - typical
-      - big
-      - veryBig
-      example: typical
     ValidationError:
       type: object
       description: Schema validation failure. Note this body carries no `statusCode`.
@@ -272,79 +297,6 @@ components:
           description: Failing field path to error message.
           additionalProperties:
             type: string
-    ExactMeasurementValue:
-      type: object
-      description: 'A numeric measurement. Compound values use both unit pairs: 5''6" is
-
-        `{ unit: "ft", value: 5, secondUnit: "in", secondValue: 6 }`.
-
-        '
-      required:
-      - unit
-      - value
-      properties:
-        unit:
-          allOf:
-          - $ref: '#/components/schemas/Uom'
-          description: Primary unit - `ft` for feet, `kg` for kilograms, and so on.
-        value:
-          type: number
-          example: 5
-        secondUnit:
-          allOf:
-          - $ref: '#/components/schemas/Uom'
-          description: Secondary unit, used alongside the primary - `in` for inches with `ft` for feet.
-        secondValue:
-          type: number
-          example: 6
-  parameters:
-    profileId:
-      name: profileId
-      in: path
-      required: true
-      description: 'A profile belonging to the identified user, from `GET /profile`. Profiles belonging to
-
-        another user return `404` rather than `403`, so the endpoint cannot be used to probe
-
-        for the existence of other users'' profiles.
-
-        '
-      schema:
-        type: string
-        format: uuid
-      example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-    partnerUserId:
-      name: partnerUserId
-      in: query
-      required: false
-      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
-
-        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
-
-        '
-      schema:
-        type: string
-      example: acme-user-42817
-    tfPartnerUserId:
-      name: tfPartnerUserId
-      in: query
-      required: false
-      description: 'True Fit''s identifier for the user, returned by `GET /id-sync`. Send either this or
-
-        `partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.
-
-        '
-      schema:
-        type: string
-      example: p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55
-    partnerId:
-      name: partnerId
-      in: path
-      required: true
-      description: Your partner identifier, issued during onboarding.
-      schema:
-        type: string
-      example: acme
   responses:
     ProfileNotFound:
       description: 'The `profileId` does not exist or does not belong to the identified user. Also returned
@@ -362,6 +314,27 @@ components:
                 statusCode: 404
                 message: Profile not found
                 error: Not Found
+    ValidationFailed:
+      description: 'The request body or query string failed schema validation. `error` maps each failing
+
+        field path to its message; array indices appear as the first path segment.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          examples:
+            missingField:
+              value:
+                message: Validation failed
+                error:
+                  0.retailerDomain: 'Invalid input: expected string, received undefined'
+            badEnum:
+              value:
+                message: Validation failed
+                error:
+                  category: 'Invalid option: expected one of "belts"|"bottoms"|"bras"'
     Unauthorized:
       description: 'Missing or invalid Basic credentials, or a user identifier that does not match a known
 
@@ -389,27 +362,54 @@ components:
                 statusCode: 401
                 message: Unknown partner user
                 error: Unauthorized
-    ValidationFailed:
-      description: 'The request body or query string failed schema validation. `error` maps each failing
+  parameters:
+    profileId:
+      name: profileId
+      in: path
+      required: true
+      description: 'A profile belonging to the identified user, from `GET /profile`. Profiles belonging to
 
-        field path to its message; array indices appear as the first path segment.
+        another user return `404` rather than `403`, so the endpoint cannot be used to probe
+
+        for the existence of other users'' profiles.
 
         '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          examples:
-            missingField:
-              value:
-                message: Validation failed
-                error:
-                  0.retailerDomain: 'Invalid input: expected string, received undefined'
-            badEnum:
-              value:
-                message: Validation failed
-                error:
-                  category: 'Invalid option: expected one of "belts"|"bottoms"|"bras"'
+      schema:
+        type: string
+        format: uuid
+      example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+    partnerId:
+      name: partnerId
+      in: path
+      required: true
+      description: Your partner identifier, issued during onboarding.
+      schema:
+        type: string
+      example: acme
+    tfPartnerUserId:
+      name: tfPartnerUserId
+      in: query
+      required: false
+      description: 'True Fit''s identifier for the user, returned by `GET /id-sync`. Send either this or
+
+        `partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.
+
+        '
+      schema:
+        type: string
+      example: p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55
+    partnerUserId:
+      name: partnerUserId
+      in: query
+      required: false
+      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
+
+        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
+
+        '
+      schema:
+        type: string
+      example: acme-user-42817
   securitySchemes:
     partnerApiKey:
       type: http

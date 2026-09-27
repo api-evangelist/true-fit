@@ -457,21 +457,13 @@ paths:
       description: Partner API
 components:
   schemas:
-    MensPantsFit:
+    WomensRise:
       type: string
       enum:
-      - FormFitting
-      - SemiFitted
-      - Relaxed
-    WomensSilhouette:
-      type: string
-      enum:
-      - ALine
-      - Empire
-      - Maxi
-      - Sheath
-      - Shift
-      - Wrap
+      - Low
+      - Mid
+      - High
+      - Ultra
     WomensBottomsStyle:
       type: string
       enum:
@@ -484,6 +476,31 @@ components:
       - Straight
       - Trouser
       - Wide
+    WomensTopsStyle:
+      type: string
+      enum:
+      - Blouse
+      - Polo
+      - Sweater
+      - TailoredShirt
+      - Tank
+      - Tee
+      - Tunic
+    WomensBraStyle:
+      type: string
+      enum:
+      - LowCoverage
+      - MediumCoverage
+      - FullCoverage
+    Category:
+      type: string
+      example: Bottoms
+      enum:
+      - Bottoms
+      - Dresses
+      - Shoes
+      - Tops
+      - Bras
     ClosetItem:
       required:
       - ageGroup
@@ -526,24 +543,21 @@ components:
 
             '
           readOnly: true
-    WomensRise:
+    FitDescription:
       type: string
       enum:
-      - Low
-      - Mid
-      - High
-      - Ultra
-    ClosetItemAge:
-      type: string
-      enum:
-      - LessThanOneYear
-      - OneYearOrOlder
-    WomensBraBandFit:
-      type: string
-      enum:
-      - DigsIn
+      - ABitSmall
       - JustRight
-      - RidesUp
+      - ABitLarge
+    WomensSilhouette:
+      type: string
+      enum:
+      - ALine
+      - Empire
+      - Maxi
+      - Sheath
+      - Shift
+      - Wrap
     StyleAttributes:
       type: object
       properties:
@@ -577,22 +591,6 @@ components:
       example:
         WomensSleeveLength: NotSure
         WomensSilhouette: ALine
-    WomensTopsStyle:
-      type: string
-      enum:
-      - Blouse
-      - Polo
-      - Sweater
-      - TailoredShirt
-      - Tank
-      - Tee
-      - Tunic
-    AgeGroup:
-      type: string
-      example: Adult
-      enum:
-      - Adult
-      - Child
     MensBottomsStyle:
       type: string
       enum:
@@ -600,34 +598,6 @@ components:
       - Skinny
       - Straight
       - Wide
-    WomensBraStyle:
-      type: string
-      enum:
-      - LowCoverage
-      - MediumCoverage
-      - FullCoverage
-    WomensBraCupFit:
-      type: string
-      enum:
-      - Gaps
-      - JustRight
-      - Overflows
-    Category:
-      type: string
-      example: Bottoms
-      enum:
-      - Bottoms
-      - Dresses
-      - Shoes
-      - Tops
-      - Bras
-    Gender:
-      type: string
-      example: Female
-      enum:
-      - Female
-      - Male
-      - Unisex
     WomensSleeveLength:
       type: string
       enum:
@@ -636,12 +606,42 @@ components:
       - Strapless
       - Tank
       - ThreeQuarterSleeve
-    FitDescription:
+    AgeGroup:
+      type: string
+      example: Adult
+      enum:
+      - Adult
+      - Child
+    MensPantsFit:
       type: string
       enum:
-      - ABitSmall
+      - FormFitting
+      - SemiFitted
+      - Relaxed
+    WomensBraCupFit:
+      type: string
+      enum:
+      - Gaps
       - JustRight
-      - ABitLarge
+      - Overflows
+    ClosetItemAge:
+      type: string
+      enum:
+      - LessThanOneYear
+      - OneYearOrOlder
+    Gender:
+      type: string
+      example: Female
+      enum:
+      - Female
+      - Male
+      - Unisex
+    WomensBraBandFit:
+      type: string
+      enum:
+      - DigsIn
+      - JustRight
+      - RidesUp
     Department:
       type: string
       description: 'Garment department. Matched case-insensitively - `Womens` and `womens` are both accepted
@@ -662,6 +662,21 @@ components:
       - womens
       - unisex
       example: womens
+    ValidationError:
+      type: object
+      description: Schema validation failure. Note this body carries no `statusCode`.
+      required:
+      - message
+      - error
+      properties:
+        message:
+          type: string
+          example: Validation failed
+        error:
+          type: object
+          description: Failing field path to error message.
+          additionalProperties:
+            type: string
     ClosetItem_2:
       allOf:
       - $ref: '#/components/schemas/CreateClosetItemRequest'
@@ -677,6 +692,22 @@ components:
           updatedAt:
             type: string
             format: date-time
+    Error:
+      type: object
+      description: Standard error body.
+      required:
+      - statusCode
+      - message
+      properties:
+        statusCode:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: Profile not found
+        error:
+          type: string
+          example: Not Found
     UpdateClosetItemRequest:
       type: object
       description: 'Every field is optional. The fields you send are merged over the stored item and the
@@ -802,54 +833,6 @@ components:
             '
           additionalProperties:
             type: string
-    SizeType:
-      type: string
-      description: 'Size range the garment belongs to. Matched case-insensitively and stored lowercased.
-
-        '
-      enum:
-      - regular
-      - plus
-      - juniors
-      - petite
-      - slim
-      - bigandtall
-      - curvy
-      - unisex
-      - tall
-      - husky
-      example: regular
-    Error:
-      type: object
-      description: Standard error body.
-      required:
-      - statusCode
-      - message
-      properties:
-        statusCode:
-          type: integer
-          example: 404
-        message:
-          type: string
-          example: Profile not found
-        error:
-          type: string
-          example: Not Found
-    ValidationError:
-      type: object
-      description: Schema validation failure. Note this body carries no `statusCode`.
-      required:
-      - message
-      - error
-      properties:
-        message:
-          type: string
-          example: Validation failed
-        error:
-          type: object
-          description: Failing field path to error message.
-          additionalProperties:
-            type: string
     ClosetCategory:
       type: string
       description: 'Garment category. Matched case-insensitively and stored lowercased.
@@ -882,6 +865,23 @@ components:
       - swimtops
       - tops
       example: bottoms
+    SizeType:
+      type: string
+      description: 'Size range the garment belongs to. Matched case-insensitively and stored lowercased.
+
+        '
+      enum:
+      - regular
+      - plus
+      - juniors
+      - petite
+      - slim
+      - bigandtall
+      - curvy
+      - unisex
+      - tall
+      - husky
+      example: regular
   requestBodies:
     ClosetItem:
       description: ClosetItem object that represents an article of clothing the person being shopped for already wears and likes how it fits.
@@ -890,62 +890,6 @@ components:
           schema:
             $ref: '#/components/schemas/ClosetItem'
       required: true
-  parameters:
-    closetItemId:
-      name: closetItemId
-      in: path
-      required: true
-      description: A closet item identifier, from the `closetId` field of `GET /closet`.
-      schema:
-        type: string
-      example: '1893471'
-    profileId:
-      name: profileId
-      in: path
-      required: true
-      description: 'A profile belonging to the identified user, from `GET /profile`. Profiles belonging to
-
-        another user return `404` rather than `403`, so the endpoint cannot be used to probe
-
-        for the existence of other users'' profiles.
-
-        '
-      schema:
-        type: string
-        format: uuid
-      example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-    partnerUserId:
-      name: partnerUserId
-      in: query
-      required: false
-      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
-
-        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
-
-        '
-      schema:
-        type: string
-      example: acme-user-42817
-    tfPartnerUserId:
-      name: tfPartnerUserId
-      in: query
-      required: false
-      description: 'True Fit''s identifier for the user, returned by `GET /id-sync`. Send either this or
-
-        `partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.
-
-        '
-      schema:
-        type: string
-      example: p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55
-    partnerId:
-      name: partnerId
-      in: path
-      required: true
-      description: Your partner identifier, issued during onboarding.
-      schema:
-        type: string
-      example: acme
   responses:
     ProfileNotFound:
       description: 'The `profileId` does not exist or does not belong to the identified user. Also returned
@@ -963,33 +907,6 @@ components:
                 statusCode: 404
                 message: Profile not found
                 error: Not Found
-    Unauthorized:
-      description: 'Missing or invalid Basic credentials, or a user identifier that does not match a known
-
-        partner user.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            missingCredentials:
-              value:
-                statusCode: 401
-                message: Missing Basic auth credentials
-                error: Unauthorized
-            invalidCredentials:
-              value:
-                statusCode: 401
-                message: Invalid credentials
-                error: Unauthorized
-            unknownUser:
-              summary: The identifier has no True Fit mapping - call GET /id-sync first
-              value:
-                statusCode: 401
-                message: Unknown partner user
-                error: Unauthorized
     ValidationFailed:
       description: 'The request body or query string failed schema validation. `error` maps each failing
 
@@ -1032,6 +949,89 @@ components:
               value:
                 statusCode: 500
                 message: Internal server error
+    Unauthorized:
+      description: 'Missing or invalid Basic credentials, or a user identifier that does not match a known
+
+        partner user.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            missingCredentials:
+              value:
+                statusCode: 401
+                message: Missing Basic auth credentials
+                error: Unauthorized
+            invalidCredentials:
+              value:
+                statusCode: 401
+                message: Invalid credentials
+                error: Unauthorized
+            unknownUser:
+              summary: The identifier has no True Fit mapping - call GET /id-sync first
+              value:
+                statusCode: 401
+                message: Unknown partner user
+                error: Unauthorized
+  parameters:
+    profileId:
+      name: profileId
+      in: path
+      required: true
+      description: 'A profile belonging to the identified user, from `GET /profile`. Profiles belonging to
+
+        another user return `404` rather than `403`, so the endpoint cannot be used to probe
+
+        for the existence of other users'' profiles.
+
+        '
+      schema:
+        type: string
+        format: uuid
+      example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+    partnerId:
+      name: partnerId
+      in: path
+      required: true
+      description: Your partner identifier, issued during onboarding.
+      schema:
+        type: string
+      example: acme
+    closetItemId:
+      name: closetItemId
+      in: path
+      required: true
+      description: A closet item identifier, from the `closetId` field of `GET /closet`.
+      schema:
+        type: string
+      example: '1893471'
+    tfPartnerUserId:
+      name: tfPartnerUserId
+      in: query
+      required: false
+      description: 'True Fit''s identifier for the user, returned by `GET /id-sync`. Send either this or
+
+        `partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.
+
+        '
+      schema:
+        type: string
+      example: p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55
+    partnerUserId:
+      name: partnerUserId
+      in: query
+      required: false
+      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
+
+        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
+
+        '
+      schema:
+        type: string
+      example: acme-user-42817
   securitySchemes:
     partnerApiKey:
       type: http
