@@ -159,6 +159,21 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    NormalizedSize:
+      required:
+      - merchantCategoryId
+      - normalizedSizes
+      type: object
+      properties:
+        merchantCategoryId:
+          type: integer
+        gender:
+          type: string
+        ageGroup:
+          type: string
+        normalizedSize:
+          type: integer
+          description: Normalized size corresponding to the merchantCategoryId.
     NormalizedSizesResultSet:
       required:
       - normalizedSizes
@@ -202,19 +217,4 @@ components:
         supportedSizeTypes:
           type: integer
           description: Supported size types bitmap corresponding to the merchantCategoryId
-    NormalizedSize:
-      required:
-      - merchantCategoryId
-      - normalizedSizes
-      type: object
-      properties:
-        merchantCategoryId:
-          type: integer
-        gender:
-          type: string
-        ageGroup:
-          type: string
-        normalizedSize:
-          type: integer
-          description: Normalized size corresponding to the merchantCategoryId.
 x-explorer-enabled: false

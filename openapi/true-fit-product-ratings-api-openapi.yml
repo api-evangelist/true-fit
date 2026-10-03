@@ -219,6 +219,12 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ProductRating:
+      type: string
+      example: Like
+      enum:
+      - Like
+      - Dislike
     UserProductRating:
       required:
       - id
@@ -237,10 +243,4 @@ components:
           type: string
         rating:
           $ref: '#/components/schemas/ProductRating'
-    ProductRating:
-      type: string
-      example: Like
-      enum:
-      - Like
-      - Dislike
 x-explorer-enabled: false

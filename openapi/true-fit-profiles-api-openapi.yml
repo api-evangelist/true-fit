@@ -145,19 +145,55 @@ paths:
         '404':
           $ref: '#/components/responses/ProfileNotFound'
 components:
+  parameters:
+    partnerUserId:
+      name: partnerUserId
+      in: query
+      required: false
+      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
+
+        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
+
+        '
+      schema:
+        type: string
+      example: acme-user-42817
+    profileId:
+      name: profileId
+      in: path
+      required: true
+      description: 'A profile belonging to the identified user, from `GET /profile`. Profiles belonging to
+
+        another user return `404` rather than `403`, so the endpoint cannot be used to probe
+
+        for the existence of other users'' profiles.
+
+        '
+      schema:
+        type: string
+        format: uuid
+      example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+    partnerId:
+      name: partnerId
+      in: path
+      required: true
+      description: Your partner identifier, issued during onboarding.
+      schema:
+        type: string
+      example: acme
+    tfPartnerUserId:
+      name: tfPartnerUserId
+      in: query
+      required: false
+      description: 'True Fit''s identifier for the user, returned by `GET /id-sync`. Send either this or
+
+        `partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.
+
+        '
+      schema:
+        type: string
+      example: p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55
   responses:
-    MissingUserIdentifier:
-      description: Neither `partnerUserId` nor `tfPartnerUserId` was supplied.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            missingIdentifier:
-              value:
-                statusCode: 400
-                message: tfPartnerUserId or partnerUserId query parameter is required
-                error: Bad Request
     ProfileNotFound:
       description: 'The `profileId` does not exist or does not belong to the identified user. Also returned
 
@@ -174,6 +210,18 @@ components:
                 statusCode: 404
                 message: Profile not found
                 error: Not Found
+    MissingUserIdentifier:
+      description: Neither `partnerUserId` nor `tfPartnerUserId` was supplied.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            missingIdentifier:
+              value:
+                statusCode: 400
+                message: tfPartnerUserId or partnerUserId query parameter is required
+                error: Bad Request
     ValidationFailed:
       description: 'The request body or query string failed schema validation. `error` maps each failing
 
@@ -239,41 +287,6 @@ components:
                 message: Unsupported partner
                 error: Not Found
   schemas:
-    Department:
-      type: string
-      description: 'Garment department. Matched case-insensitively - `Womens` and `womens` are both accepted
-
-        - and stored lowercased.
-
-        '
-      enum:
-      - baby
-      - boys
-      - donotrecommend
-      - girls
-      - maternity
-      - mens
-      - not apparel
-      - other
-      - unisexkids
-      - womens
-      - unisex
-      example: womens
-    ValidationError:
-      type: object
-      description: Schema validation failure. Note this body carries no `statusCode`.
-      required:
-      - message
-      - error
-      properties:
-        message:
-          type: string
-          example: Validation failed
-        error:
-          type: object
-          description: Failing field path to error message.
-          additionalProperties:
-            type: string
     CreateProfileRequest:
       type: object
       properties:
@@ -285,6 +298,22 @@ components:
           type: string
           description: A label for the profile, shown to the user. Not required to be unique.
           example: Primary
+    Error:
+      type: object
+      description: Standard error body.
+      required:
+      - statusCode
+      - message
+      properties:
+        statusCode:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: Profile not found
+        error:
+          type: string
+          example: Not Found
     Profile:
       type: object
       required:
@@ -356,22 +385,26 @@ components:
           - string
           - 'null'
           format: date-time
-    Error:
-      type: object
-      description: Standard error body.
-      required:
-      - statusCode
-      - message
-      properties:
-        statusCode:
-          type: integer
-          example: 404
-        message:
-          type: string
-          example: Profile not found
-        error:
-          type: string
-          example: Not Found
+    Department:
+      type: string
+      description: 'Garment department. Matched case-insensitively - `Womens` and `womens` are both accepted
+
+        - and stored lowercased.
+
+        '
+      enum:
+      - baby
+      - boys
+      - donotrecommend
+      - girls
+      - maternity
+      - mens
+      - not apparel
+      - other
+      - unisexkids
+      - womens
+      - unisex
+      example: womens
     UpdateProfileRequest:
       type: object
       description: Every field is optional; only the fields you send are changed.
@@ -390,54 +423,21 @@ components:
           type: string
           format: date-time
           description: When the user last explicitly saved the profile.
-  parameters:
-    profileId:
-      name: profileId
-      in: path
-      required: true
-      description: 'A profile belonging to the identified user, from `GET /profile`. Profiles belonging to
-
-        another user return `404` rather than `403`, so the endpoint cannot be used to probe
-
-        for the existence of other users'' profiles.
-
-        '
-      schema:
-        type: string
-        format: uuid
-      example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
-    partnerId:
-      name: partnerId
-      in: path
-      required: true
-      description: Your partner identifier, issued during onboarding.
-      schema:
-        type: string
-      example: acme
-    tfPartnerUserId:
-      name: tfPartnerUserId
-      in: query
-      required: false
-      description: 'True Fit''s identifier for the user, returned by `GET /id-sync`. Send either this or
-
-        `partnerUserId`; omitting both returns `400`. Takes precedence when both are sent.
-
-        '
-      schema:
-        type: string
-      example: p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55
-    partnerUserId:
-      name: partnerUserId
-      in: query
-      required: false
-      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
-
-        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
-
-        '
-      schema:
-        type: string
-      example: acme-user-42817
+    ValidationError:
+      type: object
+      description: Schema validation failure. Note this body carries no `statusCode`.
+      required:
+      - message
+      - error
+      properties:
+        message:
+          type: string
+          example: Validation failed
+        error:
+          type: object
+          description: Failing field path to error message.
+          additionalProperties:
+            type: string
   securitySchemes:
     partnerApiKey:
       type: http

@@ -69,6 +69,11 @@ components:
       enum:
       - web
       - app
+    DeviceType:
+      type: string
+      enum:
+      - desktop
+      - mobile
     Tracking:
       type: object
       properties:
@@ -88,9 +93,4 @@ components:
           type: string
           description: Identifier of any test group user is which the user is included.
           example: control
-    DeviceType:
-      type: string
-      enum:
-      - desktop
-      - mobile
 x-explorer-enabled: false

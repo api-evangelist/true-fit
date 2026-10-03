@@ -359,32 +359,37 @@ paths:
       operationId: postAuthRecover
       x-operation-id-source: derived
 components:
-  requestBodies:
-    UpdateEmailCredentials:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UpdateEmailCredentials'
-      required: true
-    LoginEmailCredentials:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LoginEmailCredentials'
-      required: true
-    EmailCredentials:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EmailCredentials'
-      required: true
   schemas:
-    AuthenticationState_emailCredential:
+    EmailCredentials:
+      required:
+      - emailAddress
+      - password
       type: object
       properties:
-        maskedEmail:
+        emailAddress:
           type: string
-          example: j***s@t***m
+        password:
+          type: string
+    body_2:
+      required:
+      - emailAddress
+      - newPassword
+      - passwordToken
+      type: object
+      properties:
+        emailAddress:
+          type: string
+        passwordToken:
+          type: string
+        newPassword:
+          type: string
+    body_1:
+      required:
+      - emailAddress
+      type: object
+      properties:
+        emailAddress:
+          type: string
     UpdateEmailCredentials:
       allOf:
       - $ref: '#/components/schemas/EmailCredentials'
@@ -404,13 +409,6 @@ components:
           keepSignedIn:
             type: boolean
             description: If set to `false` the session will be automatically logged out after a period of time. Defaults to `true`.
-    body_1:
-      required:
-      - emailAddress
-      type: object
-      properties:
-        emailAddress:
-          type: string
     AuthenticationState:
       required:
       - isAccountSaved
@@ -420,27 +418,29 @@ components:
           type: boolean
         emailCredential:
           $ref: '#/components/schemas/AuthenticationState_emailCredential'
-    body_2:
-      required:
-      - emailAddress
-      - newPassword
-      - passwordToken
+    AuthenticationState_emailCredential:
       type: object
       properties:
-        emailAddress:
+        maskedEmail:
           type: string
-        passwordToken:
-          type: string
-        newPassword:
-          type: string
+          example: j***s@t***m
+  requestBodies:
+    UpdateEmailCredentials:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateEmailCredentials'
+      required: true
     EmailCredentials:
-      required:
-      - emailAddress
-      - password
-      type: object
-      properties:
-        emailAddress:
-          type: string
-        password:
-          type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmailCredentials'
+      required: true
+    LoginEmailCredentials:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginEmailCredentials'
+      required: true
 x-explorer-enabled: false

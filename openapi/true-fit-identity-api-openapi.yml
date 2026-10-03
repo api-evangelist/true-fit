@@ -142,23 +142,6 @@ paths:
         '404':
           $ref: '#/components/responses/UnsupportedPartner'
 components:
-  schemas:
-    Error:
-      type: object
-      description: Standard error body.
-      required:
-      - statusCode
-      - message
-      properties:
-        statusCode:
-          type: integer
-          example: 404
-        message:
-          type: string
-          example: Profile not found
-        error:
-          type: string
-          example: Not Found
   responses:
     UnsupportedPartner:
       description: 'The `partnerId` is unknown or disabled. Returned before credentials are checked, so an
@@ -188,6 +171,23 @@ components:
                 statusCode: 400
                 message: Missing required params
                 error: Bad Request
+  schemas:
+    Error:
+      type: object
+      description: Standard error body.
+      required:
+      - statusCode
+      - message
+      properties:
+        statusCode:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: Profile not found
+        error:
+          type: string
+          example: Not Found
   securitySchemes:
     partnerApiKey:
       type: http

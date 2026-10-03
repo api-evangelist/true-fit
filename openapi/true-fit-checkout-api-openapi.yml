@@ -98,11 +98,6 @@ components:
         salesGroup:
           type: string
           example: ''
-    IntegrationPlatform:
-      type: string
-      enum:
-      - web
-      - app
     DeviceType:
       type: string
       enum:
@@ -132,6 +127,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LineItem'
+    IntegrationPlatform:
+      type: string
+      enum:
+      - web
+      - app
     CheckoutType:
       type: string
       enum:

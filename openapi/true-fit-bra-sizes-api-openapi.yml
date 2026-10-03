@@ -82,13 +82,6 @@ components:
           type: boolean
         sizeGroup:
           $ref: '#/components/schemas/SizeGroup'
-    SizeGroup:
-      type: string
-      description: The optional group the size belongs to. This is used only for display purposes. This can be either `Kids` or `LittleKids`
-      example: Kids
-      enum:
-      - Kids
-      - LittleKids
     SizeType:
       type: string
       example: Regular
@@ -103,4 +96,11 @@ components:
       - Husky
       - Slim
       - Unisex
+    SizeGroup:
+      type: string
+      description: The optional group the size belongs to. This is used only for display purposes. This can be either `Kids` or `LittleKids`
+      example: Kids
+      enum:
+      - Kids
+      - LittleKids
 x-explorer-enabled: false

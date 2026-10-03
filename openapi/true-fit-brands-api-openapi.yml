@@ -440,36 +440,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    BrandStyle:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      example:
-        id: brandstyle123
-        name: Cool Jeans
-    Classification:
-      type: string
-      description: "###### Possible Mens Shoes Classifications\n* AthleticSneakers\n* Casual \n* Dress\n* Sandals\n* Boots\n###### Possible Womens Shoes Classifications\n* AthleticSneakers\n* Flats\n* Sandals\n* Boots\n* Heels\n"
-      example: General
-      enum:
-      - AthleticSneakers
-      - Boots
-      - Casual
-      - CasualShirts
-      - Dress
-      - DressShirts
-      - Flats
-      - General
-      - Heels
-      - Jeans
-      - Pants
-      - Sandals
     Brand:
       required:
       - id
@@ -493,4 +463,34 @@ components:
         aliases:
         - Seven for all mankind
         - 7forallmankind
+    Classification:
+      type: string
+      description: "###### Possible Mens Shoes Classifications\n* AthleticSneakers\n* Casual \n* Dress\n* Sandals\n* Boots\n###### Possible Womens Shoes Classifications\n* AthleticSneakers\n* Flats\n* Sandals\n* Boots\n* Heels\n"
+      example: General
+      enum:
+      - AthleticSneakers
+      - Boots
+      - Casual
+      - CasualShirts
+      - Dress
+      - DressShirts
+      - Flats
+      - General
+      - Heels
+      - Jeans
+      - Pants
+      - Sandals
+    BrandStyle:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      example:
+        id: brandstyle123
+        name: Cool Jeans
 x-explorer-enabled: false

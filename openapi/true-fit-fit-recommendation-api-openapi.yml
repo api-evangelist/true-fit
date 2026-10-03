@@ -86,36 +86,29 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    FitDetailsResultSet:
+    FitDetails:
       required:
-      - status
-      - styleId
+      - size
       type: object
       properties:
-        styleId:
+        size:
           type: string
-          description: The store style ID that this result corresponds to.
-        status:
-          type: string
-          description: If the status is success, render the fit details page. If the status is estimationinprogress, a refershAfter should also come back on the FitDetailsResultSet, and another call for a fit rec should be made after the refreshAfter delay. For any other status, don't render the fit details page.
-          enum:
-          - error
-          - incompletegarment
-          - incompleteprofile
-          - invaliddepartment
-          - success
-          - estimationinprogress
-          - sizenotavailable
-          - unrecommendabledepartment
-        bestSize:
-          $ref: '#/components/schemas/FitDetails'
-        sizeUp:
-          $ref: '#/components/schemas/FitDetails'
-        sizeDown:
-          $ref: '#/components/schemas/FitDetails'
-        refreshAfter:
-          type: integer
-          description: If we can't provide a recommendation at the moment, the amount of time in milliseconds to wait before trying to retrieve a recommendation again.
+        recommended:
+          type: boolean
+        score:
+          maximum: 5
+          minimum: 1
+          type: number
+          description: A value between 1.0 and 5.0 that determines how good the overall fit of an item is.
+        overallFit:
+          maximum: 7
+          minimum: 0
+          type: number
+          description: A value between 0 - 7 that represents how good the overall fit of an item is. 0 represents snuggest, 3 or 4 represent an ideal fit, and 7 represents loosest. This should only come back if the list of poms are empty.
+        poms:
+          type: array
+          items:
+            $ref: '#/components/schemas/FitMeasurementPoint'
     FitMeasurementPoint:
       required:
       - measurementPoint
@@ -151,27 +144,34 @@ components:
           description: 'A value between 0 - 7 that represents how good of a fit an item is at a specific point. 0 represents snuggest, 3 or 4 represent an ideal fit, and 7 represents loosest.
 
             '
-    FitDetails:
+    FitDetailsResultSet:
       required:
-      - size
+      - status
+      - styleId
       type: object
       properties:
-        size:
+        styleId:
           type: string
-        recommended:
-          type: boolean
-        score:
-          maximum: 5
-          minimum: 1
-          type: number
-          description: A value between 1.0 and 5.0 that determines how good the overall fit of an item is.
-        overallFit:
-          maximum: 7
-          minimum: 0
-          type: number
-          description: A value between 0 - 7 that represents how good the overall fit of an item is. 0 represents snuggest, 3 or 4 represent an ideal fit, and 7 represents loosest. This should only come back if the list of poms are empty.
-        poms:
-          type: array
-          items:
-            $ref: '#/components/schemas/FitMeasurementPoint'
+          description: The store style ID that this result corresponds to.
+        status:
+          type: string
+          description: If the status is success, render the fit details page. If the status is estimationinprogress, a refershAfter should also come back on the FitDetailsResultSet, and another call for a fit rec should be made after the refreshAfter delay. For any other status, don't render the fit details page.
+          enum:
+          - error
+          - incompletegarment
+          - incompleteprofile
+          - invaliddepartment
+          - success
+          - estimationinprogress
+          - sizenotavailable
+          - unrecommendabledepartment
+        bestSize:
+          $ref: '#/components/schemas/FitDetails'
+        sizeUp:
+          $ref: '#/components/schemas/FitDetails'
+        sizeDown:
+          $ref: '#/components/schemas/FitDetails'
+        refreshAfter:
+          type: integer
+          description: If we can't provide a recommendation at the moment, the amount of time in milliseconds to wait before trying to retrieve a recommendation again.
 x-explorer-enabled: false
