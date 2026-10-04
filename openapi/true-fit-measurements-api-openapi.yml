@@ -115,18 +115,6 @@ paths:
           $ref: '#/components/responses/ProfileNotFound'
 components:
   parameters:
-    partnerUserId:
-      name: partnerUserId
-      in: query
-      required: false
-      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
-
-        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
-
-        '
-      schema:
-        type: string
-      example: acme-user-42817
     profileId:
       name: profileId
       in: path
@@ -142,6 +130,18 @@ components:
         type: string
         format: uuid
       example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+    partnerUserId:
+      name: partnerUserId
+      in: query
+      required: false
+      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
+
+        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
+
+        '
+      schema:
+        type: string
+      example: acme-user-42817
     partnerId:
       name: partnerId
       in: path
@@ -162,71 +162,6 @@ components:
       schema:
         type: string
       example: p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55
-  responses:
-    ProfileNotFound:
-      description: 'The `profileId` does not exist or does not belong to the identified user. Also returned
-
-        when the `partnerId` is unknown or disabled.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            profileNotFound:
-              value:
-                statusCode: 404
-                message: Profile not found
-                error: Not Found
-    ValidationFailed:
-      description: 'The request body or query string failed schema validation. `error` maps each failing
-
-        field path to its message; array indices appear as the first path segment.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          examples:
-            missingField:
-              value:
-                message: Validation failed
-                error:
-                  0.retailerDomain: 'Invalid input: expected string, received undefined'
-            badEnum:
-              value:
-                message: Validation failed
-                error:
-                  category: 'Invalid option: expected one of "belts"|"bottoms"|"bras"'
-    Unauthorized:
-      description: 'Missing or invalid Basic credentials, or a user identifier that does not match a known
-
-        partner user.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            missingCredentials:
-              value:
-                statusCode: 401
-                message: Missing Basic auth credentials
-                error: Unauthorized
-            invalidCredentials:
-              value:
-                statusCode: 401
-                message: Invalid credentials
-                error: Unauthorized
-            unknownUser:
-              summary: The identifier has no True Fit mapping - call GET /id-sync first
-              value:
-                statusCode: 401
-                message: Unknown partner user
-                error: Unauthorized
   schemas:
     MeasurementPoint:
       type: string
@@ -282,20 +217,6 @@ components:
         error:
           type: string
           example: Not Found
-    Uom:
-      type: string
-      description: Unit of measure.
-      enum:
-      - cm
-      - mm
-      - ft
-      - in
-      - kg
-      - year
-      - st
-      - lb
-      - month
-      example: in
     MeasurementsRequest:
       type: object
       description: 'Measurements to upsert. Points you omit are left unchanged. At least one of the two
@@ -352,39 +273,6 @@ components:
 
               '
             example: in
-    MeasurementsResponse:
-      type: object
-      required:
-      - exactMeasurements
-      - generalMeasurements
-      properties:
-        exactMeasurements:
-          type: object
-          propertyNames:
-            $ref: '#/components/schemas/MeasurementPoint'
-          additionalProperties:
-            $ref: '#/components/schemas/ExactMeasurementResponseValue'
-        generalMeasurements:
-          type: object
-          propertyNames:
-            $ref: '#/components/schemas/MeasurementPoint'
-          additionalProperties:
-            $ref: '#/components/schemas/GeneralMeasurementValue'
-    ValidationError:
-      type: object
-      description: Schema validation failure. Note this body carries no `statusCode`.
-      required:
-      - message
-      - error
-      properties:
-        message:
-          type: string
-          example: Validation failed
-        error:
-          type: object
-          description: Failing field path to error message.
-          additionalProperties:
-            type: string
     ExactMeasurementValue:
       type: object
       description: 'A numeric measurement. Compound values use both unit pairs: 5''6" is
@@ -410,6 +298,118 @@ components:
         secondValue:
           type: number
           example: 6
+    ValidationError:
+      type: object
+      description: Schema validation failure. Note this body carries no `statusCode`.
+      required:
+      - message
+      - error
+      properties:
+        message:
+          type: string
+          example: Validation failed
+        error:
+          type: object
+          description: Failing field path to error message.
+          additionalProperties:
+            type: string
+    MeasurementsResponse:
+      type: object
+      required:
+      - exactMeasurements
+      - generalMeasurements
+      properties:
+        exactMeasurements:
+          type: object
+          propertyNames:
+            $ref: '#/components/schemas/MeasurementPoint'
+          additionalProperties:
+            $ref: '#/components/schemas/ExactMeasurementResponseValue'
+        generalMeasurements:
+          type: object
+          propertyNames:
+            $ref: '#/components/schemas/MeasurementPoint'
+          additionalProperties:
+            $ref: '#/components/schemas/GeneralMeasurementValue'
+    Uom:
+      type: string
+      description: Unit of measure.
+      enum:
+      - cm
+      - mm
+      - ft
+      - in
+      - kg
+      - year
+      - st
+      - lb
+      - month
+      example: in
+  responses:
+    ValidationFailed:
+      description: 'The request body or query string failed schema validation. `error` maps each failing
+
+        field path to its message; array indices appear as the first path segment.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          examples:
+            missingField:
+              value:
+                message: Validation failed
+                error:
+                  0.retailerDomain: 'Invalid input: expected string, received undefined'
+            badEnum:
+              value:
+                message: Validation failed
+                error:
+                  category: 'Invalid option: expected one of "belts"|"bottoms"|"bras"'
+    ProfileNotFound:
+      description: 'The `profileId` does not exist or does not belong to the identified user. Also returned
+
+        when the `partnerId` is unknown or disabled.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            profileNotFound:
+              value:
+                statusCode: 404
+                message: Profile not found
+                error: Not Found
+    Unauthorized:
+      description: 'Missing or invalid Basic credentials, or a user identifier that does not match a known
+
+        partner user.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            missingCredentials:
+              value:
+                statusCode: 401
+                message: Missing Basic auth credentials
+                error: Unauthorized
+            invalidCredentials:
+              value:
+                statusCode: 401
+                message: Invalid credentials
+                error: Unauthorized
+            unknownUser:
+              summary: The identifier has no True Fit mapping - call GET /id-sync first
+              value:
+                statusCode: 401
+                message: Unknown partner user
+                error: Unauthorized
   securitySchemes:
     partnerApiKey:
       type: http

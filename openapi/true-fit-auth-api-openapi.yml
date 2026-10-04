@@ -359,17 +359,26 @@ paths:
       operationId: postAuthRecover
       x-operation-id-source: derived
 components:
-  schemas:
+  requestBodies:
     EmailCredentials:
-      required:
-      - emailAddress
-      - password
-      type: object
-      properties:
-        emailAddress:
-          type: string
-        password:
-          type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmailCredentials'
+      required: true
+    LoginEmailCredentials:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginEmailCredentials'
+      required: true
+    UpdateEmailCredentials:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateEmailCredentials'
+      required: true
+  schemas:
     body_2:
       required:
       - emailAddress
@@ -383,6 +392,31 @@ components:
           type: string
         newPassword:
           type: string
+    AuthenticationState:
+      required:
+      - isAccountSaved
+      type: object
+      properties:
+        isCredentialSaved:
+          type: boolean
+        emailCredential:
+          $ref: '#/components/schemas/AuthenticationState_emailCredential'
+    EmailCredentials:
+      required:
+      - emailAddress
+      - password
+      type: object
+      properties:
+        emailAddress:
+          type: string
+        password:
+          type: string
+    AuthenticationState_emailCredential:
+      type: object
+      properties:
+        maskedEmail:
+          type: string
+          example: j***s@t***m
     body_1:
       required:
       - emailAddress
@@ -390,6 +424,14 @@ components:
       properties:
         emailAddress:
           type: string
+    LoginEmailCredentials:
+      allOf:
+      - $ref: '#/components/schemas/EmailCredentials'
+      - type: object
+        properties:
+          keepSignedIn:
+            type: boolean
+            description: If set to `false` the session will be automatically logged out after a period of time. Defaults to `true`.
     UpdateEmailCredentials:
       allOf:
       - $ref: '#/components/schemas/EmailCredentials'
@@ -401,46 +443,4 @@ components:
           newPassword:
             type: string
             description: The password to update to.
-    LoginEmailCredentials:
-      allOf:
-      - $ref: '#/components/schemas/EmailCredentials'
-      - type: object
-        properties:
-          keepSignedIn:
-            type: boolean
-            description: If set to `false` the session will be automatically logged out after a period of time. Defaults to `true`.
-    AuthenticationState:
-      required:
-      - isAccountSaved
-      type: object
-      properties:
-        isCredentialSaved:
-          type: boolean
-        emailCredential:
-          $ref: '#/components/schemas/AuthenticationState_emailCredential'
-    AuthenticationState_emailCredential:
-      type: object
-      properties:
-        maskedEmail:
-          type: string
-          example: j***s@t***m
-  requestBodies:
-    UpdateEmailCredentials:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UpdateEmailCredentials'
-      required: true
-    EmailCredentials:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EmailCredentials'
-      required: true
-    LoginEmailCredentials:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LoginEmailCredentials'
-      required: true
 x-explorer-enabled: false

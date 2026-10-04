@@ -175,35 +175,6 @@ components:
           type: string
         styleName:
           type: string
-    AgeGroup:
-      type: string
-      example: Adult
-      enum:
-      - Adult
-      - Child
-    DiscoveryRecommendationsUnavailable:
-      type: object
-      properties:
-        refreshAfter:
-          type: integer
-          description: If we can't provide discovery recommendations at the moment, the amount of time in milliseconds to wait before trying to retrieve a recommendation again.
-          example: 500
-    Gender:
-      type: string
-      example: Female
-      enum:
-      - Female
-      - Male
-      - Unisex
-    DiscoveryRecommendation:
-      required:
-      - product
-      type: object
-      properties:
-        product:
-          $ref: '#/components/schemas/Product'
-        colorId:
-          type: string
     Category:
       type: string
       example: Bottoms
@@ -213,6 +184,12 @@ components:
       - Shoes
       - Tops
       - Bras
+    AgeGroup:
+      type: string
+      example: Adult
+      enum:
+      - Adult
+      - Child
     DiscoveryRecommendationsResultSet:
       type: object
       properties:
@@ -237,4 +214,27 @@ components:
       - Jeans
       - Pants
       - Sandals
+    DiscoveryRecommendationsUnavailable:
+      type: object
+      properties:
+        refreshAfter:
+          type: integer
+          description: If we can't provide discovery recommendations at the moment, the amount of time in milliseconds to wait before trying to retrieve a recommendation again.
+          example: 500
+    DiscoveryRecommendation:
+      required:
+      - product
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/Product'
+        colorId:
+          type: string
+    Gender:
+      type: string
+      example: Female
+      enum:
+      - Female
+      - Male
+      - Unisex
 x-explorer-enabled: false

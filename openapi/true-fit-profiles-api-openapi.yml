@@ -146,18 +146,6 @@ paths:
           $ref: '#/components/responses/ProfileNotFound'
 components:
   parameters:
-    partnerUserId:
-      name: partnerUserId
-      in: query
-      required: false
-      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
-
-        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
-
-        '
-      schema:
-        type: string
-      example: acme-user-42817
     profileId:
       name: profileId
       in: path
@@ -173,6 +161,18 @@ components:
         type: string
         format: uuid
       example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+    partnerUserId:
+      name: partnerUserId
+      in: query
+      required: false
+      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
+
+        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
+
+        '
+      schema:
+        type: string
+      example: acme-user-42817
     partnerId:
       name: partnerId
       in: path
@@ -193,111 +193,27 @@ components:
       schema:
         type: string
       example: p-3f9c1a80-5d2e-4a17-9b64-8e0c2d7f1a55
-  responses:
-    ProfileNotFound:
-      description: 'The `profileId` does not exist or does not belong to the identified user. Also returned
-
-        when the `partnerId` is unknown or disabled.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            profileNotFound:
-              value:
-                statusCode: 404
-                message: Profile not found
-                error: Not Found
-    MissingUserIdentifier:
-      description: Neither `partnerUserId` nor `tfPartnerUserId` was supplied.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            missingIdentifier:
-              value:
-                statusCode: 400
-                message: tfPartnerUserId or partnerUserId query parameter is required
-                error: Bad Request
-    ValidationFailed:
-      description: 'The request body or query string failed schema validation. `error` maps each failing
-
-        field path to its message; array indices appear as the first path segment.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          examples:
-            missingField:
-              value:
-                message: Validation failed
-                error:
-                  0.retailerDomain: 'Invalid input: expected string, received undefined'
-            badEnum:
-              value:
-                message: Validation failed
-                error:
-                  category: 'Invalid option: expected one of "belts"|"bottoms"|"bras"'
-    Unauthorized:
-      description: 'Missing or invalid Basic credentials, or a user identifier that does not match a known
-
-        partner user.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            missingCredentials:
-              value:
-                statusCode: 401
-                message: Missing Basic auth credentials
-                error: Unauthorized
-            invalidCredentials:
-              value:
-                statusCode: 401
-                message: Invalid credentials
-                error: Unauthorized
-            unknownUser:
-              summary: The identifier has no True Fit mapping - call GET /id-sync first
-              value:
-                statusCode: 401
-                message: Unknown partner user
-                error: Unauthorized
-    UnsupportedPartner:
-      description: 'The `partnerId` is unknown or disabled. Returned before credentials are checked, so an
-
-        invalid API key against an unknown partner is a `404`, not a `401`.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            unsupportedPartner:
-              value:
-                statusCode: 404
-                message: Unsupported partner
-                error: Not Found
   schemas:
-    CreateProfileRequest:
-      type: object
-      properties:
-        department:
-          allOf:
-          - $ref: '#/components/schemas/Department'
-          description: The department the user primarily shops.
-        alias:
-          type: string
-          description: A label for the profile, shown to the user. Not required to be unique.
-          example: Primary
+    Department:
+      type: string
+      description: 'Garment department. Matched case-insensitively - `Womens` and `womens` are both accepted
+
+        - and stored lowercased.
+
+        '
+      enum:
+      - baby
+      - boys
+      - donotrecommend
+      - girls
+      - maternity
+      - mens
+      - not apparel
+      - other
+      - unisexkids
+      - womens
+      - unisex
+      example: womens
     Error:
       type: object
       description: Standard error body.
@@ -314,6 +230,24 @@ components:
         error:
           type: string
           example: Not Found
+    UpdateProfileRequest:
+      type: object
+      description: Every field is optional; only the fields you send are changed.
+      properties:
+        department:
+          allOf:
+          - $ref: '#/components/schemas/Department'
+        alias:
+          type: string
+          example: Weekend
+        registeredAt:
+          type: string
+          format: date-time
+          description: When the user registered with you. Set once when the user creates an account.
+        savedAt:
+          type: string
+          format: date-time
+          description: When the user last explicitly saved the profile.
     Profile:
       type: object
       required:
@@ -385,44 +319,6 @@ components:
           - string
           - 'null'
           format: date-time
-    Department:
-      type: string
-      description: 'Garment department. Matched case-insensitively - `Womens` and `womens` are both accepted
-
-        - and stored lowercased.
-
-        '
-      enum:
-      - baby
-      - boys
-      - donotrecommend
-      - girls
-      - maternity
-      - mens
-      - not apparel
-      - other
-      - unisexkids
-      - womens
-      - unisex
-      example: womens
-    UpdateProfileRequest:
-      type: object
-      description: Every field is optional; only the fields you send are changed.
-      properties:
-        department:
-          allOf:
-          - $ref: '#/components/schemas/Department'
-        alias:
-          type: string
-          example: Weekend
-        registeredAt:
-          type: string
-          format: date-time
-          description: When the user registered with you. Set once when the user creates an account.
-        savedAt:
-          type: string
-          format: date-time
-          description: When the user last explicitly saved the profile.
     ValidationError:
       type: object
       description: Schema validation failure. Note this body carries no `statusCode`.
@@ -438,6 +334,110 @@ components:
           description: Failing field path to error message.
           additionalProperties:
             type: string
+    CreateProfileRequest:
+      type: object
+      properties:
+        department:
+          allOf:
+          - $ref: '#/components/schemas/Department'
+          description: The department the user primarily shops.
+        alias:
+          type: string
+          description: A label for the profile, shown to the user. Not required to be unique.
+          example: Primary
+  responses:
+    ValidationFailed:
+      description: 'The request body or query string failed schema validation. `error` maps each failing
+
+        field path to its message; array indices appear as the first path segment.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          examples:
+            missingField:
+              value:
+                message: Validation failed
+                error:
+                  0.retailerDomain: 'Invalid input: expected string, received undefined'
+            badEnum:
+              value:
+                message: Validation failed
+                error:
+                  category: 'Invalid option: expected one of "belts"|"bottoms"|"bras"'
+    UnsupportedPartner:
+      description: 'The `partnerId` is unknown or disabled. Returned before credentials are checked, so an
+
+        invalid API key against an unknown partner is a `404`, not a `401`.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            unsupportedPartner:
+              value:
+                statusCode: 404
+                message: Unsupported partner
+                error: Not Found
+    ProfileNotFound:
+      description: 'The `profileId` does not exist or does not belong to the identified user. Also returned
+
+        when the `partnerId` is unknown or disabled.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            profileNotFound:
+              value:
+                statusCode: 404
+                message: Profile not found
+                error: Not Found
+    MissingUserIdentifier:
+      description: Neither `partnerUserId` nor `tfPartnerUserId` was supplied.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            missingIdentifier:
+              value:
+                statusCode: 400
+                message: tfPartnerUserId or partnerUserId query parameter is required
+                error: Bad Request
+    Unauthorized:
+      description: 'Missing or invalid Basic credentials, or a user identifier that does not match a known
+
+        partner user.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            missingCredentials:
+              value:
+                statusCode: 401
+                message: Missing Basic auth credentials
+                error: Unauthorized
+            invalidCredentials:
+              value:
+                statusCode: 401
+                message: Invalid credentials
+                error: Unauthorized
+            unknownUser:
+              summary: The identifier has no True Fit mapping - call GET /id-sync first
+              value:
+                statusCode: 401
+                message: Unknown partner user
+                error: Unauthorized
   securitySchemes:
     partnerApiKey:
       type: http

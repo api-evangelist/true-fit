@@ -86,29 +86,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    FitDetails:
-      required:
-      - size
-      type: object
-      properties:
-        size:
-          type: string
-        recommended:
-          type: boolean
-        score:
-          maximum: 5
-          minimum: 1
-          type: number
-          description: A value between 1.0 and 5.0 that determines how good the overall fit of an item is.
-        overallFit:
-          maximum: 7
-          minimum: 0
-          type: number
-          description: A value between 0 - 7 that represents how good the overall fit of an item is. 0 represents snuggest, 3 or 4 represent an ideal fit, and 7 represents loosest. This should only come back if the list of poms are empty.
-        poms:
-          type: array
-          items:
-            $ref: '#/components/schemas/FitMeasurementPoint'
     FitMeasurementPoint:
       required:
       - measurementPoint
@@ -144,6 +121,29 @@ components:
           description: 'A value between 0 - 7 that represents how good of a fit an item is at a specific point. 0 represents snuggest, 3 or 4 represent an ideal fit, and 7 represents loosest.
 
             '
+    FitDetails:
+      required:
+      - size
+      type: object
+      properties:
+        size:
+          type: string
+        recommended:
+          type: boolean
+        score:
+          maximum: 5
+          minimum: 1
+          type: number
+          description: A value between 1.0 and 5.0 that determines how good the overall fit of an item is.
+        overallFit:
+          maximum: 7
+          minimum: 0
+          type: number
+          description: A value between 0 - 7 that represents how good the overall fit of an item is. 0 represents snuggest, 3 or 4 represent an ideal fit, and 7 represents loosest. This should only come back if the list of poms are empty.
+        poms:
+          type: array
+          items:
+            $ref: '#/components/schemas/FitMeasurementPoint'
     FitDetailsResultSet:
       required:
       - status

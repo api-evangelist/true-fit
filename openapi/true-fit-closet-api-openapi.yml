@@ -456,13 +456,131 @@ paths:
     - url: https://partner.truefitcorp.com/api
       description: Partner API
 components:
+  requestBodies:
+    ClosetItem:
+      description: ClosetItem object that represents an article of clothing the person being shopped for already wears and likes how it fits.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClosetItem'
+      required: true
   schemas:
+    WomensBraCupFit:
+      type: string
+      enum:
+      - Gaps
+      - JustRight
+      - Overflows
+    Category:
+      type: string
+      example: Bottoms
+      enum:
+      - Bottoms
+      - Dresses
+      - Shoes
+      - Tops
+      - Bras
+    WomensSilhouette:
+      type: string
+      enum:
+      - ALine
+      - Empire
+      - Maxi
+      - Sheath
+      - Shift
+      - Wrap
+    WomensRise:
+      type: string
+      enum:
+      - Low
+      - Mid
+      - High
+      - Ultra
     AgeGroup:
       type: string
       example: Adult
       enum:
       - Adult
       - Child
+    WomensBraBandFit:
+      type: string
+      enum:
+      - DigsIn
+      - JustRight
+      - RidesUp
+    MensPantsFit:
+      type: string
+      enum:
+      - FormFitting
+      - SemiFitted
+      - Relaxed
+    WomensBottomsStyle:
+      type: string
+      enum:
+      - Boot
+      - Boyfriend
+      - Capri
+      - Flare
+      - Legging
+      - Skinny
+      - Straight
+      - Trouser
+      - Wide
+    StyleAttributes:
+      type: object
+      properties:
+        WomensBraBandFit:
+          $ref: '#/components/schemas/WomensBraBandFit'
+        WomensBraCupFit:
+          $ref: '#/components/schemas/WomensBraCupFit'
+        WomensBraStyle:
+          $ref: '#/components/schemas/WomensBraStyle'
+        WomensSilhouette:
+          $ref: '#/components/schemas/WomensSilhouette'
+        WomensTopsStyle:
+          $ref: '#/components/schemas/WomensTopsStyle'
+        WomensSleeveLength:
+          $ref: '#/components/schemas/WomensSleeveLength'
+        WomensBottomsStyle:
+          $ref: '#/components/schemas/WomensBottomsStyle'
+        WomensRise:
+          $ref: '#/components/schemas/WomensRise'
+        MensPantsFit:
+          $ref: '#/components/schemas/MensPantsFit'
+        MensBottomsStyle:
+          $ref: '#/components/schemas/MensBottomsStyle'
+        ClosetItemAge:
+          $ref: '#/components/schemas/ClosetItemAge'
+        FitDescription:
+          $ref: '#/components/schemas/FitDescription'
+      description: 'The styles is a map that is composed of a styleType key and an associated value in the values list returned from the `/style-attributes` endpoint for the styleType and one of the following - `NotSure` or `NoneOfThese`
+
+        '
+      example:
+        WomensSleeveLength: NotSure
+        WomensSilhouette: ALine
+    WomensSleeveLength:
+      type: string
+      enum:
+      - LongSleeve
+      - ShortSleeve
+      - Strapless
+      - Tank
+      - ThreeQuarterSleeve
+    MensBottomsStyle:
+      type: string
+      enum:
+      - Boot
+      - Skinny
+      - Straight
+      - Wide
+    Gender:
+      type: string
+      example: Female
+      enum:
+      - Female
+      - Male
+      - Unisex
     ClosetItem:
       required:
       - ageGroup
@@ -505,116 +623,18 @@ components:
 
             '
           readOnly: true
-    WomensSilhouette:
-      type: string
-      enum:
-      - ALine
-      - Empire
-      - Maxi
-      - Sheath
-      - Shift
-      - Wrap
-    WomensRise:
-      type: string
-      enum:
-      - Low
-      - Mid
-      - High
-      - Ultra
     FitDescription:
       type: string
       enum:
       - ABitSmall
       - JustRight
       - ABitLarge
-    MensPantsFit:
-      type: string
-      enum:
-      - FormFitting
-      - SemiFitted
-      - Relaxed
-    Gender:
-      type: string
-      example: Female
-      enum:
-      - Female
-      - Male
-      - Unisex
-    WomensBraCupFit:
-      type: string
-      enum:
-      - Gaps
-      - JustRight
-      - Overflows
-    WomensBraBandFit:
-      type: string
-      enum:
-      - DigsIn
-      - JustRight
-      - RidesUp
-    StyleAttributes:
-      type: object
-      properties:
-        WomensBraBandFit:
-          $ref: '#/components/schemas/WomensBraBandFit'
-        WomensBraCupFit:
-          $ref: '#/components/schemas/WomensBraCupFit'
-        WomensBraStyle:
-          $ref: '#/components/schemas/WomensBraStyle'
-        WomensSilhouette:
-          $ref: '#/components/schemas/WomensSilhouette'
-        WomensTopsStyle:
-          $ref: '#/components/schemas/WomensTopsStyle'
-        WomensSleeveLength:
-          $ref: '#/components/schemas/WomensSleeveLength'
-        WomensBottomsStyle:
-          $ref: '#/components/schemas/WomensBottomsStyle'
-        WomensRise:
-          $ref: '#/components/schemas/WomensRise'
-        MensPantsFit:
-          $ref: '#/components/schemas/MensPantsFit'
-        MensBottomsStyle:
-          $ref: '#/components/schemas/MensBottomsStyle'
-        ClosetItemAge:
-          $ref: '#/components/schemas/ClosetItemAge'
-        FitDescription:
-          $ref: '#/components/schemas/FitDescription'
-      description: 'The styles is a map that is composed of a styleType key and an associated value in the values list returned from the `/style-attributes` endpoint for the styleType and one of the following - `NotSure` or `NoneOfThese`
-
-        '
-      example:
-        WomensSleeveLength: NotSure
-        WomensSilhouette: ALine
     WomensBraStyle:
       type: string
       enum:
       - LowCoverage
       - MediumCoverage
       - FullCoverage
-    MensBottomsStyle:
-      type: string
-      enum:
-      - Boot
-      - Skinny
-      - Straight
-      - Wide
-    ClosetItemAge:
-      type: string
-      enum:
-      - LessThanOneYear
-      - OneYearOrOlder
-    WomensBottomsStyle:
-      type: string
-      enum:
-      - Boot
-      - Boyfriend
-      - Capri
-      - Flare
-      - Legging
-      - Skinny
-      - Straight
-      - Trouser
-      - Wide
     WomensTopsStyle:
       type: string
       enum:
@@ -625,23 +645,94 @@ components:
       - Tank
       - Tee
       - Tunic
-    Category:
-      type: string
-      example: Bottoms
-      enum:
-      - Bottoms
-      - Dresses
-      - Shoes
-      - Tops
-      - Bras
-    WomensSleeveLength:
+    ClosetItemAge:
       type: string
       enum:
-      - LongSleeve
-      - ShortSleeve
-      - Strapless
-      - Tank
-      - ThreeQuarterSleeve
+      - LessThanOneYear
+      - OneYearOrOlder
+    Department:
+      type: string
+      description: 'Garment department. Matched case-insensitively - `Womens` and `womens` are both accepted
+
+        - and stored lowercased.
+
+        '
+      enum:
+      - baby
+      - boys
+      - donotrecommend
+      - girls
+      - maternity
+      - mens
+      - not apparel
+      - other
+      - unisexkids
+      - womens
+      - unisex
+      example: womens
+    ClosetCategory:
+      type: string
+      description: 'Garment category. Matched case-insensitively and stored lowercased.
+
+        '
+      enum:
+      - belts
+      - bottoms
+      - bras
+      - dresses
+      - hats
+      - hosiery
+      - intimates
+      - gloves
+      - neckwear
+      - nightgowns
+      - not apparel
+      - other
+      - pajamabottoms
+      - pajamatops
+      - pajamasets
+      - robes
+      - shoes
+      - scarves
+      - socks
+      - suits
+      - swim
+      - swimbottoms
+      - swimsuits
+      - swimtops
+      - tops
+      example: bottoms
+    Error:
+      type: object
+      description: Standard error body.
+      required:
+      - statusCode
+      - message
+      properties:
+        statusCode:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: Profile not found
+        error:
+          type: string
+          example: Not Found
+    ValidationError:
+      type: object
+      description: Schema validation failure. Note this body carries no `statusCode`.
+      required:
+      - message
+      - error
+      properties:
+        message:
+          type: string
+          example: Validation failed
+        error:
+          type: object
+          description: Failing field path to error message.
+          additionalProperties:
+            type: string
     CreateClosetItemRequest:
       type: object
       description: 'A garment the user owns. The combination of fields must resolve to a size in True Fit''s
@@ -782,54 +873,6 @@ components:
           - 'null'
           additionalProperties:
             type: string
-    ClosetCategory:
-      type: string
-      description: 'Garment category. Matched case-insensitively and stored lowercased.
-
-        '
-      enum:
-      - belts
-      - bottoms
-      - bras
-      - dresses
-      - hats
-      - hosiery
-      - intimates
-      - gloves
-      - neckwear
-      - nightgowns
-      - not apparel
-      - other
-      - pajamabottoms
-      - pajamatops
-      - pajamasets
-      - robes
-      - shoes
-      - scarves
-      - socks
-      - suits
-      - swim
-      - swimbottoms
-      - swimsuits
-      - swimtops
-      - tops
-      example: bottoms
-    Error:
-      type: object
-      description: Standard error body.
-      required:
-      - statusCode
-      - message
-      properties:
-        statusCode:
-          type: integer
-          example: 404
-        message:
-          type: string
-          example: Profile not found
-        error:
-          type: string
-          example: Not Found
     SizeType:
       type: string
       description: 'Size range the garment belongs to. Matched case-insensitively and stored lowercased.
@@ -847,49 +890,6 @@ components:
       - tall
       - husky
       example: regular
-    Department:
-      type: string
-      description: 'Garment department. Matched case-insensitively - `Womens` and `womens` are both accepted
-
-        - and stored lowercased.
-
-        '
-      enum:
-      - baby
-      - boys
-      - donotrecommend
-      - girls
-      - maternity
-      - mens
-      - not apparel
-      - other
-      - unisexkids
-      - womens
-      - unisex
-      example: womens
-    ValidationError:
-      type: object
-      description: Schema validation failure. Note this body carries no `statusCode`.
-      required:
-      - message
-      - error
-      properties:
-        message:
-          type: string
-          example: Validation failed
-        error:
-          type: object
-          description: Failing field path to error message.
-          additionalProperties:
-            type: string
-  requestBodies:
-    ClosetItem:
-      description: ClosetItem object that represents an article of clothing the person being shopped for already wears and likes how it fits.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ClosetItem'
-      required: true
   responses:
     UnvalidatedClosetSize:
       description: 'A server error. On these endpoints it also indicates a closet item that does not match a
@@ -912,22 +912,6 @@ components:
               value:
                 statusCode: 500
                 message: Internal server error
-    ProfileNotFound:
-      description: 'The `profileId` does not exist or does not belong to the identified user. Also returned
-
-        when the `partnerId` is unknown or disabled.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            profileNotFound:
-              value:
-                statusCode: 404
-                message: Profile not found
-                error: Not Found
     ValidationFailed:
       description: 'The request body or query string failed schema validation. `error` maps each failing
 
@@ -949,6 +933,22 @@ components:
                 message: Validation failed
                 error:
                   category: 'Invalid option: expected one of "belts"|"bottoms"|"bras"'
+    ProfileNotFound:
+      description: 'The `profileId` does not exist or does not belong to the identified user. Also returned
+
+        when the `partnerId` is unknown or disabled.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            profileNotFound:
+              value:
+                statusCode: 404
+                message: Profile not found
+                error: Not Found
     Unauthorized:
       description: 'Missing or invalid Basic credentials, or a user identifier that does not match a known
 
@@ -977,18 +977,6 @@ components:
                 message: Unknown partner user
                 error: Unauthorized
   parameters:
-    partnerUserId:
-      name: partnerUserId
-      in: query
-      required: false
-      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
-
-        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
-
-        '
-      schema:
-        type: string
-      example: acme-user-42817
     profileId:
       name: profileId
       in: path
@@ -1004,6 +992,18 @@ components:
         type: string
         format: uuid
       example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+    partnerUserId:
+      name: partnerUserId
+      in: query
+      required: false
+      description: 'Your own identifier for the user, as passed to `GET /id-sync`. Send either this or
+
+        `tfPartnerUserId`; omitting both returns `400`. If both are sent, `tfPartnerUserId` wins.
+
+        '
+      schema:
+        type: string
+      example: acme-user-42817
     closetItemId:
       name: closetItemId
       in: path

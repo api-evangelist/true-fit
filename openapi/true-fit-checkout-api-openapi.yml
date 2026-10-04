@@ -103,6 +103,11 @@ components:
       enum:
       - desktop
       - mobile
+    IntegrationPlatform:
+      type: string
+      enum:
+      - web
+      - app
     CheckoutEvent:
       required:
       - orderId
@@ -127,11 +132,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LineItem'
-    IntegrationPlatform:
-      type: string
-      enum:
-      - web
-      - app
     CheckoutType:
       type: string
       enum:
