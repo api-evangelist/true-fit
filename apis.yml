@@ -479,6 +479,10 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Pricing
+  url: https://www.truefit.com/
+- type: Plans
+  url: plans/true-fit-plans-pricing.yml
 - type: Overlay
   url: overlays/true-fit-consumer-api-overlay.yaml
 - type: AgenticAccess
