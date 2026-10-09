@@ -1,32 +1,32 @@
-generated: '2026-08-05'
+generated: '2026-09-23'
 method: generated
-source: openapi/true-fit-consumer-api-openapi.json, openapi/true-fit-partner-api-openapi.json
+source: openapi/true-fit-analytics-api-openapi.yml, openapi/true-fit-auth-api-openapi.yml, openapi/true-fit-bra-sizes-api-openapi.yml,
+  openapi/true-fit-brands-api-openapi.yml, openapi/true-fit-checkout-api-openapi.yml, openapi/true-fit-closet-api-openapi.yml,
+  openapi/true-fit-discovery-recommendation-api-openapi.yml, openapi/true-fit-fit-recommendation-api-openapi.yml,
+  openapi/true-fit-identity-api-openapi.yml, openapi/true-fit-inseams-api-openapi.yml, openapi/true-fit-measurements-api-openapi.yml,
+  openapi/true-fit-normalized-sizes-api-openapi.yml, openapi/true-fit-product-ratings-api-openapi.yml,
+  openapi/true-fit-products-api-openapi.yml, openapi/true-fit-profile-api-openapi.yml, openapi/true-fit-profiles-api-openapi.yml,
+  openapi/true-fit-recommendations-api-openapi.yml, openapi/true-fit-sizes-api-openapi.yml,
+  openapi/true-fit-sleeve-lengths-api-openapi.yml, openapi/true-fit-style-attributes-api-openapi.yml,
+  openapi/true-fit-token-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 58
+  operations: 59
   by_action_class:
-    connected: 31
-    acting: 27
+    acting: 25
+    connected: 34
   by_consequence:
-    read: 31
     physical: 2
-    write: 23
+    read: 34
+    write: 21
     safety-critical: 2
   human_in_the_loop_required: 2
 operations:
-- path: /token
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /checkout
+- path: /analytics/tracking
   method: post
+  operationId: postAnalyticsTracking
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -42,203 +42,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /style-recommendations
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /style-recommendations/available
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /profiles
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /profiles
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /profiles/{profileId}
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /profiles/{profileId}
-  method: put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /profiles/{profileId}
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /profiles/{profileId}/fit-recommendations
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /normalized-sizes
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /normalized-sizes/recommendable
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /profiles/{profileId}/set-active
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /profiles/{profileId}/strength/{category}
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /profiles/{profileId}/closet
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /profiles/{profileId}/closet
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /profiles/{profileId}/closet/{closetId}
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /profiles/{profileId}/closet/{closetId}
-  method: put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /profiles/{profileId}/closet/{closetId}
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /auth
   method: get
+  operationId: getAuth
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -248,6 +54,7 @@ operations:
     audit: none
 - path: /auth/save
   method: post
+  operationId: postAuthSave
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -263,6 +70,7 @@ operations:
     audit: required
 - path: /auth/login
   method: post
+  operationId: postAuthLogin
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -278,6 +86,7 @@ operations:
     audit: required
 - path: /auth/logout
   method: post
+  operationId: postAuthLogout
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -293,6 +102,7 @@ operations:
     audit: required
 - path: /auth/update
   method: post
+  operationId: postAuthUpdate
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -308,6 +118,7 @@ operations:
     audit: required
 - path: /auth/forgot
   method: post
+  operationId: postAuthForgot
   x-agentic-access:
     action-class: acting
     consequence: safety-critical
@@ -323,6 +134,7 @@ operations:
     audit: required
 - path: /auth/recover
   method: post
+  operationId: postAuthRecover
   x-agentic-access:
     action-class: acting
     consequence: safety-critical
@@ -336,8 +148,19 @@ operations:
     escalation:
       human-in-the-loop: required
     audit: required
+- path: /bra-sizes
+  method: get
+  operationId: getBraSizes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /brands
   method: get
+  operationId: getBrands
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -347,6 +170,7 @@ operations:
     audit: none
 - path: /brands/{brandId}
   method: get
+  operationId: getBrandsByBrandId
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -356,6 +180,7 @@ operations:
     audit: none
 - path: /brands/suggested
   method: get
+  operationId: getBrandsSuggested
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -365,6 +190,7 @@ operations:
     audit: none
 - path: /brands/{brandId}/styles
   method: get
+  operationId: getBrandsByBrandIdStyles
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -374,6 +200,7 @@ operations:
     audit: none
 - path: /brands/{brandId}/styles/{brandStyleId}
   method: get
+  operationId: getBrandsByBrandIdStylesByBrandStyleId
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -383,6 +210,7 @@ operations:
     audit: none
 - path: /brands/{brandId}/classes
   method: get
+  operationId: getBrandsByBrandIdClasses
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -390,134 +218,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /sizes
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /sizes/{sizeId}
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /bra-sizes
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /products
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /products/{styleId}
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /style-attributes
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /inseams
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /sleeve-lengths
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /profiles/{profileId}/product-ratings
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /profiles/{profileId}/product-ratings
+- path: /checkout
   method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /profiles/{profileId}/product-ratings/{productRatingId}
-  method: put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /profiles/{profileId}/product-ratings/{productRatingId}
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /analytics/tracking
-  method: post
+  operationId: postCheckout
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -533,9 +236,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /id-sync
+- path: /profiles/{profileId}/closet
   method: get
-  operationId: syncIds
+  operationId: getProfilesByProfileIdCloset
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -543,19 +246,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /partner/{partnerId}/profile
-  method: get
-  operationId: listProfiles
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /partner/{partnerId}/profile
+- path: /profiles/{profileId}/closet
   method: post
-  operationId: createProfile
+  operationId: postProfilesByProfileIdCloset
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -569,41 +262,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /partner/{partnerId}/profile/{profileId}
-  method: put
-  operationId: updateProfile
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /partner/{partnerId}/profile/{profileId}
-  method: delete
-  operationId: deleteProfile
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /partner/{partnerId}/profile/{profileId}/measurements
+- path: /profiles/{profileId}/closet/{closetId}
   method: get
-  operationId: getMeasurements
+  operationId: getProfilesByProfileIdClosetByClosetId
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -611,9 +272,25 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /partner/{partnerId}/profile/{profileId}/measurements
+- path: /profiles/{profileId}/closet/{closetId}
   method: put
-  operationId: upsertMeasurements
+  operationId: putProfilesByProfileIdClosetByClosetId
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /profiles/{profileId}/closet/{closetId}
+  method: delete
+  operationId: deleteProfilesByProfileIdClosetByClosetId
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -685,35 +362,409 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /style-recommendations
+  method: get
+  operationId: getStyleRecommendations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /style-recommendations/available
+  method: get
+  operationId: getStyleRecommendationsAvailable
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /profiles/{profileId}/fit-recommendations
+  method: get
+  operationId: getProfilesByProfileIdFitRecommendations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /id-sync
+  method: get
+  operationId: syncIds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /inseams
+  method: get
+  operationId: getInseams
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /partner/{partnerId}/profile/{profileId}/measurements
+  method: get
+  operationId: getMeasurements
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /partner/{partnerId}/profile/{profileId}/measurements
+  method: put
+  operationId: upsertMeasurements
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /normalized-sizes
+  method: get
+  operationId: getNormalizedSizes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /normalized-sizes/recommendable
+  method: get
+  operationId: getNormalizedSizesRecommendable
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /profiles/{profileId}/product-ratings
+  method: get
+  operationId: getProfilesByProfileIdProductRatings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /profiles/{profileId}/product-ratings
+  method: post
+  operationId: postProfilesByProfileIdProductRatings
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /profiles/{profileId}/product-ratings/{productRatingId}
+  method: put
+  operationId: putProfilesByProfileIdProductRatingsByProductRatingId
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /profiles/{profileId}/product-ratings/{productRatingId}
+  method: delete
+  operationId: deleteProfilesByProfileIdProductRatingsByProductRatingId
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /products
+  method: get
+  operationId: getProducts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /products/{styleId}
+  method: get
+  operationId: getProductsByStyleId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /profiles
+  method: get
+  operationId: getProfiles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /profiles
+  method: post
+  operationId: postProfiles
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /profiles/{profileId}
+  method: get
+  operationId: getProfilesByProfileId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /profiles/{profileId}
+  method: put
+  operationId: putProfilesByProfileId
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /profiles/{profileId}
+  method: delete
+  operationId: deleteProfilesByProfileId
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /profiles/{profileId}/fit-recommendations
+  method: get
+  operationId: getProfilesByProfileIdFitRecommendations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /profiles/{profileId}/set-active
+  method: post
+  operationId: postProfilesByProfileIdSetActive
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /profiles/{profileId}/strength/{category}
+  method: get
+  operationId: getProfilesByProfileIdStrengthByCategory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /partner/{partnerId}/profile
+  method: get
+  operationId: listProfiles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /partner/{partnerId}/profile
+  method: post
+  operationId: createProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /partner/{partnerId}/profile/{profileId}
+  method: put
+  operationId: updateProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /partner/{partnerId}/profile/{profileId}
+  method: delete
+  operationId: deleteProfile
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /partner/{partnerId}/profile/{profileId}/recommendation/bulk
   method: post
   operationId: getBulkRecommendation
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /partner/{partnerId}/general-guidance/bulk
   method: post
   operationId: getBulkGeneralGuidance
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
+- path: /sizes
+  method: get
+  operationId: getSizes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sizes/{sizeId}
+  method: get
+  operationId: getSizesBySizeId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sleeve-lengths
+  method: get
+  operationId: getSleeveLengths
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /style-attributes
+  method: get
+  operationId: getStyleAttributes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /token
+  method: get
+  operationId: getToken
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
