@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/true-fit/integrations
+- https://n8n.io/integrations/true-fit/
+- https://composio.dev/toolkits/true-fit
+- https://monid.ai/tools/true-fit
+checked:
+- https://composio.dev/toolkits/true-fit
+- https://monid.ai/tools/true-fit
+- https://n8n.io/integrations/true-fit/
+- https://zapier.com/apps/true-fit/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
