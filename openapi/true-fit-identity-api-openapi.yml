@@ -142,35 +142,6 @@ paths:
         '404':
           $ref: '#/components/responses/UnsupportedPartner'
 components:
-  responses:
-    UnsupportedPartner:
-      description: 'The `partnerId` is unknown or disabled. Returned before credentials are checked, so an
-
-        invalid API key against an unknown partner is a `404`, not a `401`.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            unsupportedPartner:
-              value:
-                statusCode: 404
-                message: Unsupported partner
-                error: Not Found
-    MissingIdSyncParams:
-      description: '`partnerId` or `partnerUserId` was not supplied.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            missingParams:
-              value:
-                statusCode: 400
-                message: Missing required params
-                error: Bad Request
   schemas:
     Error:
       type: object
@@ -188,6 +159,35 @@ components:
         error:
           type: string
           example: Not Found
+  responses:
+    MissingIdSyncParams:
+      description: '`partnerId` or `partnerUserId` was not supplied.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            missingParams:
+              value:
+                statusCode: 400
+                message: Missing required params
+                error: Bad Request
+    UnsupportedPartner:
+      description: 'The `partnerId` is unknown or disabled. Returned before credentials are checked, so an
+
+        invalid API key against an unknown partner is a `404`, not a `401`.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            unsupportedPartner:
+              value:
+                statusCode: 404
+                message: Unsupported partner
+                error: Not Found
   securitySchemes:
     partnerApiKey:
       type: http

@@ -66,6 +66,23 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    CheckoutType:
+      type: string
+      enum:
+      - LineItem
+      - OrderNotify
+      - TrackCheckout
+      - TrackCheckoutApi
+    IntegrationPlatform:
+      type: string
+      enum:
+      - web
+      - app
+    DeviceType:
+      type: string
+      enum:
+      - desktop
+      - mobile
     LineItem:
       required:
       - currency
@@ -98,16 +115,6 @@ components:
         salesGroup:
           type: string
           example: ''
-    DeviceType:
-      type: string
-      enum:
-      - desktop
-      - mobile
-    IntegrationPlatform:
-      type: string
-      enum:
-      - web
-      - app
     CheckoutEvent:
       required:
       - orderId
@@ -132,11 +139,4 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/LineItem'
-    CheckoutType:
-      type: string
-      enum:
-      - LineItem
-      - OrderNotify
-      - TrackCheckout
-      - TrackCheckoutApi
 x-explorer-enabled: false

@@ -456,64 +456,7 @@ paths:
     - url: https://partner.truefitcorp.com/api
       description: Partner API
 components:
-  requestBodies:
-    ClosetItem:
-      description: ClosetItem object that represents an article of clothing the person being shopped for already wears and likes how it fits.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ClosetItem'
-      required: true
   schemas:
-    WomensBraCupFit:
-      type: string
-      enum:
-      - Gaps
-      - JustRight
-      - Overflows
-    Category:
-      type: string
-      example: Bottoms
-      enum:
-      - Bottoms
-      - Dresses
-      - Shoes
-      - Tops
-      - Bras
-    WomensSilhouette:
-      type: string
-      enum:
-      - ALine
-      - Empire
-      - Maxi
-      - Sheath
-      - Shift
-      - Wrap
-    WomensRise:
-      type: string
-      enum:
-      - Low
-      - Mid
-      - High
-      - Ultra
-    AgeGroup:
-      type: string
-      example: Adult
-      enum:
-      - Adult
-      - Child
-    WomensBraBandFit:
-      type: string
-      enum:
-      - DigsIn
-      - JustRight
-      - RidesUp
-    MensPantsFit:
-      type: string
-      enum:
-      - FormFitting
-      - SemiFitted
-      - Relaxed
     WomensBottomsStyle:
       type: string
       enum:
@@ -526,6 +469,63 @@ components:
       - Straight
       - Trouser
       - Wide
+    WomensBraCupFit:
+      type: string
+      enum:
+      - Gaps
+      - JustRight
+      - Overflows
+    WomensRise:
+      type: string
+      enum:
+      - Low
+      - Mid
+      - High
+      - Ultra
+    WomensSilhouette:
+      type: string
+      enum:
+      - ALine
+      - Empire
+      - Maxi
+      - Sheath
+      - Shift
+      - Wrap
+    WomensBraBandFit:
+      type: string
+      enum:
+      - DigsIn
+      - JustRight
+      - RidesUp
+    Gender:
+      type: string
+      example: Female
+      enum:
+      - Female
+      - Male
+      - Unisex
+    MensBottomsStyle:
+      type: string
+      enum:
+      - Boot
+      - Skinny
+      - Straight
+      - Wide
+    Category:
+      type: string
+      example: Bottoms
+      enum:
+      - Bottoms
+      - Dresses
+      - Shoes
+      - Tops
+      - Bras
+    AgeGroup:
+      type: string
+      example: Adult
+      enum:
+      - Adult
+      - Child
     StyleAttributes:
       type: object
       properties:
@@ -559,6 +559,12 @@ components:
       example:
         WomensSleeveLength: NotSure
         WomensSilhouette: ALine
+    MensPantsFit:
+      type: string
+      enum:
+      - FormFitting
+      - SemiFitted
+      - Relaxed
     WomensSleeveLength:
       type: string
       enum:
@@ -567,20 +573,33 @@ components:
       - Strapless
       - Tank
       - ThreeQuarterSleeve
-    MensBottomsStyle:
+    WomensBraStyle:
       type: string
       enum:
-      - Boot
-      - Skinny
-      - Straight
-      - Wide
-    Gender:
+      - LowCoverage
+      - MediumCoverage
+      - FullCoverage
+    WomensTopsStyle:
       type: string
-      example: Female
       enum:
-      - Female
-      - Male
-      - Unisex
+      - Blouse
+      - Polo
+      - Sweater
+      - TailoredShirt
+      - Tank
+      - Tee
+      - Tunic
+    FitDescription:
+      type: string
+      enum:
+      - ABitSmall
+      - JustRight
+      - ABitLarge
+    ClosetItemAge:
+      type: string
+      enum:
+      - LessThanOneYear
+      - OneYearOrOlder
     ClosetItem:
       required:
       - ageGroup
@@ -623,53 +642,6 @@ components:
 
             '
           readOnly: true
-    FitDescription:
-      type: string
-      enum:
-      - ABitSmall
-      - JustRight
-      - ABitLarge
-    WomensBraStyle:
-      type: string
-      enum:
-      - LowCoverage
-      - MediumCoverage
-      - FullCoverage
-    WomensTopsStyle:
-      type: string
-      enum:
-      - Blouse
-      - Polo
-      - Sweater
-      - TailoredShirt
-      - Tank
-      - Tee
-      - Tunic
-    ClosetItemAge:
-      type: string
-      enum:
-      - LessThanOneYear
-      - OneYearOrOlder
-    Department:
-      type: string
-      description: 'Garment department. Matched case-insensitively - `Womens` and `womens` are both accepted
-
-        - and stored lowercased.
-
-        '
-      enum:
-      - baby
-      - boys
-      - donotrecommend
-      - girls
-      - maternity
-      - mens
-      - not apparel
-      - other
-      - unisexkids
-      - womens
-      - unisex
-      example: womens
     ClosetCategory:
       type: string
       description: 'Garment category. Matched case-insensitively and stored lowercased.
@@ -702,6 +674,52 @@ components:
       - swimtops
       - tops
       example: bottoms
+    UpdateClosetItemRequest:
+      type: object
+      description: 'Every field is optional. The fields you send are merged over the stored item and the
+
+        merged result is re-validated against True Fit''s catalogue.
+
+        '
+      properties:
+        department:
+          $ref: '#/components/schemas/Department'
+        category:
+          $ref: '#/components/schemas/ClosetCategory'
+        hierarchyLabels:
+          type: array
+          items:
+            type: string
+        brand:
+          type: string
+        sellingLocale:
+          type: string
+          minLength: 2
+          maxLength: 2
+        sellingSize:
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        sizeVariants:
+          type: object
+          required:
+          - sizeType
+          properties:
+            sizeType:
+              $ref: '#/components/schemas/SizeType'
+            sleeveLength:
+              type: string
+            shoeWidth:
+              type: string
+            cupSize:
+              type: string
+        fitAttributes:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
     Error:
       type: object
       description: Standard error body.
@@ -718,6 +736,26 @@ components:
         error:
           type: string
           example: Not Found
+    Department:
+      type: string
+      description: 'Garment department. Matched case-insensitively - `Womens` and `womens` are both accepted
+
+        - and stored lowercased.
+
+        '
+      enum:
+      - baby
+      - boys
+      - donotrecommend
+      - girls
+      - maternity
+      - mens
+      - not apparel
+      - other
+      - unisexkids
+      - womens
+      - unisex
+      example: womens
     ValidationError:
       type: object
       description: Schema validation failure. Note this body carries no `statusCode`.
@@ -812,67 +850,6 @@ components:
             '
           additionalProperties:
             type: string
-    ClosetItem_2:
-      allOf:
-      - $ref: '#/components/schemas/CreateClosetItemRequest'
-      - type: object
-        required:
-        - closetId
-        - updatedAt
-        properties:
-          closetId:
-            type: string
-            description: Identifier for this closet item, used in the item's path.
-            example: '1893471'
-          updatedAt:
-            type: string
-            format: date-time
-    UpdateClosetItemRequest:
-      type: object
-      description: 'Every field is optional. The fields you send are merged over the stored item and the
-
-        merged result is re-validated against True Fit''s catalogue.
-
-        '
-      properties:
-        department:
-          $ref: '#/components/schemas/Department'
-        category:
-          $ref: '#/components/schemas/ClosetCategory'
-        hierarchyLabels:
-          type: array
-          items:
-            type: string
-        brand:
-          type: string
-        sellingLocale:
-          type: string
-          minLength: 2
-          maxLength: 2
-        sellingSize:
-          type:
-          - string
-          - 'null'
-          minLength: 1
-        sizeVariants:
-          type: object
-          required:
-          - sizeType
-          properties:
-            sizeType:
-              $ref: '#/components/schemas/SizeType'
-            sleeveLength:
-              type: string
-            shoeWidth:
-              type: string
-            cupSize:
-              type: string
-        fitAttributes:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
     SizeType:
       type: string
       description: 'Size range the garment belongs to. Matched case-insensitively and stored lowercased.
@@ -890,7 +867,46 @@ components:
       - tall
       - husky
       example: regular
+    ClosetItem_2:
+      allOf:
+      - $ref: '#/components/schemas/CreateClosetItemRequest'
+      - type: object
+        required:
+        - closetId
+        - updatedAt
+        properties:
+          closetId:
+            type: string
+            description: Identifier for this closet item, used in the item's path.
+            example: '1893471'
+          updatedAt:
+            type: string
+            format: date-time
+  requestBodies:
+    ClosetItem:
+      description: ClosetItem object that represents an article of clothing the person being shopped for already wears and likes how it fits.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ClosetItem'
+      required: true
   responses:
+    ProfileNotFound:
+      description: 'The `profileId` does not exist or does not belong to the identified user. Also returned
+
+        when the `partnerId` is unknown or disabled.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            profileNotFound:
+              value:
+                statusCode: 404
+                message: Profile not found
+                error: Not Found
     UnvalidatedClosetSize:
       description: 'A server error. On these endpoints it also indicates a closet item that does not match a
 
@@ -912,43 +928,6 @@ components:
               value:
                 statusCode: 500
                 message: Internal server error
-    ValidationFailed:
-      description: 'The request body or query string failed schema validation. `error` maps each failing
-
-        field path to its message; array indices appear as the first path segment.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
-          examples:
-            missingField:
-              value:
-                message: Validation failed
-                error:
-                  0.retailerDomain: 'Invalid input: expected string, received undefined'
-            badEnum:
-              value:
-                message: Validation failed
-                error:
-                  category: 'Invalid option: expected one of "belts"|"bottoms"|"bras"'
-    ProfileNotFound:
-      description: 'The `profileId` does not exist or does not belong to the identified user. Also returned
-
-        when the `partnerId` is unknown or disabled.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            profileNotFound:
-              value:
-                statusCode: 404
-                message: Profile not found
-                error: Not Found
     Unauthorized:
       description: 'Missing or invalid Basic credentials, or a user identifier that does not match a known
 
@@ -976,7 +955,36 @@ components:
                 statusCode: 401
                 message: Unknown partner user
                 error: Unauthorized
+    ValidationFailed:
+      description: 'The request body or query string failed schema validation. `error` maps each failing
+
+        field path to its message; array indices appear as the first path segment.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'
+          examples:
+            missingField:
+              value:
+                message: Validation failed
+                error:
+                  0.retailerDomain: 'Invalid input: expected string, received undefined'
+            badEnum:
+              value:
+                message: Validation failed
+                error:
+                  category: 'Invalid option: expected one of "belts"|"bottoms"|"bras"'
   parameters:
+    partnerId:
+      name: partnerId
+      in: path
+      required: true
+      description: Your partner identifier, issued during onboarding.
+      schema:
+        type: string
+      example: acme
     profileId:
       name: profileId
       in: path
@@ -1012,14 +1020,6 @@ components:
       schema:
         type: string
       example: '1893471'
-    partnerId:
-      name: partnerId
-      in: path
-      required: true
-      description: Your partner identifier, issued during onboarding.
-      schema:
-        type: string
-      example: acme
     tfPartnerUserId:
       name: tfPartnerUserId
       in: query

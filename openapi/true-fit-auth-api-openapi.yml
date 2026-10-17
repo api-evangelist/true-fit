@@ -360,17 +360,17 @@ paths:
       x-operation-id-source: derived
 components:
   requestBodies:
-    EmailCredentials:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EmailCredentials'
-      required: true
     LoginEmailCredentials:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/LoginEmailCredentials'
+      required: true
+    EmailCredentials:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EmailCredentials'
       required: true
     UpdateEmailCredentials:
       content:
@@ -401,6 +401,24 @@ components:
           type: boolean
         emailCredential:
           $ref: '#/components/schemas/AuthenticationState_emailCredential'
+    body_1:
+      required:
+      - emailAddress
+      type: object
+      properties:
+        emailAddress:
+          type: string
+    UpdateEmailCredentials:
+      allOf:
+      - $ref: '#/components/schemas/EmailCredentials'
+      - type: object
+        properties:
+          newEmailAddress:
+            type: string
+            description: The email address to update to.
+          newPassword:
+            type: string
+            description: The password to update to.
     EmailCredentials:
       required:
       - emailAddress
@@ -417,13 +435,6 @@ components:
         maskedEmail:
           type: string
           example: j***s@t***m
-    body_1:
-      required:
-      - emailAddress
-      type: object
-      properties:
-        emailAddress:
-          type: string
     LoginEmailCredentials:
       allOf:
       - $ref: '#/components/schemas/EmailCredentials'
@@ -432,15 +443,4 @@ components:
           keepSignedIn:
             type: boolean
             description: If set to `false` the session will be automatically logged out after a period of time. Defaults to `true`.
-    UpdateEmailCredentials:
-      allOf:
-      - $ref: '#/components/schemas/EmailCredentials'
-      - type: object
-        properties:
-          newEmailAddress:
-            type: string
-            description: The email address to update to.
-          newPassword:
-            type: string
-            description: The password to update to.
 x-explorer-enabled: false

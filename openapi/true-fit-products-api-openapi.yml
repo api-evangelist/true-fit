@@ -153,6 +153,13 @@ components:
           type: string
         styleName:
           type: string
+    Gender:
+      type: string
+      example: Female
+      enum:
+      - Female
+      - Male
+      - Unisex
     Category:
       type: string
       example: Bottoms
@@ -185,11 +192,4 @@ components:
       - Jeans
       - Pants
       - Sandals
-    Gender:
-      type: string
-      example: Female
-      enum:
-      - Female
-      - Male
-      - Unisex
 x-explorer-enabled: false
